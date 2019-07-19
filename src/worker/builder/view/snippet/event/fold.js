@@ -103,7 +103,7 @@ export class Fold extends Event {
   detach(item, immediate) {
     const height = item.node().getBoundingClientRect().height;
 
-    item.style('height', height);
+    item.style('height', height + 'px');
     item.style('width');
 
     if (immediate) {
