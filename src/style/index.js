@@ -6,6 +6,8 @@ import './graph.css';
 import './group.css';
 import './icon.css';
 import './item.css';
+import './log.css';
+import './metric.css';
 import './panel.css';
 import './pop.css';
 import './tab.css';

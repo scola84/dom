@@ -1,23 +1,66 @@
 .group {
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 
-.panel.outset-x .group {
-  margin-left: 0;
-  margin-right: 0;
+.col.any {
+  display: flex;
+  flex-direction: column;
+}
+
+.row.any {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (min-width: 48em) {
+  .col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .panel:not(.outset-x) .row > .group {
+    flex: 1;
+  }
+
+  .panel:not(.outset-x) .group {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .col.left > .group,
+  .row.left > .group + .group {
+    margin-right: 0;
+  }
+
+  .col.right > .group,
+  .row.right > .group + .group {
+    margin-left: 0;
+  }
 }
 
 /* Body */
 
 .group > .body {
-  border-top: 1px solid lightgrey;
   overflow: hidden;
 }
 
-.panel.outset-x .group > .body:not(:empty) {
+.group > .body {
+  border-top: 1px solid lightgrey;
+}
+
+.group > .body:not(:empty) {
   border-bottom: 1px solid lightgrey;
+}
+
+@media (min-width: 48em) {
+  .panel:not(.outset-x) .group > .body {
+    border: none;
+  }
 }
 
 /* Comment */
@@ -40,7 +83,7 @@
   text-transform: uppercase;
 }
 
-.group > .title:active {
+.group > .title.fold:active {
   opacity: 0.5;
 }
 

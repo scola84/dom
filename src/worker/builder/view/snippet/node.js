@@ -166,10 +166,6 @@ export class Node extends Snippet {
     return node.attr(name);
   }
 
-  resolveBefore(box, data) {
-    return this.resolveOuter(box, data);
-  }
-
   resolveEach(box, data, object, callback) {
     object = this.resolveValue(box, data, object);
 
@@ -180,14 +176,6 @@ export class Node extends Snippet {
       key = keys[i];
       callback(key, this.resolveValue(box, data, object[key]));
     }
-  }
-
-  resolveInner(box, data) {
-    for (let i = 0; i < this._args.length; i += 1) {
-      this.resolveValue(box, data, this._args[i]);
-    }
-
-    return this.resolveAfter(box, data);
   }
 
   resolveOuter(box, data) {

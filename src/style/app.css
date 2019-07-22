@@ -6,15 +6,6 @@
   width: 64em;
 }
 
-@media (max-width: 64em), (max-height: 48em) {
-  .app {
-    border-radius: 0;
-    height: 100%;
-    padding: 0;
-    width: 100%;
-  }
-}
-
 .outset-x .app,
 .outset-y .app {
   border-radius: 0;
@@ -26,6 +17,22 @@
 
 .outset-y .app {
   height: 100%;
+}
+
+@media (max-width: 64em) {
+  .app {
+    border-radius: 0;
+    padding: 0;
+    width: 100%;
+  }
+}
+
+@media (max-height: 48em) {
+  .app {
+    border-radius: 0;
+    height: 100%;
+    padding: 0;
+  }
 }
 
 .app > * {

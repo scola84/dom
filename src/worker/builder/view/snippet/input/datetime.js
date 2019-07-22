@@ -7,10 +7,6 @@ export class DateTime extends Input {
 
     this._format = null;
     this.setFormat(options.format);
-
-    this.attributes({
-      type: 'datetime-local'
-    });
   }
 
   getOptions() {
@@ -23,7 +19,7 @@ export class DateTime extends Input {
     return this._format;
   }
 
-  setFormat(value = 'yyyy-MM-ddTHH:mm') {
+  setFormat(value = null) {
     this._format = value;
     return this;
   }

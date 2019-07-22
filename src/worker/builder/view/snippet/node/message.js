@@ -11,15 +11,15 @@ export class Message extends Node {
       return this._node;
     }
 
-    let code = `status.${data.status}`;
+    let format = `status.${data.status}`;
 
     if (data.code) {
-      code += '.' + data.code;
+      format += '.' + data.code;
     }
 
     const text = this._builder
-      .format()
-      .code(code)
+      .print()
+      .format(format)
       .values(data);
 
     this._node.text(

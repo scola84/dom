@@ -1,20 +1,18 @@
 .graph {
   background: white;
-  border-radius: 1em;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
   display: flex;
-  margin-left: 1em;
-  margin-right: 1em;
-  margin-top: 2em;
+  flex: 1;
   overflow: hidden;
   padding: 1em;
 }
 
-.panel.outset-x .graph {
-  border-bottom: 1px solid lightgrey;
-  border-radius: 0;
-  border-top: 1px solid lightgrey;
-  margin-left: 0;
-  margin-right: 0;
+@media (min-width: 48em) {
+  .panel:not(.outset-x) .graph {
+    border: none;
+    border-radius: 0.5em;
+  }
 }
 
 .graph:after {

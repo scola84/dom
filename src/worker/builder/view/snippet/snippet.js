@@ -187,6 +187,10 @@ export class Snippet {
   }
 
   resolveInner(box, data) {
+    for (let i = 0; i < this._args.length; i += 1) {
+      this.resolveValue(box, data, this._args[i]);
+    }
+
     return this.resolveAfter(box, data);
   }
 

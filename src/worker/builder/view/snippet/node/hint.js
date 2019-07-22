@@ -29,7 +29,7 @@ export class Hint extends Node {
       typeof value.reason !== 'undefined'
     ) {
       text = this._builder
-        .format()
+        .print()
         .code(`input.${value.type}.${value.reason}`)
         .values(value);
     }

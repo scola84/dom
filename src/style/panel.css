@@ -164,9 +164,9 @@
 
 .panel > .body:after {
   content: '';
-  height: 2em;
+  height: 1em;
   position: absolute;
-  width: 2em;
+  width: 1em;
 }
 
 .panel.outset-x.outset-y > .body:after {
@@ -175,7 +175,7 @@
 
 /* Body button */
 
-.panel > .body .button {
+.panel > .body .button.icon {
   align-items: center;
   background: none;
   border-radius: 50%;
@@ -184,7 +184,6 @@
   height: 2em;
   justify-content: center;
   padding: 0;
-  width: 2em;
 }
 
 .panel > .body .button:active {
@@ -194,6 +193,7 @@
 .panel > .body .button:before {
   display: block;
   font-size: 2em;
+  text-align: center;
   width: 100%;
 }
 

@@ -178,6 +178,7 @@ export class ViewRouter extends Router {
     const path = box.default || this._default;
 
     if (path === null) {
+      this._base.busy = false;
       return box;
     }
 

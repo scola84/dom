@@ -18,5 +18,5 @@ export function worker() {
   Axis.setup();
   Plot.setup();
 
-  snippet.Format.addStrings(locale);
+  snippet.Print.addStrings(locale);
 }

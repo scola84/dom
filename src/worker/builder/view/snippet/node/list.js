@@ -24,8 +24,8 @@ export class List extends Generator {
   }
 
   resolveInner(box, data) {
-    const hasData = Array.isArray(data.data);
-    const listData = data.data || [];
+    const hasData = Array.isArray(data);
+    const listData = data || [];
 
     const [
       item,

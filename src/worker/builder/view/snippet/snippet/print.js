@@ -3,16 +3,16 @@ import merge from 'lodash-es/merge';
 import { Snippet } from '../snippet';
 import { vsprintf } from '../../../../../helper';
 
-let locale = 'nl_NL';
+let flocale = 'nl_NL';
 let strings = {};
 
-export class Format extends Snippet {
+export class Print extends Snippet {
   static getLocale() {
-    return locale;
+    return flocale;
   }
 
   static setLocale(value) {
-    locale = value;
+    flocale = value;
   }
 
   static getNumbers() {
@@ -42,29 +42,29 @@ export class Format extends Snippet {
   constructor(options = {}) {
     super(options);
 
-    this._code = null;
+    this._format = null;
     this._locale = null;
     this._values = null;
 
-    this.setCode(options.code);
+    this.setFormat(options.format);
     this.setLocale(options.locale);
     this.setValues(options.values);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      code: this._code,
+      format: this._format,
       locale: this._locale,
       values: this._values
     });
   }
 
-  getCode() {
-    return this._code;
+  getFormat() {
+    return this._format;
   }
 
-  setCode(value = null) {
-    this._code = value;
+  setFormat(value = null) {
+    this._format = value;
     return this;
   }
 
@@ -72,7 +72,7 @@ export class Format extends Snippet {
     return this._locale;
   }
 
-  setLocale(value = locale) {
+  setLocale(value = flocale) {
     this._locale = value;
     return this;
   }
@@ -81,13 +81,13 @@ export class Format extends Snippet {
     return this._values;
   }
 
-  setValues(value = null) {
+  setValues(value = (box, data) => data) {
     this._values = value;
     return this;
   }
 
-  code(value) {
-    return this.setCode(value);
+  format(value) {
+    return this.setFormat(value);
   }
 
   locale(value) {
@@ -99,23 +99,26 @@ export class Format extends Snippet {
   }
 
   resolveAfter(box, data) {
-    let string = '';
-
-    const flocale = this.resolveValue(box, data, this._locale);
-    const code = this.resolveValue(box, data, this._code);
+    const format = this.resolveValue(box, data, this._format);
+    const locale = this.resolveValue(box, data, this._locale);
 
     let values = this.resolveValue(box, data, this._values);
     values = Array.isArray(values) ? values : [values];
 
-    string = get(strings, `${flocale}.${code}`);
-    string = typeof string === 'undefined' ? code : string;
+    let lformat = get(strings, `${locale}.${format}`);
 
-    try {
-      string = vsprintf(string, values, flocale);
-    } catch (error) {
-      string = error.message;
+    if (typeof lformat === 'undefined') {
+      lformat = format;
     }
 
-    return string;
+    if (typeof lformat === 'object') {
+      lformat = lformat[values[0]] || lformat.d;
+    }
+
+    try {
+      return vsprintf(lformat, values, locale);
+    } catch (error) {
+      return error.message;
+    }
   }
 }

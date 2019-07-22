@@ -10,12 +10,14 @@ export class Request extends Action {
     this._client = null;
     this._indicator = null;
     this._list = null;
+    this._merge = null;
     this._object = null;
     this._resource = null;
 
     this.setClient(options.client);
     this.setIndicator(options.indicator);
     this.setList(options.list);
+    this.setMerge(options.merge);
     this.setObject(options.object);
     this.setResource(options.resource);
   }
@@ -24,6 +26,7 @@ export class Request extends Action {
     return Object.assign(super.getOptions(), {
       indicator: this._indicator,
       list: this._list,
+      merge: this._merge,
       object: this._object,
       resource: this._resource
     });
@@ -53,6 +56,15 @@ export class Request extends Action {
 
   setList(value = false) {
     this._list = value;
+    return this;
+  }
+
+  getMerge() {
+    return this._merge;
+  }
+
+  setMerge(value = (box, data) => data.data) {
+    this._merge = value;
     return this;
   }
 
@@ -86,7 +98,11 @@ export class Request extends Action {
     return this.setList(true);
   }
 
-  object(value) {
+  merge(value) {
+    return this.setMerge(value);
+  }
+
+  object(value = true) {
     return this.setObject(value);
   }
 
@@ -144,7 +160,7 @@ export class Request extends Action {
     this._client.transformer.connect(new Worker({
       act: (b, result) => {
         this._client.transformer.setWorker(null);
-        this.pass(box, result);
+        this.pass(box, this._merge(box, result));
       },
       err: (b, error) => {
         this._client.transformer.setWorker(null);
@@ -173,6 +189,12 @@ export class Request extends Action {
   }
 
   resolveObject(box, options) {
-    options.url.path += '/' + box.params[this._object];
+    let name = this._object;
+
+    if (this._object === true) {
+      name = options.url.path.split('/').pop() + '_id';
+    }
+
+    options.url.path += '/' + box.params[name];
   }
 }

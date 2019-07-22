@@ -1,16 +1,9 @@
-import sprintf from 'sprintf-js';
+import * as formatters from './vsprintf/';
 
-import {
-  luxon,
-  marked,
-  number
-} from './vsprintf/';
-
-const formatters = { l: luxon, m: marked, n: number };
-const regexpBase = '%((\\((\\w+)\\))?((\\d+)\\$)?)([b-gijostTuvxXlmn])(\\[(.+)\\])?';
+const regexpBase = '%((\\((\\w+)\\))?((\\d+)\\$)?)([lmns])(\\[(.+)\\])?';
 const regexpGlobal = new RegExp(regexpBase, 'g');
 const regexpSingle = new RegExp(regexpBase);
-const reductor = (name) => (a, v) => typeof v[name] === 'undefined' ? a : v[name];
+const reductor = (name) => (a, v) => v[name];
 
 export function vsprintf(format, args, locale) {
   const matches = format.match(regexpGlobal) || [];
@@ -27,21 +20,24 @@ export function vsprintf(format, args, locale) {
       match, , , name, , position, type, , options
     ] = matches[i].match(regexpSingle);
 
-    value = position ?
-      args[position - 1] :
-      (name ?
-        args.reduce(reductor(name), '') :
-        args[i]);
-
-    if (formatters[type]) {
-      format = format.replace(
-        match,
-        formatters[type](value, options, locale)
-      );
+    if (position) {
+      value = args[position - 1];
+    } else if (name) {
+      value = args.reduce(reductor(name), '');
+    } else {
+      value = args[i];
     }
+
+    if (typeof value === 'undefined') {
+      value = '';
+    } else if (formatters[type]) {
+      value = formatters[type](value, options, locale);
+    }
+
+    format = format.replace(match, value);
   }
 
-  return sprintf.vsprintf(format, args);
+  return format;
 }
 
 Object.assign(vsprintf, formatters);

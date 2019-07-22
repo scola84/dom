@@ -11,7 +11,11 @@ const defaultFormat = {
 
 const definitions = {};
 
-export function number(value, options = '', locale = 'nl_NL') {
+export function n(value, options = '', locale = 'nl_NL') {
+  if (typeof value === 'undefined') {
+    return '';
+  }
+
   options = options ? options.split(';') : [];
 
   const [
@@ -36,4 +40,4 @@ export function number(value, options = '', locale = 'nl_NL') {
   return value;
 }
 
-number.definitions = definitions;
+n.definitions = definitions;
