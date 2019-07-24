@@ -8,6 +8,7 @@ export class Month extends DateTime {
       .attributes({
         type: 'month'
       })
-      .format('yyyy-MM');
+      .formatFrom('yyyy-MM')
+      .formatTo('MMM yyyy');
   }
 }

@@ -1,7 +1,9 @@
+import { select } from 'd3';
+import { DateTime as Luxon } from 'luxon';
 import { DateTime } from './datetime';
 
 export class Date extends DateTime {
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
 
     this._wrap = null;
@@ -11,7 +13,8 @@ export class Date extends DateTime {
       .attributes({
         type: 'date'
       })
-      .format('yyyy-MM-dd');
+      .formatFrom('yyyy-MM-dd')
+      .formatTo('D');
   }
 
   getOptions() {
@@ -47,9 +50,35 @@ export class Date extends DateTime {
   }
 
   changeValue() {
-    this._node.node().nextSibling.innerHTML =
-      this._node.property('value') ||
-      new Date().toISOString().slice(0, 10);
+    const formatFrom = this.resolveValue(null, null, this._formatFrom);
+    const formatTo = this.resolveValue(null, null, this._formatTo);
+
+    const required = this._node.attr('required');
+    let value = this._node.property('value');
+
+    if (required && value === '') {
+      this._node.property('value', this._node.value);
+      return this._node;
+    }
+
+    value = value || Luxon
+      .local()
+      .toFormat(formatFrom);
+
+    const date = Luxon
+      .fromFormat(value, formatFrom)
+      .toISO();
+
+    const text = this._builder
+      .print()
+      .format(`%l[${formatTo}]`)
+      .values(date);
+
+    select(this._node.node().nextSibling).text(
+      this.resolveValue(null, null, text)
+    );
+
+    this._node.value = value;
 
     return this._node;
   }
@@ -57,13 +86,18 @@ export class Date extends DateTime {
   wrapInput() {
     const wrapper = this
       .wrapNode('div')
-      .classed('date', true);
+      .classed('date-wrap', true);
 
     wrapper
-      .append('label');
+      .append('label')
+      .attr('for', 'date-' + this._id);
 
-    this._node.on('input.scola-date', () => {
-      this.changeValue();
-    });
+    this._node
+      .attr('id', 'date-' + this._id)
+      .on('input.scola-date', () => {
+        this.changeValue();
+      });
+
+    this._node.value = this._node.property('value');
   }
 }

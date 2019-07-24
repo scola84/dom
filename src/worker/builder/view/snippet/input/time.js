@@ -8,6 +8,7 @@ export class Time extends DateTime {
       .attributes({
         type: 'time'
       })
-      .format('HH:mm');
+      .formatFrom('HH:mm')
+      .formatTo('t');
   }
 }

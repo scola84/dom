@@ -1,0 +1,32 @@
+.date-wrap {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.date-wrap input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.date-wrap input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.date-wrap input::-webkit-clear-button,
+.date-wrap input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.date-wrap label {
+  cursor: pointer;
+  z-index: 1;
+}
+
+.date-wrap label:not(*:root) {
+  pointer-events: none;
+}

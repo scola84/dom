@@ -1,7 +1,5 @@
 .graph {
   background: white;
-  border-bottom: 1px solid lightgrey;
-  border-top: 1px solid lightgrey;
   display: flex;
   flex: 1;
   overflow: hidden;
@@ -10,7 +8,6 @@
 
 @media (min-width: 48em) {
   .panel:not(.outset-x) .graph {
-    border: none;
     border-radius: 0.5em;
   }
 }

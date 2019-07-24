@@ -4,6 +4,7 @@
 
 .col.any {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -15,6 +16,7 @@
 @media (min-width: 48em) {
   .col {
     display: flex;
+    flex: 1;
     flex-direction: column;
   }
 

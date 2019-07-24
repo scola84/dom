@@ -5,27 +5,44 @@ export class DateTime extends Input {
   constructor(options = {}) {
     super(options);
 
-    this._format = null;
-    this.setFormat(options.format);
+    this._formatFrom = null;
+    this._formatTo = null;
+
+    this.setFormatFrom(options.formatFrom);
+    this.setFormatTo(options.formatTo);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      format: this._format
+      formatFrom: this._formatFrom,
+      formatTo: this._formatTo
     });
   }
 
-  getFormat() {
-    return this._format;
+  getFormatFrom() {
+    return this._formatFrom;
   }
 
-  setFormat(value = null) {
-    this._format = value;
+  setFormatFrom(value = null) {
+    this._formatFrom = value;
     return this;
   }
 
-  format(value) {
-    return this.setFormat(value);
+  getFormatTo() {
+    return this._formatTo;
+  }
+
+  setFormatTo(value = null) {
+    this._formatTo = value;
+    return this;
+  }
+
+  formatFrom(value) {
+    return this.setFormatFrom(value);
+  }
+
+  formatTo(value) {
+    return this.setFormatTo(value);
   }
 
   cleanAfter(box, data, name, value) {
@@ -33,8 +50,8 @@ export class DateTime extends Input {
   }
 
   validateAfter(box, data, error, name, value) {
-    const format = this.resolveValue(box, data, this._format);
-    const date = Luxon.fromFormat(value, format);
+    const formatFrom = this.resolveValue(box, data, this._formatFrom);
+    const date = Luxon.fromFormat(value, formatFrom);
 
     if (date.isValid === false) {
       return this.setError(error, name, value, 'type');

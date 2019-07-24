@@ -1,27 +1,59 @@
+import merge from 'lodash-es/merge';
 import { Widget } from '../widget';
 
 export class LogControl extends Widget {
   constructor(options = {}) {
     super(options);
 
-    this._level = null;
+    this._action = null;
+    this._begin = null;
+    this._end = null;
+    this._mode = null;
     this._name = null;
+    this._storage = null;
 
-    this.setLevel(options.level);
+    this.setAction(options.action);
+    this.setBegin(options.begin);
+    this.setEnd(options.end);
+    this.setMode(options.mode);
     this.setName(options.name);
+    this.setStorage(options.storage);
   }
 
-  getLevel() {
-    return this._level;
+  getAction() {
+    return this._action;
   }
 
-  setLevel(...level) {
-    this._level = level;
+  setAction(...action) {
+    this._action = action;
     return this;
   }
 
-  level(...level) {
-    return this.setLevel(...level);
+  getBegin() {
+    return this._begin;
+  }
+
+  setBegin(value = new Date().toISOString().slice(0, 10)) {
+    this._begin = value;
+    return this;
+  }
+
+  getEnd() {
+    return this._end;
+  }
+
+  setEnd(value = new Date().toISOString().slice(0, 10)) {
+    this._end = value;
+    return this;
+  }
+
+  getMode() {
+    return this._mode;
+  }
+
+  setMode(...mode) {
+    this._mode = mode;
+    return this;
   }
 
   getName() {
@@ -33,102 +65,175 @@ export class LogControl extends Widget {
     return this;
   }
 
+  getStorage() {
+    return this._storage;
+  }
+
+  setStorage(value = localStorage) {
+    this._storage = value;
+    return this;
+  }
+
+  action(...action) {
+    return this.setAction(...action);
+  }
+
+  begin(value) {
+    return this.setBegin(value);
+  }
+
+  end(value) {
+    return this.setEnd(value);
+  }
+
+  mode(...mode) {
+    return this.setMode(...mode);
+  }
+
   name(...name) {
     return this.setName(...name);
+  }
+
+  storage(value) {
+    return this.setStorage(value);
   }
 
   createWidget() {
     const b = this._builder;
 
     this.append(
-      b.div().class('log col any').append(
-        b.row().class('any').append(
-          b.div().class('name').append(
-            b.input(
-              b.select().class('click').attributes({
-                name: 'name'
-              }).append(
-                ...this._name
+      b.div().class('log-control').append(
+        b.col().class('any').append(
+          b.row().class('any').append(
+            b.div().class('name').append(
+              b.input(
+                b.select().class('click').attributes({
+                  name: 'name'
+                }).append(
+                  ...this._name
+                )
+              ).act((box, data) => {
+                this.handleInput(box, data);
+              }),
+              b.div().class('arrow')
+            ),
+            b.div().class('range').append(
+              b.input(
+                b.date().wrap().attributes({
+                  formnovalidate: 'formnovalidate',
+                  name: 'begin',
+                  required: 'required'
+                })
+              ).act((box, data) => {
+                this.handleInput(box, data);
+              }),
+              b.div().class('arrow'),
+              b.input(
+                b.date().wrap().attributes({
+                  formnovalidate: 'formnovalidate',
+                  name: 'end',
+                  required: 'required'
+                })
+              ).act((box, data) => {
+                this.handleInput(box, data);
+              })
+            )
+          ),
+          b.row().class('any').append(
+            b.div().class('action').append(
+              ...this._action
+            ),
+            b.tab().id('mode').append(
+              b.div().class('tab mode').append(
+                ...this._mode
               )
             ).act((box, data) => {
-              this.handleName(box, data);
-            }),
-            b.div().class('arrow')
-          ),
-          b.div().class('date').append(
-            b.input(
-              b.date().wrap().class('click').attributes({
-                formnovalidate: 'formnovalidate',
-                value: new Date().toISOString().slice(0, 10)
-              })
-            ).act((box, data) => {
-              this.handleBegin(box, data);
-            }),
-            b.div().class('arrow'),
-            b.input(
-              b.date().wrap().class('click').attributes({
-                formnovalidate: 'formnovalidate',
-                value: new Date().toISOString().slice(0, 10)
-              })
-            ).act((box, data) => {
-              this.handleEnd(box, data);
+              this.handleInput(box, data);
             })
           )
-        ),
-        b.row().class('any').append(
-          b.div().class('action').append(
-            b.button().class('click icon ion-ios-download')
-          ),
-          b.tab(
-            b.div().class('tab').append(
-              ...this._level
-            )
-          ).act((box, data) => {
-            this.handleLevel(box, data);
-          })
         )
       )
     );
   }
 
-  handleName(box, data) {
-    box.control = box.control || {};
-    box.control.name = box.input;
+  resolveAfter(box, data) {
+    this.load(box, data);
+    this.read(box, data);
+  }
 
-    delete box.input;
-
+  handleInput(box, data) {
+    this.read(box, data);
+    this.save(box, data);
     this.pass(box, data);
   }
 
-  handleBegin(box, data) {
-    box.control = box.control || {};
-    box.control.begin = box.input;
+  load() {
+    const control = JSON.parse(
+      this._storage.getItem('control-' + this._id) || '{}'
+    );
 
-    delete box.input;
+    const [snippet] = this._args;
+    const node = snippet.node();
 
-    this.pass(box, data);
+    if (control.mode) {
+      node
+        .selectAll('.tab *')
+        .classed('selected', false);
+
+      node
+        .select(`.tab *[value=${control.mode}]`)
+        .classed('selected', true);
+    }
+
+    if (control.name) {
+      node
+        .select('select')
+        .property('value', control.name);
+    }
+
+    node
+      .select('input[name=begin]')
+      .property('value', control.begin || this._begin);
+
+    node
+      .select('input[name=end]')
+      .property('value', control.end || this._end);
   }
 
-  handleEnd(box, data) {
-    box.control = box.control || {};
-    box.control.end = box.input;
+  read(box) {
+    const [snippet] = this._args;
+    const node = snippet.node();
 
-    delete box.input;
+    const mode = node
+      .select('.tab .selected')
+      .property('value');
 
-    this.pass(box, data);
+    const name = node
+      .select('select')
+      .property('value');
+
+    const begin = node
+      .select('input[name=begin]')
+      .property('value');
+
+    const end = node
+      .select('input[name=end]')
+      .property('value');
+
+    merge(box, {
+      control: {
+        mode,
+        name,
+        begin,
+        end
+      }
+    });
   }
 
-  handleLevel(box, data) {
-    const tab = this._level[box.tab];
-
-    let level = tab.resolveAttribute(box, data, 'value');
-    level = level || tab;
-
-    box.control = box.control || {};
-    box.control.level = level;
-
-    delete box.input;
-
-    this.pass(box, data);
+  save(box) {
+    this._storage.setItem(
+      'control-' + this._id,
+      JSON.stringify(box.control)
+    );
   }
 }

@@ -1,0 +1,65 @@
+.log-control {
+  background: white;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  display: flex;
+  padding: 1em;
+}
+
+.panel:not(.outset-x) .log-control {
+  border: none;
+  border-radius: 0.5em;
+}
+
+.log-control .action {
+  flex: 1;
+  margin-top: 0.5em;
+}
+
+.log-control .range {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.log-control .range > .arrow:after {
+  content: '\f119';
+  font-size: 1.25em;
+  font-family: Ionicons;
+  margin: 0 0.5em;
+}
+
+.log-control .name {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  padding-right: 0.5em;
+  width: 50%;
+}
+
+.log-control .name select {
+  background: none;
+  border: none;
+  font-size: 1.25em;
+  max-width: 100%;
+  margin: -0.25em -0.15em;
+  padding-right: 1em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.log-control .name .arrow {
+  margin-left: -0.5em;
+  pointer-events: none;
+}
+
+.log-control .name .arrow:after {
+  content: '\f3d0';
+  display: flex;
+  font-family: Ionicons;
+  margin-top: 0.15em;
+}
+
+.log-control .mode {
+  margin-top: 0.5em;
+}
