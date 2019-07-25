@@ -110,10 +110,14 @@ export class ViewRouter extends Router {
 
     if (box.path === false) {
       box = this.processDelete(box, routes);
-    } else if (typeof this._workers[box.path] === 'undefined') {
-      box = this.processDefault(box, routes);
-    } else {
+    } else if (box.path) {
       box = this.processRoute(box, routes, box);
+    } else if (typeof routes[this._name] !== 'undefined') {
+      box = this.processRoute(box, routes, routes[this._name]);
+    }
+
+    if (typeof this._workers[box.path] === 'undefined') {
+      box = this.processDefault(box, routes);
     }
 
     this.formatHash(routes);
