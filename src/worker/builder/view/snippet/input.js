@@ -72,7 +72,7 @@ export class Input extends Node {
   }
 
   isAboveMin(value, min) {
-    if (typeof min === 'undefined') {
+    if (min === null) {
       return true;
     }
 
@@ -80,7 +80,7 @@ export class Input extends Node {
   }
 
   isBelowMax(value, max) {
-    if (typeof max === 'undefined') {
+    if (max === null) {
       return true;
     }
 
@@ -88,7 +88,7 @@ export class Input extends Node {
   }
 
   isDefined(value, required) {
-    if (typeof required === 'undefined') {
+    if (required === null) {
       return true;
     }
 
@@ -101,8 +101,16 @@ export class Input extends Node {
       value === '';
   }
 
+  isMultiple(value, multiple) {
+    if (multiple === null) {
+      return true;
+    }
+
+    return Array.isArray(value) === true;
+  }
+
   isPattern(value, pattern) {
-    if (typeof pattern === 'undefined') {
+    if (pattern === null) {
       return true;
     }
 
@@ -129,11 +137,8 @@ export class Input extends Node {
 
     const multiple = this.resolveAttribute(box, data, 'multiple');
 
-    if (typeof multiple !== 'undefined') {
-      if (Array.isArray(value) === false) {
-        this.setError(error, name, value, 'array');
-        return null;
-      }
+    if (this.isMultiple(value, multiple) === false) {
+      return this.setError(error, name, value, 'array');
     }
 
     if (Array.isArray(value) === false) {
