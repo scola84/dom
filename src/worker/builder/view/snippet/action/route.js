@@ -37,7 +37,7 @@ export class Route extends Action {
     return this;
   }
 
-  object(value) {
+  object(value = true) {
     return this.setObject(value);
   }
 
@@ -57,7 +57,12 @@ export class Route extends Action {
 
   resolveObject(box, data, route) {
     const [path, name] = route.split('@');
-    const object = `${this._object}=${data[this._object]}`;
-    return `${path}:${object}@${name}`;
+    let key = this._object;
+
+    if (this._object === true) {
+      key = path.split('-').pop() + '_id';
+    }
+
+    return `${path}:${key}=${data[key]}@${name}`;
   }
 }

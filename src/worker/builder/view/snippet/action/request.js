@@ -189,12 +189,12 @@ export class Request extends Action {
   }
 
   resolveObject(box, options) {
-    let name = this._object;
+    let key = this._object;
 
     if (this._object === true) {
-      name = options.url.path.split('/').pop() + '_id';
+      key = options.url.path.split('/').pop() + '_id';
     }
 
-    options.url.path += '/' + box.params[name];
+    options.url.path += '/' + box.params[key];
   }
 }
