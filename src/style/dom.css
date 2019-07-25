@@ -35,12 +35,11 @@ button {
   user-select: text;
 }
 
-button:focus,
-label:focus {
+:focus {
   outline: none;
 }
 
-button::-moz-focus-inner {
+::-moz-focus-inner {
   border: 0;
 }
 

@@ -4,7 +4,9 @@ const pattern = 'Deze waarde is niet goed (%(pattern)s).';
 
 export const nl_NL = {
   button: {
-    back: 'Terug'
+    back: 'Terug',
+    cancel: 'Annuleren',
+    save: 'Opslaan'
   },
   input: {
     checkbox: {
