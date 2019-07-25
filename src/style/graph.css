@@ -6,7 +6,7 @@
   padding: 1em;
 }
 
-@media (min-width: 48em) {
+@media not all and (max-width: 48em) {
   .panel:not(.outset-x) .graph {
     border-radius: 0.5em;
   }

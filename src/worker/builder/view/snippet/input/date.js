@@ -90,10 +90,12 @@ export class Date extends DateTime {
 
     wrapper
       .append('label')
+      .attr('tabindex', 0)
       .attr('for', 'date-' + this._id);
 
     this._node
       .attr('id', 'date-' + this._id)
+      .attr('tabindex', -1)
       .on('input.scola-date', () => {
         this.changeValue();
       });

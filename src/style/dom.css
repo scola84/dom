@@ -35,7 +35,8 @@ button {
   user-select: text;
 }
 
-button:focus {
+button:focus,
+label:focus {
   outline: none;
 }
 
@@ -44,7 +45,8 @@ button::-moz-focus-inner {
 }
 
 @media not all and (max-width: 64em) {
-  button:focus {
+  button:focus,
+  label:focus {
     outline: 1px dotted black;
   }
 }

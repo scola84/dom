@@ -13,7 +13,14 @@
   flex-direction: row;
 }
 
-@media (min-width: 48em) {
+@media not all and (max-width: 48em) {
+  .panel:not(.outset-x) .group {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
+
+@media not all and (max-width: 64em) {
   .col {
     display: flex;
     flex: 1;
@@ -27,11 +34,6 @@
 
   .panel:not(.outset-x) .row > .group {
     flex: 1;
-  }
-
-  .panel:not(.outset-x) .group {
-    margin-left: 1em;
-    margin-right: 1em;
   }
 
   .col.left > .group,
@@ -59,7 +61,7 @@
   border-bottom: 1px solid lightgrey;
 }
 
-@media (min-width: 48em) {
+@media not all and (max-width: 48em) {
   .panel:not(.outset-x) .group > .body {
     border: none;
   }
