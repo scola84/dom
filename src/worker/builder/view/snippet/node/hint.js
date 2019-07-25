@@ -30,7 +30,7 @@ export class Hint extends Node {
     ) {
       text = this._builder
         .print()
-        .code(`input.${value.type}.${value.reason}`)
+        .format(`input.${value.type}.${value.reason}`)
         .values(value);
     }
 
