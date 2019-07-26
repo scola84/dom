@@ -51,7 +51,7 @@ export class Scroll extends Event {
 
   handle(box, data, snippet) {
     if (box.list.total % box.list.count > 0) {
-      return false;
+      return;
     }
 
     const initialized = box.list.height > 0;
@@ -65,15 +65,14 @@ export class Scroll extends Event {
     const top = box.list.height + node.scrollTop;
     const threshold = node.scrollHeight - (box.list.height / 4 * 2);
 
-    if (top > threshold) {
-      if (initialized === true) {
-        box.list.offset += box.list.count;
-      }
-
-      this.pass(box, data);
-      return true;
+    if (top < threshold) {
+      return;
     }
 
-    return false;
+    if (initialized === true) {
+      box.list.offset += box.list.count;
+    }
+
+    this.pass(box, data);
   }
 }

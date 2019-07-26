@@ -1,6 +1,6 @@
-import { Generator } from '../generator';
+import { Parent } from '../parent';
 
-export class List extends Generator {
+export class List extends Parent {
   prepareList(box, data) {
     if (box.list.clear) {
       delete box.list.clear;
@@ -31,10 +31,6 @@ export class List extends Generator {
       item,
       empty
     ] = this._args;
-
-    if (box.busy === true) {
-      delete box.busy;
-    }
 
     if (box.list) {
       this.prepareList(box, listData);

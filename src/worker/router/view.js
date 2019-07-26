@@ -97,12 +97,6 @@ export class ViewRouter extends Router {
   }
 
   act(box, data, callback) {
-    if (this._base.busy === true) {
-      return;
-    }
-
-    this._base.busy = true;
-
     box = this.processHistory(box);
     box = this.processBackward(box);
 
@@ -182,7 +176,6 @@ export class ViewRouter extends Router {
     const path = box.default || this._default;
 
     if (path === null) {
-      this._base.busy = false;
       return box;
     }
 

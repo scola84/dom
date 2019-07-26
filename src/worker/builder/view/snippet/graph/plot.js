@@ -1,9 +1,9 @@
 import { event } from 'd3';
 import { Axis } from './axis';
-import { Generator } from '../generator';
+import { Parent } from '../parent';
 import { map } from './plot/';
 
-export class Plot extends Generator {
+export class Plot extends Parent {
   static setup() {
     Plot.attachFactories(Plot, { map });
   }

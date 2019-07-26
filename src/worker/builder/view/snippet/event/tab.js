@@ -8,7 +8,7 @@ export class Tab extends Click {
     const tab = children.indexOf(event.target);
 
     if (tab === box.tab || tab < 0) {
-      return false;
+      return;
     }
 
     box.tab = tab;
@@ -17,7 +17,5 @@ export class Tab extends Click {
     select(children[box.tab]).classed('selected', true);
 
     this.pass(box, data);
-
-    return false;
   }
 }

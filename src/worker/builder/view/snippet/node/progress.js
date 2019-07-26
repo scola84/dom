@@ -21,6 +21,10 @@ export class Progress extends Node {
           return;
         }
 
+        if (this._node === null) {
+          return;
+        }
+
         this._node
           .style('transition-duration', '0s')
           .style('width', null)

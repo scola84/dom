@@ -25,7 +25,5 @@ export class Submit extends Event {
     }
 
     this.pass(box, data);
-
-    return true;
   }
 }

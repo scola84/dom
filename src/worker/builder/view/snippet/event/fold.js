@@ -71,8 +71,6 @@ export class Fold extends Event {
       this.fold(box, data, snippet);
       this.save(box, data, snippet);
     }
-
-    return false;
   }
 
   attach(item, immediate) {

@@ -10,13 +10,4 @@ export class Form extends Node {
       })
       .name('form');
   }
-
-  resolveBefore(box, data) {
-    if (box.busy === true) {
-      delete box.busy;
-      return this._node;
-    }
-
-    return this.resolveOuter(box, data);
-  }
 }

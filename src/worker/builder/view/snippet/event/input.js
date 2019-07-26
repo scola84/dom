@@ -27,7 +27,5 @@ export class Input extends Event {
       box.input = value;
       this.pass(box, data);
     }
-
-    return false;
   }
 }

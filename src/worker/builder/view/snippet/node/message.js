@@ -8,7 +8,8 @@ export class Message extends Node {
 
   resolveAfter(box, data) {
     if (typeof data.status === 'undefined') {
-      return this._node;
+      return this._node
+        .classed('in', false);
     }
 
     let format = `status.${data.status}`;

@@ -10,7 +10,5 @@ export class Click extends Event {
     if (event.target.closest('.click') !== null) {
       this.pass(box, data);
     }
-
-    return false;
   }
 }

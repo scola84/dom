@@ -63,6 +63,8 @@ export class Route extends Action {
       key = path.split('-').pop() + '_id';
     }
 
-    return `${path}:${key}=${data[key]}@${name}`;
+    const value = box.params[key] || data[key];
+
+    return `${path}:${key}=${value}@${name}`;
   }
 }

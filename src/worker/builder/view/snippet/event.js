@@ -91,11 +91,7 @@ export class Event extends Action {
       newEvent.preventDefault();
     }
 
-    if (box.busy === true) {
-      return;
-    }
-
-    box.busy = this.handle(box, data, snippet, newEvent);
+    this.handle(box, data, snippet, newEvent);
   }
 
   unbind(snippet) {

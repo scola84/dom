@@ -1,7 +1,7 @@
-import { Generator } from '../generator';
+import { Parent } from '../parent';
 import { Linear, map } from './axis/';
 
-export class Axis extends Generator {
+export class Axis extends Parent {
   static setup() {
     Axis.attachFactories(Axis, { map });
   }

@@ -1,7 +1,7 @@
 import { Axis } from './axis';
-import { Generator } from '../generator';
+import { Parent } from '../parent';
 
-export class Grid extends Generator {
+export class Grid extends Parent {
   constructor(options) {
     super(options);
     this.class('transition');

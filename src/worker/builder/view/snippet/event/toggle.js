@@ -7,7 +7,5 @@ export class Toggle extends Click {
 
     node.classed('toggled', box.toggle);
     this.pass(box, data);
-
-    return false;
   }
 }

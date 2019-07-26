@@ -15,7 +15,6 @@ export class Panel extends Node {
       .classed('rtl ltr ins', false) : select();
 
     if (old.node() === this._node.node()) {
-      box.base.busy = false;
       return this.resolveOuter(box, data);
     }
 
@@ -32,7 +31,6 @@ export class Panel extends Node {
       .classed(effect, true)
       .on('transitionend.scola-panel-new', () => {
         this._node.on('.scola-panel-new', null);
-        box.base.busy = false;
       });
 
     return this.resolveOuter(box, data);
