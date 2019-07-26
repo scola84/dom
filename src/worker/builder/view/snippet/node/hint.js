@@ -1,6 +1,26 @@
 import { Node } from '../node';
 
 export class Hint extends Node {
+  constructor(options = {}) {
+    super(options);
+
+    this._format = null;
+    this.setFormat(options.format);
+  }
+
+  getFormat() {
+    return this._format;
+  }
+
+  setFormat(value = null) {
+    this._format = value;
+    return this;
+  }
+
+  format(value) {
+    return this.setFormat(value);
+  }
+
   resolveAfter(box, data) {
     if (typeof data.data === 'undefined' || data.data === null) {
       return this._node;
@@ -22,15 +42,20 @@ export class Hint extends Node {
       [name, value] = this.resolveArray(box, data, input, name, value);
     }
 
+    let format = null;
     let text = null;
 
     if (
       typeof value !== 'undefined' &&
       typeof value.reason !== 'undefined'
     ) {
+      format = this._format ?
+        this.resolveValue(box, data, this._format) :
+        `input.${value.type}.${value.reason}`;
+
       text = this._builder
         .print()
-        .format(`input.${value.type}.${value.reason}`)
+        .format(format)
         .values(value);
     }
 

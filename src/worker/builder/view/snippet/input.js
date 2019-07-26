@@ -5,7 +5,10 @@ export class Input extends Node {
   constructor(options = {}) {
     super(options);
 
+    this._custom = null;
     this._default = null;
+
+    this.setCustom(options.custom);
     this.setDefault(options.default);
 
     this.name('input');
@@ -13,8 +16,18 @@ export class Input extends Node {
 
   getOptions() {
     return Object.assign(super.getOptions(), {
+      custom: this._custom,
       default: this._default
     });
+  }
+
+  getCustom() {
+    return this._custom;
+  }
+
+  setCustom(value = () => true) {
+    this._custom = value;
+    return this;
   }
 
   getDefault() {
@@ -24,6 +37,10 @@ export class Input extends Node {
   setDefault(value = null) {
     this._default = value;
     return this;
+  }
+
+  custom(value) {
+    return this.setCustom(value);
   }
 
   default (value) {
@@ -191,6 +208,10 @@ export class Input extends Node {
 
     if (this.isAboveMin(value, min) === false) {
       return this.setError(error, name, value, 'min', { min });
+    }
+
+    if (this._custom(box, data, value) === false) {
+      return this.setError(error, name, value, 'custom');
     }
 
     return this.validateAfter(box, data, error, name, value);

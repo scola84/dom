@@ -25,6 +25,7 @@ export class Validate extends Action {
     if (hasError) {
       const newError = new Error('400 Input invalid');
       newError.data = error;
+      newError.original = data;
       this.fail(box, newError);
     } else {
       this.pass(box, data);
