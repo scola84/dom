@@ -14,6 +14,10 @@ export class ViewBuilder extends Builder {
     this.setView(options.view);
   }
 
+  getNode() {
+    return select(this._parent.getBase());
+  }
+
   getView() {
     return this._view;
   }
@@ -24,7 +28,7 @@ export class ViewBuilder extends Builder {
   }
 
   node() {
-    return select(this._parent.getBase());
+    return this.getNode();
   }
 
   act(box, data, callback) {

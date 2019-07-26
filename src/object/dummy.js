@@ -5,7 +5,9 @@ export class Dummy {
 
   attr(key, value) {
     if (typeof value === 'undefined') {
-      return this._attributes[key];
+      return typeof this._attributes[key] === 'undefined' ?
+        null :
+        this._attributes[key];
     }
 
     this._attributes[key] = value;

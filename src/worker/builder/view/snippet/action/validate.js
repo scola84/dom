@@ -2,12 +2,9 @@ import { Action } from '../action';
 import { Input } from '../input';
 
 export class Validate extends Action {
-  resolveAfter(box, data) {
-    let snippet = null;
-
+  resolveInner(box, data) {
     for (let i = 0; i < this._args.length; i += 1) {
-      [snippet] = this.resolveValue(null, null, this._args[i]);
-      this.validate(box, data, snippet);
+      this.validate(box, data, this._args[i]);
     }
   }
 
