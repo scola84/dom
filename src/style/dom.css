@@ -35,14 +35,6 @@ button {
   user-select: text;
 }
 
-:focus {
-  outline: none;
-}
-
-::-moz-focus-inner {
-  border: 0;
-}
-
 @media not all and (max-width: 64em) {
   button:focus,
   label:focus {
@@ -66,6 +58,29 @@ p a:hover {
   text-decoration: none;
 }
 
+select {
+  background: none;
+  border: none;
+  margin: -0.25em -0.15em;
+  padding-right: 1em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+select +.arrow {
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  width: 1em;
+}
+
+select + .arrow:after {
+  content: '\f3d0';
+  display: flex;
+  font-family: Ionicons;
+  margin-top: 0.15em;
+}
+
 textarea {
   -webkit-appearance: textfield;
 }
@@ -77,6 +92,14 @@ textarea {
 
 .transition {
   transition: all 0.25s ease-in-out;
+}
+
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
 }
 
 @keyframes spin {

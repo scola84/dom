@@ -38,26 +38,12 @@
 }
 
 .log-control .name select {
-  background: none;
-  border: none;
   font-size: 1.25em;
   max-width: 100%;
-  margin: -0.25em -0.15em;
-  padding-right: 1em;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 }
 
-.log-control .name .arrow {
-  margin-left: -0.5em;
-  pointer-events: none;
-}
-
-.log-control .name .arrow:after {
-  content: '\f3d0';
-  display: flex;
-  font-family: Ionicons;
-  margin-top: 0.15em;
+.log-control .name select + .arrow {
+  margin-left: -1em;
 }
 
 .log-control .mode {

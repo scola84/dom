@@ -6,9 +6,20 @@
 .form .item > input,
 .form .item > select,
 .form .item > textarea {
+  background: none;
   border: 0;
   flex: 1;
   min-width: 0;
+}
+
+@media not all and (max-width: 32em) {
+  .form .item > .input,
+  .form .item > input,
+  .form .item > select,
+  .form .item > textarea {
+    flex: none;
+    min-width: auto;
+  }
 }
 
 .form .item > input,
@@ -24,6 +35,10 @@
 .form .item > input[type=checkbox]:not(:first-child),
 .form .item > input[type=radio]:not(:first-child) {
   margin-left: 0;
+}
+
+.form .item > select + .arrow {
+  margin-left: -2em;
 }
 
 .form .item > .hint {
