@@ -38,6 +38,12 @@
   margin-left: -2em;
 }
 
+.form .item > .delete:first-child {
+  color: red;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .form .item > .hint {
   margin-left: 0;
   margin-right: 0;

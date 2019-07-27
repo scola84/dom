@@ -6,6 +6,7 @@ export const nl_NL = {
   button: {
     back: 'Terug',
     cancel: 'Annuleren',
+    delete: 'Verwijderen',
     save: 'Opslaan'
   },
   input: {
