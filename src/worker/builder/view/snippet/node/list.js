@@ -25,7 +25,7 @@ export class List extends Parent {
 
   resolveInner(box, data) {
     const hasData = Array.isArray(data);
-    const listData = data || [];
+    const listData = hasData ? data : [];
 
     const [
       item,
