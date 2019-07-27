@@ -13,10 +13,7 @@
 }
 
 @media not all and (max-width: 32em) {
-  .form .item > .input,
-  .form .item > input,
-  .form .item > select,
-  .form .item > textarea {
+  .form .item > select {
     flex: none;
     min-width: auto;
   }
