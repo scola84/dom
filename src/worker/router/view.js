@@ -97,10 +97,10 @@ export class ViewRouter extends Router {
   }
 
   act(box, data, callback) {
-    box = this.processHistory(box);
-    box = this.processBackward(box);
-
     const routes = this.parseHash();
+
+    box = this.processHistory(box, routes);
+    box = this.processBackward(box, routes);
 
     if (box.path === false) {
       box = this.processDelete(box, routes);
@@ -194,10 +194,6 @@ export class ViewRouter extends Router {
   }
 
   processForward(box) {
-    if (box.options.clr === true) {
-      this._history = [];
-    }
-
     if (box.path) {
       this._history.push(box);
     }
@@ -205,7 +201,15 @@ export class ViewRouter extends Router {
     this.saveHistory();
   }
 
-  processHistory(box) {
+  processHistory(box, routes) {
+    if (box.options.clr === true) {
+      this._history = [];
+    }
+
+    if (box.path === '') {
+      delete routes[this._name];
+    }
+
     if (box.options.his === false) {
       return box;
     }

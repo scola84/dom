@@ -3,6 +3,12 @@ import { ViewRouter } from './view';
 
 export class PopRouter extends ViewRouter {
   act(box, data, callback) {
+    if (box.options.clr) {
+      box.options.clr = false;
+      this.close(box);
+      return;
+    }
+
     if (box.path !== false) {
       this.open(box);
     }
