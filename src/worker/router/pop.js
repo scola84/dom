@@ -4,16 +4,10 @@ import { ViewRouter } from './view';
 export class PopRouter extends ViewRouter {
   act(box, data, callback) {
     if (box.options.clr) {
-      box.options.clr = false;
       this.close(box);
-      return;
+    } else {
+      super.act(box, data, callback);
     }
-
-    if (box.path !== false) {
-      this.open(box);
-    }
-
-    super.act(box, data, callback);
   }
 
   close(box) {
@@ -32,8 +26,7 @@ export class PopRouter extends ViewRouter {
           .classed('open', false)
           .on('.scola-pop', null);
 
-        box.path = false;
-        this.act(box);
+        super.act(box);
       });
 
     base.style('width');
@@ -68,7 +61,9 @@ export class PopRouter extends ViewRouter {
       .classed('in', true)
       .on('click.scola-pop', () => {
         if (box.lock !== true) {
-          this.close(box);
+          box.path = null;
+          box.options.clr = true;
+          this.act(box);
         }
       });
 
@@ -80,5 +75,12 @@ export class PopRouter extends ViewRouter {
       .on('click.scola-pop', () => {
         event.stopPropagation();
       });
+  }
+
+  pass(name, box, data, callback) {
+    if (typeof this._workers[box.path] !== 'undefined') {
+      this.open(box);
+      super.pass(name, box, data, callback);
+    }
   }
 }

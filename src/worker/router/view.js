@@ -101,10 +101,9 @@ export class ViewRouter extends Router {
 
     box = this.processHistory(box, routes);
     box = this.processBackward(box, routes);
+    box = this.processDelete(box, routes);
 
-    if (box.path === false) {
-      box = this.processDelete(box, routes);
-    } else if (box.path) {
+    if (box.path) {
       box = this.processRoute(box, routes, box);
     } else if (typeof routes[this._name] !== 'undefined') {
       box = this.processRoute(box, routes, routes[this._name]);
@@ -156,8 +155,8 @@ export class ViewRouter extends Router {
     if (box.options.bwd === false) {
       return box;
     }
-
     if (this._history.length < 2) {
+      this._history.pop();
       return box;
     }
 
@@ -183,7 +182,17 @@ export class ViewRouter extends Router {
   }
 
   processDelete(box, routes) {
+    if (box.options.clr === false) {
+      return box;
+    }
+
     delete routes[this._name];
+
+    this._history = [];
+
+    if (box.path) {
+      return box;
+    }
 
     if (this._base.snippet) {
       this._base.snippet.remove();
@@ -201,15 +210,7 @@ export class ViewRouter extends Router {
     this.saveHistory();
   }
 
-  processHistory(box, routes) {
-    if (box.options.clr === true) {
-      this._history = [];
-    }
-
-    if (box.path === '') {
-      delete routes[this._name];
-    }
-
+  processHistory(box) {
     if (box.options.his === false) {
       return box;
     }
