@@ -13,6 +13,13 @@ export class Event extends Action {
     this.setThrottle(options.throttle);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      name: this._name,
+      throttle: this._throttle
+    });
+  }
+
   getName() {
     return this._name;
   }

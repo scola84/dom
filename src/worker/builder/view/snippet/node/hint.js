@@ -8,6 +8,12 @@ export class Hint extends Node {
     this.setFormat(options.format);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      format: this._format
+    });
+  }
+
   getFormat() {
     return this._format;
   }

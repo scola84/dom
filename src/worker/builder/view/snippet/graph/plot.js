@@ -17,6 +17,12 @@ export class Plot extends Parent {
     this.class('transition');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      data: this._data
+    });
+  }
+
   getData() {
     return this._data;
   }

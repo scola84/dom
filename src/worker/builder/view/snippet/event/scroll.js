@@ -13,6 +13,12 @@ export class Scroll extends Event {
       .throttle(250);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      height: this._height
+    });
+  }
+
   getHeight() {
     return this._height;
   }

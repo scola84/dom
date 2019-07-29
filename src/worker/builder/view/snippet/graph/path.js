@@ -12,6 +12,12 @@ export class Path extends Plot {
       .class('plot');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      fill: this._fill
+    });
+  }
+
   getFill() {
     return this._fill;
   }

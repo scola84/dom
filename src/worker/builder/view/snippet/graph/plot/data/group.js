@@ -8,6 +8,12 @@ export class Group extends Data {
     this.setIndex(options.value);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      index: this._index
+    });
+  }
+
   getIndex() {
     return this._index;
   }

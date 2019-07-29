@@ -21,6 +21,19 @@ export class Scale {
     this.setRange(options.range);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      axis: this._axis,
+      domain: this._domain,
+      max: this._max,
+      min: this._min,
+      name: this._name,
+      position: this._position,
+      ppu: this._ppu,
+      range: this._range,
+    });
+  }
+
   getAxis() {
     return this._axis;
   }

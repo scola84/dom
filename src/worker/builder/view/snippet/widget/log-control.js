@@ -20,6 +20,17 @@ export class LogControl extends Widget {
     this.setStorage(options.storage);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      action: this._action,
+      begin: this._begin,
+      end: this._end,
+      mode: this._mode,
+      name: this._name,
+      storage: this._storage
+    });
+  }
+
   getAction() {
     return this._action;
   }

@@ -12,6 +12,12 @@ export class Circle extends Plot {
       .class('plot');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      radius: this._radius
+    });
+  }
+
   getRadius() {
     return this._radius;
   }

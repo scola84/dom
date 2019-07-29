@@ -11,6 +11,13 @@ export class Linear extends Scale {
     this.setStep(options.step);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      count: this._count,
+      step: this._step
+    });
+  }
+
   getCount() {
     return this._count;
   }

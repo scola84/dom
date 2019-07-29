@@ -1,14 +1,23 @@
 export class Data {
   constructor(options = {}) {
     this._filter = null;
-    this._exogenous = null;
     this._endogenous = null;
+    this._exogenous = null;
     this._position = null;
 
     this.setFilter(options.filter);
-    this.setExogenous(options.exogenous);
     this.setEndogenous(options.endogenous);
+    this.setExogenous(options.exogenous);
     this.setPosition(options.position);
+  }
+
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      filter: this._filter,
+      endogenous: this._endogenous,
+      exogenous: this._exogenous,
+      position: this._position
+    });
   }
 
   getFilter() {
@@ -20,21 +29,21 @@ export class Data {
     return this;
   }
 
-  getExogenous() {
-    return this._exogenous;
-  }
-
-  setExogenous(value = null) {
-    this._exogenous = value;
-    return this;
-  }
-
   getEndogenous() {
     return this._endogenous;
   }
 
   setEndogenous(value = null) {
     this._endogenous = value;
+    return this;
+  }
+
+  getExogenous() {
+    return this._exogenous;
+  }
+
+  setExogenous(value = null) {
+    this._exogenous = value;
     return this;
   }
 

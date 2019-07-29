@@ -9,6 +9,12 @@ export class Parent extends Node {
     this.setChildren(options.children);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      children: this._children
+    });
+  }
+
   getChildren() {
     return this._children;
   }

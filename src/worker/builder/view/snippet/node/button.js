@@ -21,6 +21,13 @@ export class Button extends Node {
       .name('button');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      form: this._form,
+      menu: this._menu
+    });
+  }
+
   getForm() {
     return this._form;
   }

@@ -15,6 +15,12 @@ export class Axis extends Parent {
     this.class('transition');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      scale: this._scale
+    });
+  }
+
   getScale() {
     return this._scale;
   }

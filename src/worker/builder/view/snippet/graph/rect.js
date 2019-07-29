@@ -12,6 +12,12 @@ export class Rect extends Plot {
       .class('plot');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      padding: this._padding
+    });
+  }
+
   getPadding() {
     return this._padding;
   }

@@ -18,6 +18,7 @@ export class Search extends Node {
 
   getOptions() {
     return Object.assign(super.getOptions(), {
+      placeholder: this._placeholder,
       storage: this._storage,
       wildcard: this._wildcard
     });

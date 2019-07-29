@@ -10,6 +10,12 @@ export class Textarea extends Input {
     this.name('textarea');
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      grow: this._grow
+    });
+  }
+
   getGrow() {
     return this._grow;
   }
