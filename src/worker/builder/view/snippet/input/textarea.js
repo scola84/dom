@@ -46,7 +46,7 @@ export class Textarea extends Input {
   resolveGrow() {
     const wrapper = this
       .wrapNode('div')
-      .classed('input', true);
+      .classed('input textarea', true);
 
     const pre = wrapper.append('pre');
     const span = pre.append('span');

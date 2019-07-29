@@ -15,6 +15,9 @@ export class Button extends Node {
       .attributes({
         type: 'button'
       })
+      .classed({
+        click: true
+      })
       .name('button');
   }
 
@@ -63,6 +66,8 @@ export class Button extends Node {
 
   resolveForm() {
     const form = this._node.attr('form');
+
+    this._node.attr('type', 'submit');
 
     this._node.on('click.scola-button', () => {
       event.preventDefault();

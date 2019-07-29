@@ -1,11 +1,11 @@
-.form .item > .label {
+.form .item .label {
   flex: none;
 }
 
-.form .item > .input,
-.form .item > input,
-.form .item > select,
-.form .item > textarea {
+.form .item .input,
+.form .item input,
+.form .item select,
+.form .item textarea {
   background: none;
   border: 0;
   flex: 1;
@@ -13,43 +13,39 @@
 }
 
 @media not all and (max-width: 32em) {
-  .form .item > select {
+  .form .item select {
     flex: none;
     min-width: auto;
   }
 }
 
-.form .item > input,
-.form .item > select {
+.form .item input,
+.form .item select {
   white-space: nowrap;
 }
 
-.form .item > input[type=checkbox],
-.form .item > input[type=radio] {
+.form .item input[type=checkbox],
+.form .item input[type=radio] {
   flex: none;
 }
 
-.form .item > input[type=checkbox]:not(:first-child),
-.form .item > input[type=radio]:not(:first-child) {
+.form .item input[type=checkbox]:not(:first-child),
+.form .item input[type=radio]:not(:first-child) {
   margin-left: 0;
 }
 
-.form .item > select + .arrow {
-  margin-left: -2em;
-}
-
-.form .item > .delete:first-child {
+.form .item .delete:first-child {
   color: red;
   margin-left: auto;
   margin-right: auto;
 }
 
-.form .item > .hint {
+.form .item .hint {
   margin-left: 0;
   margin-right: 0;
 }
 
-.form .item > .hint:not(:empty) {
+.form .item .hint:not(:empty) {
   color: red;
   font-size: 0.9em;
   margin-left: 1em;

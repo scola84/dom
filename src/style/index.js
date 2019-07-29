@@ -6,6 +6,7 @@ import './form.css';
 import './graph.css';
 import './group.css';
 import './icon.css';
+import './input.css';
 import './item.css';
 import './log-control.css';
 import './metric.css';

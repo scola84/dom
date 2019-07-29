@@ -32,6 +32,16 @@ export class Node extends Snippet {
     return this._node;
   }
 
+  setId(value) {
+    if (typeof value === 'string') {
+      return this.attributes({
+        id: value
+      });
+    }
+
+    return super.setId(value);
+  }
+
   setName(value = 'div') {
     this._name = value;
     return this;

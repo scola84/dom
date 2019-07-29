@@ -1,0 +1,29 @@
+.input.select {
+  align-items: center;
+  display: flex;
+  margin: -0.15em;
+}
+
+.input.select select {
+  background: none;
+  border: none;
+  margin: 0;
+  padding-right: 1em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.input.select .arrow {
+  display: flex;
+  justify-content: center;
+  margin-left: -1em;
+  pointer-events: none;
+  width: 1em;
+}
+
+.input.select .arrow:after {
+  content: '\f3d0';
+  display: flex;
+  font-family: Ionicons;
+  margin-top: 0.15em;
+}

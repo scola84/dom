@@ -114,8 +114,7 @@ export class LogControl extends Widget {
                 )
               ).act((box, data) => {
                 this.handleInput(box, data);
-              }),
-              b.div().class('arrow')
+              })
             ),
             b.div().class('range').append(
               b.input(
