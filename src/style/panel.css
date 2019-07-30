@@ -210,6 +210,18 @@
   width: 1.5em;
 }
 
+/* Body message */
+
+.panel > .body.message {
+  align-items: center;
+  color: #A9A9A9;
+  display: flex;
+  font-size: 2em;
+  justify-content: center;
+  padding: 0.5em;
+  text-align: center;
+}
+
 /* Footer / header */
 
 .panel > .footer {

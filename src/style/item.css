@@ -168,6 +168,10 @@
   white-space: nowrap;
 }
 
+.item > .label > *:empty:after {
+  content: '-';
+}
+
 .item > .label > .l0 {
   color: darkgrey;
   flex: 100%;
