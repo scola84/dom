@@ -28,31 +28,38 @@ const plugins = [
   })
 ];
 
+const external = [
+  '@scola/http',
+  '@scola/worker',
+  'postal-codes-js',
+  'process'
+];
+
+const globals = {
+  '@scola/http': 'scola.http',
+  '@scola/worker': 'scola.worker',
+  'postal-codes-js': 'postalCodesJs',
+  'process': 'process'
+};
+
 export default [{
   input,
-  external: [
-    '@scola/http',
-    'process'
-  ],
+  external,
   output: {
     extend: true,
     file: 'dist/dom.umd.js',
     format: 'umd',
     name: 'scola.dom',
-    globals: {
-      '@scola/http': 'scola.http'
-    }
+    globals
   },
   plugins
 }, {
   input,
-  external: [
-    '@scola/http',
-    'postal-codes-js'
-  ],
+  external,
   output: {
     file: 'dist/dom.cjs.js',
-    format: 'cjs'
+    format: 'cjs',
+    globals
   },
   plugins: [
     ignore([
