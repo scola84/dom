@@ -11,15 +11,6 @@ export class Data {
     this.setPosition(options.position);
   }
 
-  getOptions() {
-    return Object.assign(super.getOptions(), {
-      filter: this._filter,
-      endogenous: this._endogenous,
-      exogenous: this._exogenous,
-      position: this._position
-    });
-  }
-
   getFilter() {
     return this._filter;
   }
