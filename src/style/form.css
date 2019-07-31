@@ -48,7 +48,7 @@
 .form .item .hint:not(:empty) {
   color: red;
   font-size: 0.9em;
-  margin-left: 1em;
+  margin-left: 1.111em;
   margin-right: 1em;
   margin-top: 0;
   width: 100%;
