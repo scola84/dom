@@ -101,10 +101,12 @@ export class Input extends Node {
 
     const isEmpty = this.isEmpty(value);
 
-    if (
-      isEmpty === true &&
-      this._default !== null
-    ) {
+    if (isEmpty === true) {
+      if (this._default === null) {
+        this.setValue(data, name, null);
+        return;
+      }
+
       value = this.resolveValue(box, data, this._default);
       this.setValue(data, name, value);
     }
