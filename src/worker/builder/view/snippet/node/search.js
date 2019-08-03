@@ -63,6 +63,20 @@ export class Search extends Node {
     return this.setWildcard(value);
   }
 
+  createNode() {
+    super.createNode();
+
+    const placeholder = this.resolveValue(null, null, this._placeholder);
+
+    const input = this._node
+      .append('input')
+      .attr('autocomplete', 'on')
+      .attr('name', 'search')
+      .attr('type', 'search')
+      .attr('placeholder', placeholder);
+
+  }
+
   formatSearch(value) {
     const parts = value.match(/[^"\s]+|"[^"]+"/g) || [];
 
@@ -108,20 +122,11 @@ export class Search extends Node {
   }
 
   resolveSearch(box, data) {
-    const placeholder = this.resolveValue(box, data, this._placeholder);
-
-    const input = this._node
-      .append('input')
-      .attr('autocomplete', 'on')
-      .attr('name', 'search')
-      .attr('type', 'search')
-      .attr('placeholder', placeholder);
-
     const value = this._storage.getItem('search-' + this._id);
 
     if (value) {
       this._node.classed('in', true);
-      input.attr('value', value);
+      this._node.select('input').attr('value', value);
 
       defaults(box, {
         list: {
