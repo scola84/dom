@@ -1,7 +1,78 @@
+/* Check */
+
+.input.check input {
+  display: none;
+}
+
+.input.check div {
+  align-items: center;
+  display: flex;
+  height: 1em;
+  justify-content: center;
+  width: 1em;
+}
+
+.input.check div:after {
+  font-family: Ionicons;
+  font-size: 1.5em;
+}
+
+.input.check.checkbox div:after {
+  content: '\f149';
+}
+
+.input.check.checkbox input:checked + div:after {
+  content: '\f14a';
+}
+
+.input.check.radio div:after {
+  content: '\f1f6';
+}
+
+.input.check.radio input:checked + div:after {
+  content: '\f1f7';
+}
+
+/* Date */
+
+.input.date {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.input.date input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.input.date input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.input.date input::-webkit-clear-button,
+.input.date input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.input.date label {
+  cursor: pointer;
+  z-index: 1;
+}
+
+.input.date label:not(*:root) {
+  pointer-events: none;
+}
+
+/* Select */
+
 .input.select {
   align-items: center;
   display: flex;
-  margin: -0.15em;
 }
 
 .input.select select {
@@ -9,6 +80,7 @@
   border: none;
   margin: 0;
   padding-right: 1em;
+  text-overflow: ellipsis;
   -moz-appearance: none;
   -webkit-appearance: none;
 }

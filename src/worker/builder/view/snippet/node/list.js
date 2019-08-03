@@ -24,12 +24,15 @@ export class List extends Parent {
   }
 
   resolveInner(box, data) {
+    data = this._filter ? this._filter(box, data) : data;
+
     const hasData = Array.isArray(data);
     const listData = hasData ? data : [];
 
     const [
       item,
-      empty
+      empty,
+      ...extra
     ] = this._args;
 
     if (box.list) {
@@ -45,7 +48,11 @@ export class List extends Parent {
       .size();
 
     if (hasData === true && size === 0) {
-      this.appendChild(box, [{}], empty);
+      this.appendChild(box, { i: -1 }, empty);
+    }
+
+    for (let i = 0; i < extra.length; i += 1) {
+      this.appendChild(box, { i }, extra[i]);
     }
 
     return this.resolveAfter(box, data);

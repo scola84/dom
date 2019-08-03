@@ -10,6 +10,7 @@ export class Snippet {
     this._allow = null;
     this._args = null;
     this._builder = null;
+    this._filter = null;
     this._id = null;
     this._node = null;
     this._parent = null;
@@ -17,6 +18,7 @@ export class Snippet {
     this.setAllow(options.allow);
     this.setArgs(options.args);
     this.setBuilder(options.builder);
+    this.setFilter(options.filter);
     this.setId(options.id);
     this.setNode(options.node);
     this.setParent(options.parent);
@@ -38,6 +40,7 @@ export class Snippet {
       allow: this._allow,
       args: this._args,
       builder: this._builder,
+      filter: this._filter,
       id: this._id,
       parent: this._parent
     };
@@ -77,6 +80,15 @@ export class Snippet {
     return this;
   }
 
+  getFilter() {
+    return this._filter;
+  }
+
+  setFilter(value = null) {
+    this._filter = value;
+    return this;
+  }
+
   getId() {
     return this._id;
   }
@@ -110,6 +122,10 @@ export class Snippet {
 
   append(...args) {
     return this.setArgs(this._args.concat(args));
+  }
+
+  filter(value) {
+    return this.setFilter(value);
   }
 
   id(value) {

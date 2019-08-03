@@ -118,7 +118,7 @@ export class LogControl extends Widget {
           b.row().class('any').append(
             b.div().class('name').append(
               b.input(
-                b.select().class('click').attributes({
+                b.select().wrap().class('click').attributes({
                   name: 'name'
                 }).append(
                   ...this._name
@@ -203,11 +203,17 @@ export class LogControl extends Widget {
 
     node
       .select('input[name=begin]')
-      .property('value', control.begin || this._begin);
+      .property('value', control.begin || this._begin)
+      .node()
+      .snippet
+      .changeValue();
 
     node
       .select('input[name=end]')
-      .property('value', control.end || this._end);
+      .property('value', control.end || this._end)
+      .node()
+      .snippet
+      .changeValue();
   }
 
   read(box) {

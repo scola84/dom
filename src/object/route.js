@@ -1,4 +1,6 @@
+import assignWith from 'lodash-es/assignWith';
 import defaults from 'lodash-es/defaultsDeep';
+import qs from 'qs';
 
 export class Route {
   static parse(route, router) {
@@ -29,18 +31,8 @@ export class Route {
       options.name = router;
     }
 
-    const optionNames = rawOptions ? rawOptions.split(';') : [];
-
-    for (let i = 0; i < optionNames.length; i += 1) {
-      options.options[optionNames[i]] = true;
-    }
-
-    const params = rawParams ? rawParams.split(';') : [];
-
-    for (let i = 0; i < params.length; i += 1) {
-      const [paramName, paramValue] = params[i].split('=');
-      options.params[paramName] = paramValue;
-    }
+    assignWith(options.options, qs.parse(rawOptions), () => true);
+    assignWith(options.params, qs.parse(rawParams));
 
     return new Route(options);
   }
@@ -89,7 +81,7 @@ export class Route {
         this.options[name] === true &&
         filter.indexOf(name) > -1
       ) {
-        string += string.length === 0 ? ':' : ';';
+        string += string.length === 0 ? ':' : '&';
         string += name;
       }
     }
@@ -106,7 +98,7 @@ export class Route {
     for (let i = 0; i < names.length; i += 1) {
       name = names[i];
 
-      string += string.length === 0 ? ':' : ';';
+      string += string.length === 0 ? ':' : '&';
       string += name + '=' + this.params[name];
     }
 

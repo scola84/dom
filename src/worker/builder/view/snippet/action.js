@@ -60,6 +60,31 @@ export class Action extends Snippet {
     return this.setRef(args);
   }
 
+  expand(string) {
+    const matches = string.match(/\{.+\}/g);
+
+    if (matches === null) {
+      return string;
+    }
+
+    let names = null;
+    let match = null;
+
+    for (let i = 0; i < matches.length; i += 1) {
+      match = matches[i];
+
+      names = match
+        .slice(1, -1)
+        .split(',')
+        .map((name) => `${name}=%(${name})s`)
+        .join('&');
+
+      string = string.replace(match, names);
+    }
+
+    return string;
+  }
+
   fail(box, error) {
     for (let i = 0; i < this._err.length; i += 1) {
       this.resolveValue(box, error, this._err[i]);

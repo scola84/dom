@@ -8,4 +8,13 @@ export class Radio extends Input {
       type: 'radio'
     });
   }
+
+  wrapInput() {
+    const wrapper = this
+      .wrapNode('label')
+      .classed('input radio check', true);
+
+    wrapper
+      .append('div');
+  }
 }

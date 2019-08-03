@@ -5,10 +5,8 @@ export class Fold extends Event {
   constructor(options = {}) {
     super(options);
 
-    this._filter = null;
     this._storage = null;
 
-    this.setFilter(options.filter);
     this.setStorage(options.storage);
 
     this.name('click');
@@ -16,18 +14,8 @@ export class Fold extends Event {
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      filter: this._filter,
       storage: this._storage
     });
-  }
-
-  getFilter() {
-    return this._filter;
-  }
-
-  setFilter(value = null) {
-    this._filter = value;
-    return this;
   }
 
   getStorage() {
@@ -37,10 +25,6 @@ export class Fold extends Event {
   setStorage(value = localStorage) {
     this._storage = value;
     return this;
-  }
-
-  filter(value) {
-    return this.setFilter(value);
   }
 
   storage(value) {

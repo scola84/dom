@@ -1,3 +1,4 @@
+import sprintf from 'sprintf-js';
 import { ViewRouter } from '../../../../router';
 import { Action } from '../action';
 
@@ -5,27 +6,14 @@ export class Route extends Action {
   constructor(options = {}) {
     super(options);
 
-    this._object = null;
     this._view = null;
-
-    this.setObject(options.object);
     this.setView(options.view);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      object: this._object,
       view: this._view
     });
-  }
-
-  getObject() {
-    return this._object;
-  }
-
-  setObject(value = null) {
-    this._object = value;
-    return this;
   }
 
   getView() {
@@ -37,10 +25,6 @@ export class Route extends Action {
     return this;
   }
 
-  object(value = true) {
-    return this.setObject(value);
-  }
-
   view(value) {
     return this.setView(value);
   }
@@ -48,23 +32,11 @@ export class Route extends Action {
   resolveAfter(box, data) {
     let route = this.resolveValue(box, data, this._view);
 
-    if (this._object) {
-      route = this.resolveObject(box, data, route);
-    }
+    route = sprintf.sprintf(
+      this.expand(route),
+      Object.assign({}, box.params, data)
+    );
 
     ViewRouter.handle(box, data, route);
-  }
-
-  resolveObject(box, data, route) {
-    const [path, name] = route.split('@');
-    let key = this._object;
-
-    if (this._object === true) {
-      key = path.split('-').pop() + '_id';
-    }
-
-    const value = box.params[key] || data[key];
-
-    return `${path}:${key}=${value}@${name}`;
   }
 }

@@ -1,6 +1,7 @@
 import { Url, createBrowser } from '@scola/http';
 import { Worker } from '@scola/worker';
 import defaults from 'lodash-es/defaultsDeep';
+import sprintf from 'sprintf-js';
 import { Action } from '../action';
 
 export class Request extends Action {
@@ -9,25 +10,19 @@ export class Request extends Action {
 
     this._client = null;
     this._indicator = null;
-    this._list = null;
     this._merge = null;
-    this._object = null;
     this._resource = null;
 
     this.setClient(options.client);
     this.setIndicator(options.indicator);
-    this.setList(options.list);
     this.setMerge(options.merge);
-    this.setObject(options.object);
     this.setResource(options.resource);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
       indicator: this._indicator,
-      list: this._list,
       merge: this._merge,
-      object: this._object,
       resource: this._resource
     });
   }
@@ -50,30 +45,12 @@ export class Request extends Action {
     return this;
   }
 
-  getList() {
-    return this._list;
-  }
-
-  setList(value = false) {
-    this._list = value;
-    return this;
-  }
-
   getMerge() {
     return this._merge;
   }
 
   setMerge(value = (box, data) => data.data) {
     this._merge = value;
-    return this;
-  }
-
-  getObject() {
-    return this._object;
-  }
-
-  setObject(value = null) {
-    this._object = value;
     return this;
   }
 
@@ -94,16 +71,8 @@ export class Request extends Action {
     return this.setIndicator(value);
   }
 
-  list() {
-    return this.setList(true);
-  }
-
   merge(value) {
     return this.setMerge(value);
-  }
-
-  object(value = true) {
-    return this.setObject(value);
   }
 
   resource(value) {
@@ -128,7 +97,14 @@ export class Request extends Action {
         method = void 0;
       }
 
-      url = Url.parse(url);
+      url = sprintf.sprintf(
+        this.expand(url),
+        Object.assign({}, box.params, box.list)
+      );
+
+      url = Url.parse(
+        url.replace(/undefined/g, '')
+      );
 
       options = {
         method,
@@ -151,12 +127,6 @@ export class Request extends Action {
       }
     });
 
-    if (this._list) {
-      this.resolveList(box, options);
-    } else if (this._object) {
-      this.resolveObject(box, options);
-    }
-
     this._client.transformer.connect(new Worker({
       act: (b, result) => {
         this._client.transformer.setWorker(null);
@@ -171,30 +141,5 @@ export class Request extends Action {
     this._client.connector.handle(options, data, (event) => {
       this.resolveValue(box, event, this._indicator);
     });
-  }
-
-  resolveList(box, options) {
-    const names = ['count', 'offset', 'search'];
-    const list = box.list || {};
-
-    let name = null;
-
-    for (let i = 0; i < names.length; i += 1) {
-      name = names[i];
-
-      if (typeof list[name] !== 'undefined') {
-        options.url.query[name] = list[name];
-      }
-    }
-  }
-
-  resolveObject(box, options) {
-    let key = this._object;
-
-    if (this._object === true) {
-      key = options.url.path.split('/').pop() + '_id';
-    }
-
-    options.url.path += '/' + box.params[key];
   }
 }

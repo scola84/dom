@@ -7,9 +7,11 @@ export class Input extends Node {
 
     this._custom = null;
     this._default = null;
+    this._wrap = null;
 
     this.setCustom(options.custom);
     this.setDefault(options.default);
+    this.setWrap(options.wrap);
 
     this.name('input');
   }
@@ -17,7 +19,8 @@ export class Input extends Node {
   getOptions() {
     return Object.assign(super.getOptions(), {
       custom: this._custom,
-      default: this._default
+      default: this._default,
+      wrap: this._wrap
     });
   }
 
@@ -39,12 +42,33 @@ export class Input extends Node {
     return this;
   }
 
+  getWrap() {
+    return this._wrap;
+  }
+
+  setWrap(value = false) {
+    this._wrap = value;
+    return this;
+  }
+
   custom(value) {
     return this.setCustom(value);
   }
 
   default (value) {
     return this.setDefault(value);
+  }
+
+  wrap() {
+    return this.setWrap(true);
+  }
+
+  createNode() {
+    super.createNode();
+
+    if (this._wrap) {
+      this.wrapInput();
+    }
   }
 
   clean(box, data) {
@@ -216,4 +240,6 @@ export class Input extends Node {
 
     return this.validateAfter(box, data, error, name, value);
   }
+
+  wrapInput() {}
 }

@@ -6,7 +6,7 @@ export class Iban extends Input {
     super(options);
 
     this.attributes({
-      type: 'iban'
+      type: 'text'
     });
   }
 

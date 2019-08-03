@@ -6,18 +6,6 @@ export class Select extends Input {
     this.name('select');
   }
 
-  createNode() {
-    super.createNode();
-
-    const wrapper = this
-      .wrapNode('div')
-      .classed('input select', true);
-
-    wrapper
-      .append('div')
-      .classed('arrow', true);
-  }
-
   validateAfter(box, data, error, name, value) {
     const values = [];
 
@@ -33,5 +21,15 @@ export class Select extends Input {
     }
 
     return this.setError(error, name, value, 'type', { values });
+  }
+
+  wrapInput() {
+    const wrapper = this
+      .wrapNode('div')
+      .classed('input select', true);
+
+    wrapper
+      .append('div')
+      .classed('arrow', true);
   }
 }

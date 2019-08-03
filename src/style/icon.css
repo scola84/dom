@@ -16,3 +16,11 @@
 *[dir=rtl] .ion-ios-arrow-forward {
   transform: rotate(180deg);
 }
+
+.link .item > .icon.add {
+  color: green;
+}
+
+.link .item > .icon.edit {
+  color: black;
+}

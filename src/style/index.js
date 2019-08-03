@@ -1,6 +1,5 @@
 import 'ionicons/dist/css/ionicons.css';
 import './app.css';
-import './date.css';
 import './dom.css';
 import './form.css';
 import './graph.css';

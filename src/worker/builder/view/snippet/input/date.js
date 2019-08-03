@@ -6,9 +6,6 @@ export class Date extends DateTime {
   constructor(options = {}) {
     super(options);
 
-    this._wrap = null;
-    this.setWrap(options.wrap);
-
     this
       .attributes({
         type: 'date'
@@ -17,49 +14,11 @@ export class Date extends DateTime {
       .formatTo('D');
   }
 
-  getOptions() {
-    return Object.assign(super.getOptions(), {
-      wrap: this._wrap
-    });
-  }
-
-  getWrap() {
-    return this._wrap;
-  }
-
-  setWrap(value = false) {
-    this._wrap = value;
-    return this;
-  }
-
-  wrap() {
-    return this.setWrap(true);
-  }
-
-  createNode() {
-    super.createNode();
-
-    if (this._wrap) {
-      this.wrapInput();
-    }
-  }
-
-  resolveAfter(box, data) {
-    super.resolveAfter(box, data);
-    return this.changeValue();
-  }
-
   changeValue() {
     const formatFrom = this.resolveValue(null, null, this._formatFrom);
     const formatTo = this.resolveValue(null, null, this._formatTo);
 
-    const required = this._node.attr('required');
     let value = this._node.property('value');
-
-    if (required && value === '') {
-      this._node.property('value', this._node.value);
-      return this._node;
-    }
 
     value = value || Luxon
       .local()
@@ -86,7 +45,7 @@ export class Date extends DateTime {
   wrapInput() {
     const wrapper = this
       .wrapNode('div')
-      .classed('date-wrap', true);
+      .classed('input date', true);
 
     wrapper
       .append('label')
@@ -99,7 +58,5 @@ export class Date extends DateTime {
       .on('input.scola-date', () => {
         this.changeValue();
       });
-
-    this._node.value = this._node.property('value');
   }
 }

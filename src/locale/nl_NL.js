@@ -143,5 +143,10 @@ export const nl_NL = {
     500: 'Er is een serverfout opgetreden.',
     502: 'Er is een verbindingsfout opgetreden.',
     504: 'Er is een verbindingsfout opgetreden.'
+  },
+  title: {
+    actions: 'Acties',
+    link: 'Koppelingen',
+    properties: 'Eigenschappen'
   }
 };

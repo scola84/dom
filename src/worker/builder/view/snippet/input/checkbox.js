@@ -8,4 +8,13 @@ export class Checkbox extends Input {
       type: 'checkbox'
     });
   }
+
+  wrapInput() {
+    const wrapper = this
+      .wrapNode('label')
+      .classed('input checkbox check', true);
+
+    wrapper
+      .append('div');
+  }
 }

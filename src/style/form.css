@@ -1,37 +1,32 @@
-.form .item .label {
-  flex: none;
-}
-
 .form .item .input,
 .form .item input,
 .form .item select,
 .form .item textarea {
   background: none;
   border: 0;
-  flex: 1;
   min-width: 0;
 }
 
-@media not all and (max-width: 32em) {
-  .form .item select {
-    flex: none;
-    min-width: auto;
-  }
-}
-
 .form .item input,
-.form .item select {
-  white-space: nowrap;
+.form .item textarea {
+  flex: 1;
 }
 
 .form .item input[type=checkbox],
-.form .item input[type=radio] {
+.form .item input[type=date],
+.form .item input[type=month],
+.form .item input[type=radio],
+.form .item input[type=time] {
   flex: none;
 }
 
 .form .item input[type=checkbox]:not(:first-child),
 .form .item input[type=radio]:not(:first-child) {
   margin-left: 0;
+}
+
+.form .item .label:first-child {
+  flex: none;
 }
 
 .form .item .delete:first-child {
