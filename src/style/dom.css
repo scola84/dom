@@ -63,6 +63,11 @@ p a:hover {
   cursor: pointer;
 }
 
+.hint:not(:empty) {
+  color: red;
+  font-size: 0.9em;
+}
+
 .transition {
   transition: all 0.25s ease-in-out;
 }
