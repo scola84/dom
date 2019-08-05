@@ -129,7 +129,7 @@ export const nl_NL = {
     }
   },
   message: {
-    nodata: 'Geen gegevens gevonden'
+    nodata: 'Geen gegevens gevonden.'
   },
   search: {
     placeholder: 'Zoeken'
