@@ -17,14 +17,14 @@
   transform: rotate(180deg);
 }
 
-.item > .icon.add {
+.item > .button.add {
   color: green;
 }
 
-.item > .icon.edit {
+.item > .button.edit {
   color: black;
 }
 
-.item > .icon.delete {
+.item > .button.delete {
   color: red;
 }

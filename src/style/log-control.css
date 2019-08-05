@@ -12,6 +12,7 @@
 }
 
 .log-control .action {
+  display: flex;
   flex: 1;
   margin-top: 0.5em;
 }

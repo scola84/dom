@@ -169,7 +169,7 @@
 }
 
 .item > .label > *:empty:after {
-  content: '-';
+  content: '\00a0';
 }
 
 .item > .label > .l0 {

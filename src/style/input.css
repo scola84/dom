@@ -1,6 +1,6 @@
 /* Check */
 
-.icon.delete + .input.check {
+.delete + .input.check {
   display: none;
 }
 
