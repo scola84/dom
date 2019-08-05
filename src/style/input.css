@@ -1,5 +1,9 @@
 /* Check */
 
+.icon.delete + .input.check {
+  display: none;
+}
+
 .input.check input {
   display: none;
 }
@@ -7,14 +11,12 @@
 .input.check div {
   align-items: center;
   display: flex;
-  height: 1em;
   justify-content: center;
-  width: 1em;
 }
 
 .input.check div:after {
   font-family: Ionicons;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .input.check.checkbox div:after {

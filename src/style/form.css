@@ -29,7 +29,7 @@
   flex: none;
 }
 
-.form .item .delete:first-child {
+.form .item .delete:not(.icon):first-child {
   color: red;
   margin-left: auto;
   margin-right: auto;

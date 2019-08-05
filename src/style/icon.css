@@ -17,10 +17,14 @@
   transform: rotate(180deg);
 }
 
-.link .item > .icon.add {
+.item > .icon.add {
   color: green;
 }
 
-.link .item > .icon.edit {
+.item > .icon.edit {
   color: black;
+}
+
+.item > .icon.delete {
+  color: red;
 }
