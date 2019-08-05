@@ -1,21 +1,59 @@
 import { Parent } from '../parent';
 
 export class List extends Parent {
-  prepareList(box, data) {
-    if (box.list.clear) {
-      delete box.list.clear;
+  constructor(options = {}) {
+    super(options);
 
-      box.list.offset = 0;
-      box.list.total = 0;
+    this._clear = null;
+    this._empty = null;
+
+    this.setClear(options.clear);
+    this.setEmpty(options.empty);
+  }
+
+  getClear() {
+    return this._clear;
+  }
+
+  setClear(value = false) {
+    this._clear = value;
+    return this;
+  }
+
+  getEmpty() {
+    return this._empty;
+  }
+
+  setEmpty(value = null) {
+    this._empty = value;
+    return this;
+  }
+
+  clear() {
+    return this.setClear(true);
+  }
+
+  empty(value) {
+    return this.setEmpty(value);
+  }
+
+  prepareList(box, data) {
+    const options = box.list || {};
+
+    if (this._clear || options.clear) {
+      delete options.clear;
+
+      options.offset = 0;
+      options.total = 0;
 
       this.removeChildren();
     }
 
-    if (box.list.offset === 0 && box.list.count > 0) {
+    if (options.offset === 0 && options.count > 0) {
       this._node.node().parentNode.scrollTop = 0;
     }
 
-    box.list.total += data.length;
+    options.total += data.length;
   }
 
   removeInner() {
@@ -31,13 +69,10 @@ export class List extends Parent {
 
     const [
       item,
-      empty,
       ...extra
     ] = this._args;
 
-    if (box.list) {
-      this.prepareList(box, listData);
-    }
+    this.prepareList(box, listData);
 
     for (let i = 0; i < listData.length; i += 1) {
       this.appendChild(box, listData[i], item);
@@ -48,7 +83,7 @@ export class List extends Parent {
       .size();
 
     if (hasData === true && size === 0) {
-      this.appendChild(box, { i: -1 }, empty);
+      this.appendChild(box, { i: -1 }, this._empty);
     }
 
     for (let i = 0; i < extra.length; i += 1) {
