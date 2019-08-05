@@ -32,7 +32,7 @@ export class Rect extends Plot {
   }
 
   appendRect(box, key, j, set, endogenous, exogenous) {
-    const [rect, tip] = this._args;
+    const [rect] = this._args;
     const [from, to, datum] = set[j] || [0, 0, {}];
 
     const data = {
@@ -86,7 +86,7 @@ export class Rect extends Plot {
       .classed('negative', to < 0)
       .classed('zero', to === 0);
 
-    this.appendTip(box, data, node, tip);
+    this.appendTip(box, data, node);
   }
 
   resolveInner(box, data) {

@@ -12,7 +12,10 @@ export class Plot extends Parent {
     super(options);
 
     this._data = null;
+    this._tip = null;
+
     this.setData(options.data);
+    this.setTip(options.tip);
 
     this.class('transition');
   }
@@ -32,22 +35,35 @@ export class Plot extends Parent {
     return this;
   }
 
+  getTip() {
+    return this._tip;
+  }
+
+  setTip(value = null) {
+    this._tip = value;
+    return this;
+  }
+
   data(value) {
     return this.setData(value(this));
   }
 
-  appendTip(box, data, node, tip) {
-    if (tip === null) {
+  tip(value) {
+    return this.setTip(value);
+  }
+
+  appendTip(box, data, node) {
+    if (this._tip === null) {
       return;
     }
 
     node
       .on('mouseover.scola-plot', () => {
         data.target = event.target;
-        this.resolveValue(box, data, tip.setParent(null));
+        this.resolveValue(box, data, this._tip.setParent(null));
       })
       .on('mouseout.scola-plot', () => {
-        tip.remove();
+        this._tip.remove();
       });
   }
 

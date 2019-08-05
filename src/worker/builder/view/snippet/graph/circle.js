@@ -32,7 +32,7 @@ export class Circle extends Plot {
   }
 
   appendCircle(box, key, j, set, endogenous, exogenous) {
-    const [circle, tip] = this._args;
+    const [circle] = this._args;
     const [from, to, datum] = set[j] || [0, 0, {}];
 
     const data = {
@@ -55,7 +55,7 @@ export class Circle extends Plot {
       .attr('c' + exogenousOrientation, exogenousDistance)
       .attr('r', radius);
 
-    this.appendTip(box, data, node, tip);
+    this.appendTip(box, data, node);
   }
 
   resolveInner(box, data) {
