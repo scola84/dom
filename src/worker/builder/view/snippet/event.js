@@ -102,6 +102,12 @@ export class Event extends Action {
   }
 
   unbind(snippet) {
-    snippet.node().on(this._name, null);
+    const node = snippet.node();
+
+    if (node === null) {
+      return;
+    }
+
+    node.on(this._name, null);
   }
 }
