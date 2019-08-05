@@ -115,10 +115,14 @@ export class Print extends Snippet {
       lformat = lformat[values[0]] || lformat.d;
     }
 
+    let string = null;
+
     try {
-      return vsprintf(lformat, values, locale);
+      string = vsprintf(lformat, values, locale);
     } catch (error) {
-      return error.message;
+      string = error.message;
     }
+
+    return string === format ? '' : string;
   }
 }
