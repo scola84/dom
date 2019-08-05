@@ -55,7 +55,10 @@ export class Button extends Node {
   }
 
   removeBefore() {
-    this._node.on('.scola-button', null);
+    if (this._node) {
+      this._node.on('.scola-button', null);
+    }
+
     this.removeOuter();
   }
 
