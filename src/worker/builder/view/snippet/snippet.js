@@ -14,6 +14,7 @@ export class Snippet {
     this._id = null;
     this._node = null;
     this._parent = null;
+    this._storage = null;
 
     this.setAllow(options.allow);
     this.setArgs(options.args);
@@ -22,6 +23,7 @@ export class Snippet {
     this.setId(options.id);
     this.setNode(options.node);
     this.setParent(options.parent);
+    this.setStorage(options.storage);
   }
 
   clone() {
@@ -42,7 +44,8 @@ export class Snippet {
       builder: this._builder,
       filter: this._filter,
       id: this._id,
-      parent: this._parent
+      parent: this._parent,
+      storage: this._storage
     };
   }
 
@@ -116,6 +119,17 @@ export class Snippet {
     return this;
   }
 
+  getStorage() {
+    return this._storage;
+  }
+
+  setStorage(
+    value = (typeof localStorage === 'undefined' ? null : localStorage)
+  ) {
+    this._storage = value;
+    return this;
+  }
+
   allow(value) {
     return this.setAllow(value);
   }
@@ -134,6 +148,10 @@ export class Snippet {
 
   node() {
     return this.getNode();
+  }
+
+  storage(value) {
+    return this.setStorage(value);
   }
 
   find(compare) {

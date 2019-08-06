@@ -1,5 +1,11 @@
 /* Check */
 
+.item.empty > .input.check {
+  margin-right: 0;
+  overflow: hidden;
+  width: 0;
+}
+
 .delete + .input.check {
   display: none;
 }

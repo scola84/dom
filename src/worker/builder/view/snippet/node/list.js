@@ -25,7 +25,7 @@ export class List extends Parent {
   }
 
   setEmpty(value = null) {
-    this._empty = value;
+    this._empty = value ? value.setParent(this) : value;
     return this;
   }
 

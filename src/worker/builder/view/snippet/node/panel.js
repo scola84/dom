@@ -8,15 +8,17 @@ export class Panel extends Node {
   }
 
   resolveBefore(box, data) {
-    const effect = ['rtl', 'ltr', 'ins']
-      .find((name) => box.options[name] === true) || 'none';
-
     const old = box.base.snippet ? box.base.snippet.node()
       .classed('rtl ltr ins', false) : select();
 
     if (old.node() === this._node.node()) {
       return this.resolveOuter(box, data);
     }
+
+    const effect = ['rtl', 'ltr', 'ins']
+      .find((name) => box.options[name] === true) || 'none';
+
+    const path = box.path.split('-').join(' ');
 
     old
       .classed('old', true)
@@ -29,6 +31,7 @@ export class Panel extends Node {
     this._node
       .classed('new', true)
       .classed(effect, true)
+      .classed(path, true)
       .on('transitionend.scola-panel-new', () => {
         this._node.on('.scola-panel-new', null);
       });

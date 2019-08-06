@@ -32,21 +32,14 @@ export class Scroll extends Event {
     return this.setHeight(value);
   }
 
-  resolveAfter(box, data) {
-    const result = super.resolveAfter(box, data);
-
-    for (let i = 0; i < result.length; i += 1) {
-      result[i].dispatch('scroll');
-    }
-
-    return result;
-  }
-
   resolveBefore(box, data) {
+    const height = parseInt(this._parent.node().style('height'), 10);
+    const count = Math.round(height / this._height) * 2;
+
     defaults(box, {
       list: {
-        count: 0,
-        height: 0,
+        count,
+        height,
         offset: 0,
         total: 0
       }
@@ -60,13 +53,6 @@ export class Scroll extends Event {
       return;
     }
 
-    const initialized = box.list.height > 0;
-
-    if (initialized === false) {
-      box.list.height = parseInt(snippet.node().style('height'), 10);
-      box.list.count = Math.round(box.list.height / this._height) * 2;
-    }
-
     const node = snippet.node().node();
     const top = box.list.height + node.scrollTop;
     const threshold = node.scrollHeight - (box.list.height / 4 * 2);
@@ -75,9 +61,7 @@ export class Scroll extends Event {
       return;
     }
 
-    if (initialized === true) {
-      box.list.offset += box.list.count;
-    }
+    box.list.offset += box.list.count;
 
     this.pass(box, data);
   }

@@ -6,11 +6,9 @@ export class Search extends Node {
     super(options);
 
     this._placeholder = null;
-    this._storage = null;
     this._wildcard = null;
 
     this.setPlaceholder(options.placeholder);
-    this.setStorage(options.storage);
     this.setWildcard(options.wildcard);
 
     this.class('transition');
@@ -19,7 +17,6 @@ export class Search extends Node {
   getOptions() {
     return Object.assign(super.getOptions(), {
       placeholder: this._placeholder,
-      storage: this._storage,
       wildcard: this._wildcard
     });
   }
@@ -30,15 +27,6 @@ export class Search extends Node {
 
   setPlaceholder(value = null) {
     this._placeholder = value;
-    return this;
-  }
-
-  getStorage() {
-    return this._storage;
-  }
-
-  setStorage(value = localStorage) {
-    this._storage = value;
     return this;
   }
 
@@ -53,10 +41,6 @@ export class Search extends Node {
 
   placeholder(value) {
     return this.setPlaceholder(value);
-  }
-
-  storage(value) {
-    return this.setStorage(value);
   }
 
   wildcard(value) {

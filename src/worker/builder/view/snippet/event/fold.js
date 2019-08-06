@@ -4,31 +4,7 @@ import { Event } from '../event';
 export class Fold extends Event {
   constructor(options = {}) {
     super(options);
-
-    this._storage = null;
-
-    this.setStorage(options.storage);
-
     this.name('click');
-  }
-
-  getOptions() {
-    return Object.assign(super.getOptions(), {
-      storage: this._storage
-    });
-  }
-
-  getStorage() {
-    return this._storage;
-  }
-
-  setStorage(value = localStorage) {
-    this._storage = value;
-    return this;
-  }
-
-  storage(value) {
-    return this.setStorage(value);
   }
 
   resolveAfter(box, data) {

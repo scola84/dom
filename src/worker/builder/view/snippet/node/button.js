@@ -75,13 +75,18 @@ export class Button extends Node {
   }
 
   resolveForm() {
-    const form = this._node.attr('form');
+    const id = this._node.attr('form');
 
     this._node.attr('type', 'submit');
 
     this._node.on('click.scola-button', () => {
       event.preventDefault();
-      select('#' + form).dispatch('submit', {
+
+      const form = id ?
+        select('#' + id) :
+        select(this._node.node().closest('.panel')).select('form');
+
+      form.dispatch('submit', {
         cancelable: true
       });
     });

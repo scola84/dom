@@ -199,19 +199,6 @@
   width: 100%;
 }
 
-/* Body loading */
-
-.panel > .body > .loading.in {
-  animation: spin 1s infinite linear;
-  border: 1px solid grey;
-  border-radius: 50%;
-  border-right: none;
-  flex: none;
-  height: 1.5em;
-  margin: 1em auto;
-  width: 1.5em;
-}
-
 /* Body message */
 
 .panel > .body.message {

@@ -68,6 +68,17 @@ p a:hover {
   font-size: 0.9em;
 }
 
+.loading.in {
+  animation: spin 1s infinite linear;
+  border: 1px solid grey;
+  border-radius: 50%;
+  border-right: none;
+  flex: none;
+  height: 1.5em;
+  margin: 1em auto;
+  width: 1.5em;
+}
+
 .transition {
   transition: all 0.25s ease-in-out;
 }

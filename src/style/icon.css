@@ -2,6 +2,7 @@
   font-size: 1em !important;
 }
 
+.ion-ios-refresh:before,
 .ion-ios-search:before {
   font-size: 1.5em !important;
 }

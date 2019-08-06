@@ -9,15 +9,13 @@ export class LogControl extends Widget {
     this._begin = null;
     this._end = null;
     this._mode = null;
-    this._name = null;
-    this._storage = null;
+    this._prefix = null;
 
     this.setAction(options.action);
     this.setBegin(options.begin);
     this.setEnd(options.end);
     this.setMode(options.mode);
-    this.setName(options.name);
-    this.setStorage(options.storage);
+    this.setPrefix(options.prefix);
   }
 
   getOptions() {
@@ -26,8 +24,7 @@ export class LogControl extends Widget {
       begin: this._begin,
       end: this._end,
       mode: this._mode,
-      name: this._name,
-      storage: this._storage
+      prefix: this._prefix
     });
   }
 
@@ -67,21 +64,12 @@ export class LogControl extends Widget {
     return this;
   }
 
-  getName() {
-    return this._name;
+  getPrefix() {
+    return this._prefix;
   }
 
-  setName(...name) {
-    this._name = name;
-    return this;
-  }
-
-  getStorage() {
-    return this._storage;
-  }
-
-  setStorage(value = localStorage) {
-    this._storage = value;
+  setPrefix(value = null) {
+    this._prefix = value;
     return this;
   }
 
@@ -101,74 +89,68 @@ export class LogControl extends Widget {
     return this.setMode(...mode);
   }
 
-  name(...name) {
-    return this.setName(...name);
+  prefix(value) {
+    return this.setPrefix(value);
   }
 
-  storage(value) {
-    return this.setStorage(value);
-  }
-
-  createWidget() {
+  buildWidget() {
     const b = this._builder;
 
-    this.append(
-      b.div().class('log-control').append(
-        b.col().class('any').append(
-          b.row().class('any').append(
-            b.div().class('name').append(
-              b.input(
-                b.select().wrap().class('click').attributes({
-                  name: 'name'
-                }).append(
-                  ...this._name
-                )
-              ).act((box, data) => {
-                this.handleInput(box, data);
-              })
-            ),
-            b.div().class('range').append(
-              b.input(
-                b.date().wrap().attributes({
-                  formnovalidate: 'formnovalidate',
-                  name: 'begin',
-                  required: 'required'
-                })
-              ).act((box, data) => {
-                this.handleInput(box, data);
-              }),
-              b.div().class('arrow'),
-              b.input(
-                b.date().wrap().attributes({
-                  formnovalidate: 'formnovalidate',
-                  name: 'end',
-                  required: 'required'
-                })
-              ).act((box, data) => {
-                this.handleInput(box, data);
-              })
-            )
-          ),
-          b.row().class('any').append(
-            b.div().class('action').append(
-              ...this._action
-            ),
-            b.tab().id('mode').append(
-              b.div().class('tab mode').append(
-                ...this._mode
-              )
-            ).act((box, data) => {
-              this.handleInput(box, data);
-            })
-          )
-        )
-      )
+    return b.div().class('log-control').append(
+      // b.col().class('any').append(
+      //   b.row().class('any').append(
+      //     b.div().class('name').append(
+      //       b.input(
+      //         b.select().wrap().class('click').attributes({
+      //           name: 'name'
+      //         }).append(
+      //           ...this._name
+      //         )
+      //       ).act((box, data) => {
+      //         this.handleInput(box, data);
+      //       })
+      //     ),
+      //     b.div().class('range').append(
+      //       b.input(
+      //         b.date().wrap().attributes({
+      //           formnovalidate: 'formnovalidate',
+      //           name: 'begin',
+      //           required: 'required'
+      //         })
+      //       ).act((box, data) => {
+      //         this.handleInput(box, data);
+      //       }),
+      //       b.div().class('arrow'),
+      //       b.input(
+      //         b.date().wrap().attributes({
+      //           formnovalidate: 'formnovalidate',
+      //           name: 'end',
+      //           required: 'required'
+      //         })
+      //       ).act((box, data) => {
+      //         this.handleInput(box, data);
+      //       })
+      //     )
+      //   ),
+      //   b.row().class('any').append(
+      //     b.div().class('action').append(
+      //       ...this._action
+      //     ),
+      //     b.tab().id('mode').append(
+      //       b.div().class('tab mode').append(
+      //         ...this._mode
+      //       )
+      //     ).act((box, data) => {
+      //       this.handleInput(box, data);
+      //     })
+      //   )
+      // )
     );
   }
 
   resolveAfter(box, data) {
-    this.load(box, data);
-    this.read(box, data);
+    // this.load(box, data);
+    // this.read(box, data);
   }
 
   handleInput(box, data) {
