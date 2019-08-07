@@ -6,12 +6,16 @@ export class Parent extends Node {
     super(options);
 
     this._children = null;
+    this._key = null;
+
     this.setChildren(options.children);
+    this.setKey(options.key);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      children: this._children
+      children: this._children,
+      key: this._key
     });
   }
 
@@ -24,24 +28,45 @@ export class Parent extends Node {
     return this;
   }
 
+  getKey() {
+    return this._key;
+  }
+
+  setKey(value = null) {
+    this._key = value;
+    return this;
+  }
+
+  key(value) {
+    return this.setKey(value);
+  }
+
   appendChild(box, data, snippet = null) {
     if (snippet === null) {
       return null;
     }
 
-    const id = JSON.stringify(data);
+    let key = this._key ?
+      this._key(box, data) :
+      JSON.stringify(data);
 
-    if (this._children.has(id)) {
-      return this._children.get(id);
+    key = key ? key : snippet.getId();
+
+    if (this._children.has(key)) {
+      return this._children.get(key);
     }
 
     let node = snippet
       .clone()
       .resolve(box, data);
 
+    if (node === null) {
+      return null;
+    }
+
     node = Array.isArray(node) ? node[0] : node;
 
-    this._children.set(id, node);
+    this._children.set(key, node);
 
     const transition = select(node.node().parentNode)
       .classed('transition');

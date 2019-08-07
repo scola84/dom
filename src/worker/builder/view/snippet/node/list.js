@@ -83,11 +83,11 @@ export class List extends Parent {
       .size();
 
     if (hasData === true && size === 0) {
-      this.appendChild(box, { i: -1 }, this._empty);
+      this.appendChild(box, listData, this._empty);
     }
 
     for (let i = 0; i < extra.length; i += 1) {
-      this.appendChild(box, { i }, extra[i]);
+      this.appendChild(box, listData, extra[i]);
     }
 
     return this.resolveAfter(box, data);
