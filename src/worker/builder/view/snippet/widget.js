@@ -45,9 +45,11 @@ export class Widget extends Action {
 
     this._widget = this.buildWidget(args);
 
-    this.append(
-      this._widget.setArgs(args)
-    );
+    if (args.length > 0) {
+      this._widget.setArgs(args);
+    }
+
+    this.append(this._widget);
   }
 
   resolve(box, data) {

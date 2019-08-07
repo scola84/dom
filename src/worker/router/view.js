@@ -155,6 +155,7 @@ export class ViewRouter extends Router {
     if (box.options.bwd === false) {
       return box;
     }
+
     if (this._history.length < 2) {
       this._history.pop();
       return box;
