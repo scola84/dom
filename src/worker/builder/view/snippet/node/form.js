@@ -1,3 +1,4 @@
+import { select } from 'd3';
 import { Node } from '../node';
 
 export class Form extends Node {
@@ -9,5 +10,25 @@ export class Form extends Node {
         novalidate: 'novalidate'
       })
       .name('form');
+  }
+
+  resolveAfter() {
+    const label = this._node
+      .selectAll('.label:not(:last-child)');
+
+    let max = 0;
+
+    label.each((datum, index, nodes) => {
+      max = Math.max(
+        max,
+        parseFloat(select(nodes[index]).style('width'))
+      );
+    });
+
+    this._node
+      .selectAll('.label:not(:last-child)')
+      .style('width', max + 'px');
+
+    return this._node;
   }
 }
