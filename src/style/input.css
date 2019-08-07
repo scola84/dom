@@ -14,30 +14,30 @@
   display: none;
 }
 
-.input.check div {
+.input.check input + * {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.input.check div:after {
+.input.check input + *:after {
   font-family: Ionicons;
   font-size: 2em;
 }
 
-.input.check.checkbox div:after {
+.input.check input[type=checkbox] + *:after {
   content: '\f149';
 }
 
-.input.check.checkbox input:checked + div:after {
+.input.check input[type=checkbox]:checked + *:after {
   content: '\f14a';
 }
 
-.input.check.radio div:after {
+.input.check input[type=radio] + *:after {
   content: '\f1f6';
 }
 
-.input.check.radio input:checked + div:after {
+.input.check input[type=radio]:checked + *:after {
   content: '\f1f7';
 }
 

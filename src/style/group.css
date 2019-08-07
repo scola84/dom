@@ -93,8 +93,8 @@
   text-transform: uppercase;
 }
 
-.group > .title.fold:active {
-  opacity: 0.5;
+.group > .title:not(:empty) * {
+  font-size: inherit;
 }
 
 .group > .title.fold:after {

@@ -21,7 +21,11 @@ export class Form extends Node {
     label.each((datum, index, nodes) => {
       max = Math.max(
         max,
-        parseFloat(select(nodes[index]).style('width'))
+        Math.ceil(
+          parseFloat(
+            select(nodes[index]).style('width')
+          )
+        )
       );
     });
 

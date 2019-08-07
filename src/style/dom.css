@@ -37,7 +37,10 @@ button {
 
 @media not all and (max-width: 64em) {
   button:focus,
-  label:focus {
+  input:focus,
+  label:focus,
+  select:focus,
+  textarea:focus {
     outline: 1px dotted black;
   }
 }
@@ -56,6 +59,11 @@ p a {
 
 p a:hover {
   text-decoration: none;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
 }
 
 .click,

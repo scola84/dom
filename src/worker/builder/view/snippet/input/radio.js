@@ -1,20 +1,11 @@
-import { Input } from '../input';
+import { Checkbox } from './checkbox';
 
-export class Radio extends Input {
+export class Radio extends Checkbox {
   constructor(options) {
     super(options);
 
     this.attributes({
       type: 'radio'
     });
-  }
-
-  wrapInput() {
-    const wrapper = this
-      .wrapNode('label')
-      .classed('input radio check', true);
-
-    wrapper
-      .append('div');
   }
 }
