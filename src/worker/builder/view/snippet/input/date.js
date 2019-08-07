@@ -42,6 +42,11 @@ export class Date extends DateTime {
     return this._node;
   }
 
+  removeBefore() {
+    this._node.on('.scola-date', null);
+    this.removeOuter();
+  }
+
   wrapInput() {
     const wrapper = this
       .wrapNode('div')

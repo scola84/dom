@@ -34,10 +34,7 @@ export class Textarea extends Input {
   }
 
   removeBefore() {
-    if (this._grow) {
-      this._node.on('.scola-textarea', null);
-    }
-
+    this._node.on('.scola-textarea', null);
     this.removeOuter();
   }
 

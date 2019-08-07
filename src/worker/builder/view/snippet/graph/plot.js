@@ -1,4 +1,4 @@
-import { event } from 'd3';
+import { event, select } from 'd3';
 import { Axis } from './axis';
 import { Parent } from '../parent';
 import { map } from './plot/';
@@ -88,6 +88,20 @@ export class Plot extends Parent {
 
   prepare(data) {
     return this._data.prepare(data);
+  }
+
+  removeChildren() {
+    const children = Array.from(this._node.node().childNodes);
+
+    for (let i = 0; i < children.length; i += 1) {
+      this.removeTip(select(children[i]));
+    }
+
+    super.removeChildren();
+  }
+
+  removeTip(node) {
+    node.on('.scola-plot', null);
   }
 
   removeInner() {
