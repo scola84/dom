@@ -24,8 +24,14 @@ export class Fold extends Event {
   }
 
   handle(box, data, snippet, event) {
-    const handle = select(event.target.closest('.title'));
-    const mustFold = handle.classed('fold handle');
+    const handle = event.target.closest('.title');
+
+    if (handle === null) {
+      return;
+    }
+
+    const mustFold = select(handle)
+      .classed('fold handle');
 
     if (mustFold === true) {
       this.fold(box, data, snippet);
