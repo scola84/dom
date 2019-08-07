@@ -9,13 +9,11 @@ export class LogControl extends Widget {
     this._begin = null;
     this._end = null;
     this._mode = null;
-    this._prefix = null;
 
     this.setAction(options.action);
     this.setBegin(options.begin);
     this.setEnd(options.end);
     this.setMode(options.mode);
-    this.setPrefix(options.prefix);
   }
 
   getOptions() {
@@ -23,8 +21,7 @@ export class LogControl extends Widget {
       action: this._action,
       begin: this._begin,
       end: this._end,
-      mode: this._mode,
-      prefix: this._prefix
+      mode: this._mode
     });
   }
 
@@ -64,15 +61,6 @@ export class LogControl extends Widget {
     return this;
   }
 
-  getPrefix() {
-    return this._prefix;
-  }
-
-  setPrefix(value = null) {
-    this._prefix = value;
-    return this;
-  }
-
   action(...action) {
     return this.setAction(...action);
   }
@@ -89,68 +77,101 @@ export class LogControl extends Widget {
     return this.setMode(...mode);
   }
 
-  prefix(value) {
-    return this.setPrefix(value);
+  buildMode() {
+    const b = this._builder;
+
+    return this._mode.map((name) => {
+      const selected = name.slice(-1) === '#' ? true : false;
+      name = selected ? name.slice(0, -1) : name;
+
+      return b.button().attributes({
+        value: name.split('.').pop()
+      }).classed({
+        click: true,
+        selected
+      }).text(
+        b.print().format(name)
+      );
+    });
+  }
+
+  buildName() {
+    const b = this._builder;
+
+    return this._name.map((name) => {
+      const selected = name.slice(-1) === '#' ? 'selected' : null;
+      name = selected ? name.slice(0, -1) : name;
+
+      return b.option().attributes({
+        selected,
+        value: name.split('.').pop()
+      }).text(
+        b.print().format(name)
+      );
+    });
   }
 
   buildWidget() {
     const b = this._builder;
 
     return b.div().class('log-control').append(
-      // b.col().class('any').append(
-      //   b.row().class('any').append(
-      //     b.div().class('name').append(
-      //       b.input(
-      //         b.select().wrap().class('click').attributes({
-      //           name: 'name'
-      //         }).append(
-      //           ...this._name
-      //         )
-      //       ).act((box, data) => {
-      //         this.handleInput(box, data);
-      //       })
-      //     ),
-      //     b.div().class('range').append(
-      //       b.input(
-      //         b.date().wrap().attributes({
-      //           formnovalidate: 'formnovalidate',
-      //           name: 'begin',
-      //           required: 'required'
-      //         })
-      //       ).act((box, data) => {
-      //         this.handleInput(box, data);
-      //       }),
-      //       b.div().class('arrow'),
-      //       b.input(
-      //         b.date().wrap().attributes({
-      //           formnovalidate: 'formnovalidate',
-      //           name: 'end',
-      //           required: 'required'
-      //         })
-      //       ).act((box, data) => {
-      //         this.handleInput(box, data);
-      //       })
-      //     )
-      //   ),
-      //   b.row().class('any').append(
-      //     b.div().class('action').append(
-      //       ...this._action
-      //     ),
-      //     b.tab().id('mode').append(
-      //       b.div().class('tab mode').append(
-      //         ...this._mode
-      //       )
-      //     ).act((box, data) => {
-      //       this.handleInput(box, data);
-      //     })
-      //   )
-      // )
+      b.col().class('any').append(
+        b.row().class('any').append(
+          b.div().class('name').append(
+            b.input(
+              b.select().wrap().classed({
+                click: this._name.length < 2 ? false : true
+              }).attributes({
+                disabled: this._name.length < 2 ? 'disabled' : null,
+                name: 'name'
+              }).append(
+                ...this.buildName()
+              )
+            ).act((box, data) => {
+              this.handleInput(box, data);
+            })
+          ),
+          b.div().class('range').append(
+            b.input(
+              b.date().wrap().attributes({
+                formnovalidate: 'formnovalidate',
+                name: 'begin',
+                required: 'required'
+              })
+            ).act((box, data) => {
+              this.handleInput(box, data);
+            }),
+            b.div().class('arrow'),
+            b.input(
+              b.date().wrap().attributes({
+                formnovalidate: 'formnovalidate',
+                name: 'end',
+                required: 'required'
+              })
+            ).act((box, data) => {
+              this.handleInput(box, data);
+            })
+          )
+        ),
+        b.row().class('any').append(
+          b.div().class('action').append(
+            ...this._action
+          ),
+          b.tab().id('mode').append(
+            b.div().class('tab mode').append(
+              ...this.buildMode()
+            )
+          ).act((box, data) => {
+            this.handleInput(box, data);
+          })
+        )
+      )
     );
   }
 
   resolveAfter(box, data) {
-    // this.load(box, data);
-    // this.read(box, data);
+    this.read(box, data);
+    this.load(box, data);
   }
 
   handleInput(box, data) {
@@ -202,11 +223,11 @@ export class LogControl extends Widget {
     const [snippet] = this._args;
     const node = snippet.node();
 
-    const mode = node
+    const mode = this._mode.length === 0 ? null : node
       .select('.tab .selected')
       .property('value');
 
-    const name = node
+    const name = this._name.length === 0 ? null : node
       .select('select')
       .property('value');
 

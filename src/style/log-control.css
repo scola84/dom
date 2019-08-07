@@ -14,7 +14,32 @@
 .log-control .action {
   display: flex;
   flex: 1;
+}
+
+.log-control .action:not(:empty) {
   margin-top: 0.5em;
+}
+
+.log-control .mode:not(:empty) {
+  margin-top: 0.5em;
+}
+
+.log-control .name {
+  align-items: center;
+  padding-right: 0.5em;
+}
+
+.log-control .name .input select {
+  font-size: 1.25em;
+  width: 100%;
+}
+
+.log-control .name .input select[disabled] {
+  color: black;
+}
+
+.log-control .name .input select[disabled] + .arrow {
+  display: none;
 }
 
 .log-control .range {
@@ -30,18 +55,4 @@
   font-size: 1.25em;
   font-family: Ionicons;
   margin: 0 0.5em;
-}
-
-.log-control .name {
-  align-items: center;
-  padding-right: 0.5em;
-}
-
-.log-control .name .input select {
-  font-size: 1.25em;
-  width: 100%;
-}
-
-.log-control .mode {
-  margin-top: 0.5em;
 }
