@@ -1,8 +1,8 @@
-import { event, select, selectAll } from 'd3';
+import { select, selectAll } from 'd3';
 import { Click } from './click';
 
 export class Tab extends Click {
-  handle(box, data, snippet) {
+  handle(box, data, snippet, event) {
     const node = snippet.node();
     const children = Array.from(node.node().children);
     const tab = children.indexOf(event.target);

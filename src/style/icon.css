@@ -1,4 +1,7 @@
-.ion-ios-brush:before {
+.ion-ios-brush:before,
+.ion-ios-lock:before,
+.ion-ios-square:before,
+.ion-ios-unlock:before {
   font-size: 1em !important;
 }
 
@@ -7,10 +10,8 @@
   font-size: 1.5em !important;
 }
 
-.ion-ios-lock:before,
-.ion-ios-square:before,
-.ion-ios-unlock:before {
-  font-size: 1em !important;
+.ion-ios-list:before {
+  font-size: 1.75em !important;
 }
 
 *[dir=rtl] .ion-ios-arrow-back,

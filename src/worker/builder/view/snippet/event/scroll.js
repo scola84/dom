@@ -10,7 +10,7 @@ export class Scroll extends Event {
 
     this
       .name('scroll')
-      .throttle(250);
+      .debounce(250);
   }
 
   getOptions() {

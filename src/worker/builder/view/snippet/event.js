@@ -1,5 +1,5 @@
 import { event } from 'd3';
-import throttle from 'lodash-es/throttle';
+import debounce from 'lodash-es/debounce';
 import { Action } from './action';
 
 export class Event extends Action {
@@ -7,16 +7,16 @@ export class Event extends Action {
     super(options);
 
     this._name = null;
-    this._throttle = null;
+    this._debounce = null;
 
     this.setName(options.name);
-    this.setThrottle(options.throttle);
+    this.setDebounce(options.debounce);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
       name: this._name,
-      throttle: this._throttle
+      debounce: this._debounce
     });
   }
 
@@ -29,12 +29,12 @@ export class Event extends Action {
     return this;
   }
 
-  getThrottle() {
-    return this._throttle;
+  getDebounce() {
+    return this._debounce;
   }
 
-  setThrottle(value = 0) {
-    this._throttle = value;
+  setDebounce(value = 0) {
+    this._debounce = value;
     return this;
   }
 
@@ -42,8 +42,8 @@ export class Event extends Action {
     return this.setName(value);
   }
 
-  throttle(value) {
-    return this.setThrottle(value);
+  debounce(value) {
+    return this.setDebounce(value);
   }
 
   removeBefore() {
@@ -79,25 +79,22 @@ export class Event extends Action {
       return;
     }
 
-    const throttled = throttle((newEvent) => {
+    const debounced = debounce((newEvent) => {
       this.handleBefore(box, data, snippet, newEvent);
-    }, this._throttle);
+    }, this._debounce);
 
     node.on(this._name, () => {
-      throttled(event);
+      event.preventDefault();
+      event.stopPropagation();
+      debounced(event);
     });
   }
 
   handle(box, data) {
     this.pass(box, data);
-    return false;
   }
 
   handleBefore(box, data, snippet, newEvent) {
-    if (newEvent) {
-      newEvent.preventDefault();
-    }
-
     this.handle(box, data, snippet, newEvent);
   }
 

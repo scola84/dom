@@ -37,6 +37,6 @@ export class Route extends Action {
       Object.assign({}, box.params, data)
     );
 
-    ViewRouter.handle(box, data, route);
+    ViewRouter.handle(box, {}, route);
   }
 }

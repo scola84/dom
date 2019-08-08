@@ -52,13 +52,12 @@ export class Search extends Node {
 
     const placeholder = this.resolveValue(null, null, this._placeholder);
 
-    const input = this._node
+    this._node
       .append('input')
       .attr('autocomplete', 'on')
       .attr('name', 'search')
       .attr('type', 'search')
       .attr('placeholder', placeholder);
-
   }
 
   formatSearch(value) {

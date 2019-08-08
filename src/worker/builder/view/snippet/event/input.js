@@ -7,7 +7,7 @@ export class Input extends Event {
 
     this
       .name('input')
-      .throttle(500);
+      .debounce(500);
   }
 
   handle(box, data, snippet, event) {

@@ -134,6 +134,7 @@
 
 .item > .icon:before {
   font-size: 2em;
+  width: 100%;
 }
 
 .item > .icon:last-child {
