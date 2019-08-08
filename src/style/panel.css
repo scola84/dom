@@ -153,25 +153,24 @@
 .panel > .body {
   flex: 1;
   overflow: auto;
+  padding-top: 1em;
   position: relative;
   -webkit-overflow-scrolling: touch;
+}
+
+@media not all and (max-width: 48em) {
+  .panel > .body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 }
 
 .panel.outset-x.outset-y > .body {
   background: white;
   display: flex;
   flex-direction: column;
-}
-
-.panel > .body:after {
-  content: '';
-  height: 1em;
-  position: absolute;
-  width: 1em;
-}
-
-.panel.outset-x.outset-y > .body:after {
-  display: none;
+  padding-top: 0;
 }
 
 /* Body button */

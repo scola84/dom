@@ -11,6 +11,7 @@ export default [
   'icon',
   'item',
   'label',
+  'main',
   'metric',
   'row',
   'left',

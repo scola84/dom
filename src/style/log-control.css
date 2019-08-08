@@ -3,6 +3,7 @@
   border-bottom: 1px solid lightgrey;
   border-top: 1px solid lightgrey;
   display: flex;
+  flex-direction: column;
   padding: 1em;
 }
 
@@ -11,38 +12,43 @@
   border-radius: 0.5em;
 }
 
-.log-control .action {
+.log-control > .row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.log-control > .row > .action {
   display: flex;
   flex: 1;
 }
 
-.log-control .action:not(:empty) {
+.log-control > .row > .action:not(:empty) {
   margin-top: 0.5em;
 }
 
-.log-control .mode:not(:empty) {
+.log-control > .row > .mode:not(:empty) {
   margin-top: 0.5em;
 }
 
-.log-control .name {
+.log-control > .row > .name {
   align-items: center;
   padding-right: 0.5em;
 }
 
-.log-control .name .input select {
+.log-control > .row > .name .input select {
   font-size: 1.25em;
   width: 100%;
 }
 
-.log-control .name .input select[disabled] {
+.log-control > .row > .name .input select[disabled] {
   color: black;
 }
 
-.log-control .name .input select[disabled] + .arrow {
+.log-control > .row > .name .input select[disabled] + .arrow {
   display: none;
 }
 
-.log-control .range {
+.log-control > .row > .range {
   align-items: center;
   display: flex;
   flex: 1;
@@ -50,7 +56,7 @@
   position: relative;
 }
 
-.log-control .range > .arrow:after {
+.log-control > .row > .range > .arrow:after {
   content: '\f119';
   font-size: 1.25em;
   font-family: Ionicons;

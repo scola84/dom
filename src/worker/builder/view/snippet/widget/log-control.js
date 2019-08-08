@@ -115,56 +115,54 @@ export class LogControl extends Widget {
     const b = this._builder;
 
     return b.div().class('log-control').append(
-      b.col().class('any').append(
-        b.row().class('any').append(
-          b.div().class('name').append(
-            b.input(
-              b.select().wrap().classed({
-                click: this._name.length < 2 ? false : true
-              }).attributes({
-                disabled: this._name.length < 2 ? 'disabled' : null,
-                name: 'name'
-              }).append(
-                ...this.buildName()
-              )
-            ).act((box, data) => {
-              this.handleInput(box, data);
-            })
-          ),
-          b.div().class('range').append(
-            b.input(
-              b.date().wrap().attributes({
-                formnovalidate: 'formnovalidate',
-                name: 'begin',
-                required: 'required'
-              })
-            ).act((box, data) => {
-              this.handleInput(box, data);
-            }),
-            b.div().class('arrow'),
-            b.input(
-              b.date().wrap().attributes({
-                formnovalidate: 'formnovalidate',
-                name: 'end',
-                required: 'required'
-              })
-            ).act((box, data) => {
-              this.handleInput(box, data);
-            })
-          )
-        ),
-        b.row().class('any').append(
-          b.div().class('action').append(
-            ...this._action
-          ),
-          b.tab().id('mode').append(
-            b.div().class('tab mode').append(
-              ...this.buildMode()
+      b.row(
+        b.div().class('name').append(
+          b.input(
+            b.select().wrap().classed({
+              click: this._name.length < 2 ? false : true
+            }).attributes({
+              disabled: this._name.length < 2 ? 'disabled' : null,
+              name: 'name'
+            }).append(
+              ...this.buildName()
             )
           ).act((box, data) => {
             this.handleInput(box, data);
           })
+        ),
+        b.div().class('range').append(
+          b.input(
+            b.date().wrap().attributes({
+              formnovalidate: 'formnovalidate',
+              name: 'begin',
+              required: 'required'
+            })
+          ).act((box, data) => {
+            this.handleInput(box, data);
+          }),
+          b.div().class('arrow'),
+          b.input(
+            b.date().wrap().attributes({
+              formnovalidate: 'formnovalidate',
+              name: 'end',
+              required: 'required'
+            })
+          ).act((box, data) => {
+            this.handleInput(box, data);
+          })
         )
+      ),
+      b.row(
+        b.div().class('action').append(
+          ...this._action
+        ),
+        b.tab().id('mode').append(
+          b.div().class('tab mode').append(
+            ...this.buildMode()
+          )
+        ).act((box, data) => {
+          this.handleInput(box, data);
+        })
       )
     );
   }
