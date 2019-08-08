@@ -25,7 +25,12 @@ export class List extends Parent {
   }
 
   setEmpty(value = null) {
-    this._empty = value ? value.setParent(this) : value;
+    if (value) {
+      this._empty = value
+        .setParent(this)
+        .class('empty');
+    }
+
     return this;
   }
 
@@ -54,6 +59,16 @@ export class List extends Parent {
     }
 
     options.total += data.length;
+
+    this.removeEmpty();
+  }
+
+  removeEmpty() {
+    const empty = this._node.select('.empty').node();
+
+    if (empty) {
+      empty.snippet.remove();
+    }
   }
 
   removeInner() {
@@ -63,31 +78,29 @@ export class List extends Parent {
 
   resolveInner(box, data) {
     data = this._filter ? this._filter(box, data) : data;
-
-    const hasData = Array.isArray(data);
-    const listData = hasData ? data : [];
+    data = data || [];
 
     const [
       item,
       ...extra
     ] = this._args;
 
-    this.prepareList(box, listData);
+    this.prepareList(box, data);
 
-    for (let i = 0; i < listData.length; i += 1) {
-      this.appendChild(box, listData[i], item);
+    for (let i = 0; i < data.length; i += 1) {
+      this.appendChild(box, data[i], item);
     }
 
     const size = this._node
       .select('.item:not(.out)')
       .size();
 
-    if (hasData === true && size === 0) {
-      this.appendChild(box, listData, this._empty);
+    if (data.length === 0 && size === 0) {
+      this.appendChild(box, data, this._empty);
     }
 
     for (let i = 0; i < extra.length; i += 1) {
-      this.appendChild(box, listData, extra[i]);
+      this.appendChild(box, data, extra[i]);
     }
 
     return this.resolveAfter(box, data);
