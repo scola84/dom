@@ -158,14 +158,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-@media not all and (max-width: 48em) {
-  .panel > .body {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-}
-
 .panel.outset-x.outset-y > .body {
   background: white;
   display: flex;
