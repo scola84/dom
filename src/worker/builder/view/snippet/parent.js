@@ -53,20 +53,21 @@ export class Parent extends Node {
     key = key ? key : snippet.getId();
 
     if (this._children.has(key)) {
-      return this._children.get(key);
+      return this._children
+        .get(key)
+        .resolve(box, data);
     }
 
-    let node = snippet
-      .clone()
-      .resolve(box, data);
+    snippet = snippet.clone();
+
+    let node = snippet.resolve(box, data);
+    node = Array.isArray(node) ? node[0] : node;
 
     if (node === null) {
       return null;
     }
 
-    node = Array.isArray(node) ? node[0] : node;
-
-    this._children.set(key, node);
+    this._children.set(key, snippet);
 
     const transition = select(node.node().parentNode)
       .classed('transition');
