@@ -27,6 +27,10 @@ export class Linear extends Scale {
     return this;
   }
 
+  count(value) {
+    return this.setCount(value);
+  }
+
   setName(value = 'linear') {
     return super.setName(value);
   }
@@ -38,10 +42,6 @@ export class Linear extends Scale {
   setStep(value = 1) {
     this._step = value;
     return this;
-  }
-
-  count(value) {
-    return this.setCount(value);
   }
 
   step(value) {

@@ -33,6 +33,18 @@ export class ViewRouter extends Router {
     routers[this._name] = this;
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      base: this._base,
+      default: this._default,
+      global: this._global,
+      history: this._history,
+      name: this._name,
+      stash: this._stash,
+      storage: this._storage
+    });
+  }
+
   getBase() {
     return this._base;
   }
@@ -109,7 +121,7 @@ export class ViewRouter extends Router {
       box = this.processRoute(box, routes, routes[this._name]);
     }
 
-    if (typeof this._workers[box.path] === 'undefined') {
+    if (typeof this._downstreams[box.path] === 'undefined') {
       box = this.processDefault(box, routes);
     }
 

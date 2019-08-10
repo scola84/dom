@@ -7,9 +7,11 @@ export class Node extends Snippet {
     super(options);
 
     this._name = null;
+    this._node = null;
     this._transform = [];
 
     this.setName(options.name);
+    this.setNode(options.node);
     this.setTransform(options.transform);
 
     if (options.class) {
@@ -20,16 +22,9 @@ export class Node extends Snippet {
   getOptions() {
     return Object.assign(super.getOptions(), {
       name: this._name,
+      node: this._node,
       transform: this._transform
     });
-  }
-
-  getName() {
-    return this._name;
-  }
-
-  getNode() {
-    return this._node;
   }
 
   setId(value) {
@@ -42,9 +37,30 @@ export class Node extends Snippet {
     return super.setId(value);
   }
 
+  getName() {
+    return this._name;
+  }
+
   setName(value = 'div') {
     this._name = value;
     return this;
+  }
+
+  name(value) {
+    return this.setName(value);
+  }
+
+  setNode(value = null) {
+    this._node = value;
+    return this;
+  }
+
+  getNode() {
+    return this._node;
+  }
+
+  node() {
+    return this.getNode();
   }
 
   getTransform() {
@@ -53,6 +69,11 @@ export class Node extends Snippet {
 
   setTransform(value = []) {
     this._transform = value;
+    return this;
+  }
+
+  transform(...transform) {
+    this._transform = this._transform.concat(transform);
     return this;
   }
 
@@ -106,21 +127,14 @@ export class Node extends Snippet {
     });
   }
 
-  name(value) {
-    return this.setName(value);
-  }
-
-  transform(...transform) {
-    this._transform = this._transform.concat(transform);
-    return this;
-  }
-
   createNode() {
-    this._node = this._parent === null ?
+    const node = this._parent === null ?
       select('body').append(this._name).remove() :
       this._parent.node().append(this._name);
 
-    this._node.node().snippet = this;
+    node.node().snippet = this;
+
+    this.setNode(node);
   }
 
   removeNode() {

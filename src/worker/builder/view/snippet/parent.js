@@ -28,6 +28,10 @@ export class Parent extends Node {
     return this;
   }
 
+  children(value) {
+    return this.setChildren(value);
+  }
+
   getKey() {
     return this._key;
   }

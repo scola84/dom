@@ -68,6 +68,10 @@ export class Print extends Snippet {
     return this;
   }
 
+  format(value) {
+    return this.setFormat(value);
+  }
+
   getLocale() {
     return this._locale;
   }
@@ -77,6 +81,10 @@ export class Print extends Snippet {
     return this;
   }
 
+  locale(value) {
+    return this.setLocale(value);
+  }
+
   getValues() {
     return this._values;
   }
@@ -84,14 +92,6 @@ export class Print extends Snippet {
   setValues(value = (box, data) => data) {
     this._values = value;
     return this;
-  }
-
-  format(value) {
-    return this.setFormat(value);
-  }
-
-  locale(value) {
-    return this.setLocale(value);
   }
 
   values(value) {

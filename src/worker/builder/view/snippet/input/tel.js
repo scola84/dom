@@ -23,15 +23,6 @@ export class Tel extends Input {
     });
   }
 
-  getFormat() {
-    return this._format;
-  }
-
-  setFormat(value = 'E.164') {
-    this._format = value;
-    return this;
-  }
-
   getCountry() {
     return this._country;
   }
@@ -41,12 +32,21 @@ export class Tel extends Input {
     return this;
   }
 
-  format(value) {
-    return this.setFormat(value);
-  }
-
   country(value) {
     return this.setCountry(value);
+  }
+
+  getFormat() {
+    return this._format;
+  }
+
+  setFormat(value = 'E.164') {
+    this._format = value;
+    return this;
+  }
+
+  format(value) {
+    return this.setFormat(value);
   }
 
   cleanAfter(box, data, name, value) {

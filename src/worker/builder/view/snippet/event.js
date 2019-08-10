@@ -29,6 +29,10 @@ export class Event extends Action {
     return this;
   }
 
+  name(value) {
+    return this.setName(value);
+  }
+
   getDebounce() {
     return this._debounce;
   }
@@ -36,10 +40,6 @@ export class Event extends Action {
   setDebounce(value = 0) {
     this._debounce = value;
     return this;
-  }
-
-  name(value) {
-    return this.setName(value);
   }
 
   debounce(value) {

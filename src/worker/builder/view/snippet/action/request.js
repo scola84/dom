@@ -21,6 +21,7 @@ export class Request extends Action {
 
   getOptions() {
     return Object.assign(super.getOptions(), {
+      client: this._client,
       indicator: this._indicator,
       merge: this._merge,
       resource: this._resource
@@ -36,6 +37,10 @@ export class Request extends Action {
     return this;
   }
 
+  client(value) {
+    return this.setClient(value);
+  }
+
   getIndicator() {
     return this._indicator;
   }
@@ -43,6 +48,10 @@ export class Request extends Action {
   setIndicator(value = null) {
     this._indicator = value;
     return this;
+  }
+
+  indicator(value) {
+    return this.setIndicator(value);
   }
 
   getMerge() {
@@ -54,6 +63,10 @@ export class Request extends Action {
     return this;
   }
 
+  merge(value) {
+    return this.setMerge(value);
+  }
+
   getResource() {
     return this._resource;
   }
@@ -61,18 +74,6 @@ export class Request extends Action {
   setResource(value = null) {
     this._resource = value;
     return this;
-  }
-
-  client(value) {
-    return this.setClient(value);
-  }
-
-  indicator(value) {
-    return this.setIndicator(value);
-  }
-
-  merge(value) {
-    return this.setMerge(value);
   }
 
   resource(value) {
@@ -129,11 +130,11 @@ export class Request extends Action {
 
     this._client.transformer.connect(new Worker({
       act: (b, result) => {
-        this._client.transformer.setWorker(null);
+        this._client.transformer.setDownstream(null);
         this.pass(box, this._merge(box, result));
       },
       err: (b, error) => {
-        this._client.transformer.setWorker(null);
+        this._client.transformer.setDownstream(null);
         this.fail(box, error);
       }
     }));

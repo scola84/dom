@@ -20,6 +20,10 @@ export class Data {
     return this;
   }
 
+  filter(value) {
+    return this.setFilter(value);
+  }
+
   getEndogenous() {
     return this._endogenous;
   }
@@ -29,6 +33,10 @@ export class Data {
     return this;
   }
 
+  endogenous(value) {
+    return this.setEndogenous(value);
+  }
+
   getExogenous() {
     return this._exogenous;
   }
@@ -36,6 +44,10 @@ export class Data {
   setExogenous(value = null) {
     this._exogenous = value;
     return this;
+  }
+
+  exogenous(value) {
+    return this.setExogenous(value);
   }
 
   getPosition() {
@@ -52,12 +64,12 @@ export class Data {
     return this;
   }
 
-  bottom() {
-    return this.addPosition('bottom');
+  position(value) {
+    return this.setPosition(value);
   }
 
-  filter(value) {
-    return this.setFilter(value);
+  bottom() {
+    return this.addPosition('bottom');
   }
 
   left() {
@@ -70,14 +82,6 @@ export class Data {
 
   top() {
     return this.addPosition('top');
-  }
-
-  exogenous(value) {
-    return this.setExogenous(value);
-  }
-
-  endogenous(value) {
-    return this.setEndogenous(value);
   }
 
   prepare(data) {

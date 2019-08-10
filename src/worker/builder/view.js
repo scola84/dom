@@ -14,8 +14,18 @@ export class ViewBuilder extends Builder {
     this.setView(options.view);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      view: this._view
+    });
+  }
+
   getNode() {
-    return select(this._parent.getBase());
+    return select(this._upstream.getBase());
+  }
+
+  node() {
+    return this.getNode();
   }
 
   getView() {
@@ -27,17 +37,18 @@ export class ViewBuilder extends Builder {
     return this;
   }
 
-  node() {
-    return this.getNode();
-  }
-
   act(box, data, callback) {
-    data = this.filter(box, data);
-    this._view.resolve(box, data);
+    this._view.resolve(
+      box,
+      this.filter(box, data)
+    );
+
     this.pass(box, data, callback);
   }
 
   build(view) {
-    return this.setView(view.setParent(this));
+    return this.setView(
+      view.setParent(this)
+    );
   }
 }

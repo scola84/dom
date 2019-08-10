@@ -28,6 +28,10 @@ export class DateTime extends Input {
     return this;
   }
 
+  formatFrom(value) {
+    return this.setFormatFrom(value);
+  }
+
   getFormatTo() {
     return this._formatTo;
   }
@@ -35,10 +39,6 @@ export class DateTime extends Input {
   setFormatTo(value = null) {
     this._formatTo = value;
     return this;
-  }
-
-  formatFrom(value) {
-    return this.setFormatFrom(value);
   }
 
   formatTo(value) {

@@ -37,6 +37,10 @@ export class Button extends Node {
     return this;
   }
 
+  form() {
+    return this.setForm(true);
+  }
+
   getMenu() {
     return this._menu;
   }
@@ -44,10 +48,6 @@ export class Button extends Node {
   setMenu(value = false) {
     this._menu = value;
     return this;
-  }
-
-  form() {
-    return this.setForm(true);
   }
 
   menu() {

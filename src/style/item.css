@@ -182,6 +182,7 @@
 
 .item > .label > .l0 {
   color: darkgrey;
+  margin-bottom: 0.2em;
   flex: 100%;
 }
 

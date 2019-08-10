@@ -22,7 +22,8 @@ export class Plot extends Parent {
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      data: this._data
+      data: this._data,
+      tip: this._tip
     });
   }
 
@@ -35,6 +36,10 @@ export class Plot extends Parent {
     return this;
   }
 
+  data(value) {
+    return this.setData(value(this));
+  }
+
   getTip() {
     return this._tip;
   }
@@ -42,10 +47,6 @@ export class Plot extends Parent {
   setTip(value = null) {
     this._tip = value;
     return this;
-  }
-
-  data(value) {
-    return this.setData(value(this));
   }
 
   tip(value) {

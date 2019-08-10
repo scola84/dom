@@ -78,7 +78,7 @@ export class PopRouter extends ViewRouter {
   }
 
   pass(name, box, data, callback) {
-    if (typeof this._workers[box.path] !== 'undefined') {
+    if (typeof this._downstreams[box.path] !== 'undefined') {
       this.open(box);
       super.pass(name, box, data, callback);
     }

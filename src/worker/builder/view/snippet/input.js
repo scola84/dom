@@ -33,6 +33,10 @@ export class Input extends Node {
     return this;
   }
 
+  custom(value) {
+    return this.setCustom(value);
+  }
+
   getDefault() {
     return this._default;
   }
@@ -42,6 +46,10 @@ export class Input extends Node {
     return this;
   }
 
+  default (value) {
+    return this.setDefault(value);
+  }
+
   getWrap() {
     return this._wrap;
   }
@@ -49,14 +57,6 @@ export class Input extends Node {
   setWrap(value = false) {
     this._wrap = value;
     return this;
-  }
-
-  custom(value) {
-    return this.setCustom(value);
-  }
-
-  default (value) {
-    return this.setDefault(value);
   }
 
   wrap() {

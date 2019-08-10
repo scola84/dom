@@ -34,6 +34,10 @@ export class LogControl extends Widget {
     return this;
   }
 
+  action(...action) {
+    return this.setAction(...action);
+  }
+
   getBegin() {
     return this._begin;
   }
@@ -41,6 +45,10 @@ export class LogControl extends Widget {
   setBegin(value = new Date().toISOString().slice(0, 10)) {
     this._begin = value;
     return this;
+  }
+
+  begin(value) {
+    return this.setBegin(value);
   }
 
   getEnd() {
@@ -52,6 +60,10 @@ export class LogControl extends Widget {
     return this;
   }
 
+  end(value) {
+    return this.setEnd(value);
+  }
+
   getMode() {
     return this._mode;
   }
@@ -59,18 +71,6 @@ export class LogControl extends Widget {
   setMode(...mode) {
     this._mode = mode;
     return this;
-  }
-
-  action(...action) {
-    return this.setAction(...action);
-  }
-
-  begin(value) {
-    return this.setBegin(value);
-  }
-
-  end(value) {
-    return this.setEnd(value);
   }
 
   mode(...mode) {

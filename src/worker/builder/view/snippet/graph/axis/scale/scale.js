@@ -30,6 +30,10 @@ export class Scale {
     return this;
   }
 
+  axis(value) {
+    return this.setAxis(value);
+  }
+
   getDomain() {
     return this._domain;
   }
@@ -37,6 +41,10 @@ export class Scale {
   setDomain(value = null) {
     this._domain = value;
     return this;
+  }
+
+  domain(value) {
+    return this.setDomain(value);
   }
 
   getMax() {
@@ -48,6 +56,10 @@ export class Scale {
     return this;
   }
 
+  max(value) {
+    return this.setMax(value);
+  }
+
   getMin() {
     return this._min;
   }
@@ -55,6 +67,10 @@ export class Scale {
   setMin(value = 'auto') {
     this._min = value;
     return this;
+  }
+
+  min(value) {
+    return this.setMin(value);
   }
 
   getName() {
@@ -66,6 +82,10 @@ export class Scale {
     return this;
   }
 
+  name(value) {
+    return this.setName(value);
+  }
+
   getPosition() {
     return this._position;
   }
@@ -73,6 +93,10 @@ export class Scale {
   setPosition(value = null) {
     this._position = value;
     return this;
+  }
+
+  position(value) {
+    return this.setPosition(value);
   }
 
   getPpu() {
@@ -84,6 +108,10 @@ export class Scale {
     return this;
   }
 
+  ppu(value) {
+    return this.setPpu(value);
+  }
+
   getRange() {
     return this._range;
   }
@@ -91,6 +119,10 @@ export class Scale {
   setRange(value = null) {
     this._range = value;
     return this;
+  }
+
+  range(value) {
+    return this.setRange(value);
   }
 
   getType() {
@@ -102,8 +134,8 @@ export class Scale {
     return this;
   }
 
-  axis(value) {
-    return this.setAxis(value);
+  type(value) {
+    return this.setType(value);
   }
 
   bottom() {
@@ -122,28 +154,12 @@ export class Scale {
     return this.setPosition('left');
   }
 
-  max(value) {
-    return this.setMax(value);
-  }
-
-  min(value) {
-    return this.setMin(value);
-  }
-
-  position(value) {
-    return this.setPosition(value);
-  }
-
   right() {
     return this.setPosition('right');
   }
 
   top() {
     return this.setPosition('top');
-  }
-
-  type(value) {
-    return this.setType(value);
   }
 
   calculateDistance() {}

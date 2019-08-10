@@ -2,8 +2,8 @@ import { Builder } from '@scola/worker';
 let id = 0;
 
 export class Snippet {
-  static attachFactories(...args) {
-    Builder.attachFactories(...args);
+  static attachFactories(target, objects) {
+    Builder.attachFactories(target, objects);
   }
 
   constructor(options = {}) {
@@ -12,7 +12,6 @@ export class Snippet {
     this._builder = null;
     this._filter = null;
     this._id = null;
-    this._node = null;
     this._parent = null;
     this._storage = null;
 
@@ -21,7 +20,6 @@ export class Snippet {
     this.setBuilder(options.builder);
     this.setFilter(options.filter);
     this.setId(options.id);
-    this.setNode(options.node);
     this.setParent(options.parent);
     this.setStorage(options.storage);
   }
@@ -58,6 +56,10 @@ export class Snippet {
     return this;
   }
 
+  allow(value) {
+    return this.setAllow(value);
+  }
+
   getArgs() {
     return this._args;
   }
@@ -74,6 +76,14 @@ export class Snippet {
     return this;
   }
 
+  append(...args) {
+    return this.setArgs(this._args.concat(args));
+  }
+
+  args(value) {
+    return this.setArgs(value);
+  }
+
   getBuilder() {
     return this._builder;
   }
@@ -81,6 +91,10 @@ export class Snippet {
   setBuilder(value = null) {
     this._builder = value;
     return this;
+  }
+
+  builder(value) {
+    return this.setBuilder(value);
   }
 
   getFilter() {
@@ -92,6 +106,10 @@ export class Snippet {
     return this;
   }
 
+  filter(value) {
+    return this.setFilter(value);
+  }
+
   getId() {
     return this._id;
   }
@@ -101,13 +119,12 @@ export class Snippet {
     return this;
   }
 
-  getNode() {
-    return this._parent.getNode();
+  id(value) {
+    return this.setId(value);
   }
 
-  setNode(value = null) {
-    this._node = value;
-    return this;
+  node() {
+    return this._parent.node();
   }
 
   getParent() {
@@ -119,35 +136,23 @@ export class Snippet {
     return this;
   }
 
+  parent(value) {
+    return this.setParent(value);
+  }
+
   getStorage() {
     return this._storage;
   }
 
-  setStorage(
-    value = (typeof localStorage === 'undefined' ? null : localStorage)
-  ) {
+  setStorage(value = null) {
+    if (value === null) {
+      if (typeof localStorage !== 'undefined') {
+        value = localStorage;
+      }
+    }
+
     this._storage = value;
     return this;
-  }
-
-  allow(value) {
-    return this.setAllow(value);
-  }
-
-  append(...args) {
-    return this.setArgs(this._args.concat(args));
-  }
-
-  filter(value) {
-    return this.setFilter(value);
-  }
-
-  id(value) {
-    return this.setId(value);
-  }
-
-  node() {
-    return this.getNode();
   }
 
   storage(value) {

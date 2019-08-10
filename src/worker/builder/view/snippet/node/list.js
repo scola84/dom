@@ -11,6 +11,13 @@ export class List extends Parent {
     this.setEmpty(options.empty);
   }
 
+  getOptions() {
+    return Object.assign(super.getOptions(), {
+      clear: this._clear,
+      empty: this._empty
+    });
+  }
+
   getClear() {
     return this._clear;
   }
@@ -18,6 +25,10 @@ export class List extends Parent {
   setClear(value = false) {
     this._clear = value;
     return this;
+  }
+
+  clear() {
+    return this.setClear(true);
   }
 
   getEmpty() {
@@ -32,10 +43,6 @@ export class List extends Parent {
     }
 
     return this;
-  }
-
-  clear() {
-    return this.setClear(true);
   }
 
   empty(value) {

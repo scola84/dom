@@ -30,6 +30,10 @@ export class Search extends Node {
     return this;
   }
 
+  placeholder(value) {
+    return this.setPlaceholder(value);
+  }
+
   getWildcard() {
     return this._wildcard;
   }
@@ -37,10 +41,6 @@ export class Search extends Node {
   setWildcard(value = '*') {
     this._wildcard = value;
     return this;
-  }
-
-  placeholder(value) {
-    return this.setPlaceholder(value);
   }
 
   wildcard(value) {

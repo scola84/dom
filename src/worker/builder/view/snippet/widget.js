@@ -14,6 +14,7 @@ export class Widget extends Action {
   getOptions() {
     return Object.assign(super.getOptions(), {
       name: this._name,
+      widget: this._widget
     });
   }
 
@@ -26,6 +27,10 @@ export class Widget extends Action {
     return this;
   }
 
+  name(...name) {
+    return this.setName(...name);
+  }
+
   getWidget() {
     return this._widget;
   }
@@ -35,21 +40,22 @@ export class Widget extends Action {
     return this;
   }
 
-  name(...name) {
-    return this.setName(...name);
+  widget(value) {
+    return this.setWidget(value);
   }
 
   createWidget() {
     const args = this._args;
     this._args = [];
 
-    this._widget = this.buildWidget(args);
+    const widget = this.buildWidget(args);
 
     if (args.length > 0) {
-      this._widget.setArgs(args);
+      widget.setArgs(args);
     }
 
-    this.append(this._widget);
+    this.setWidget(widget);
+    this.append(widget);
   }
 
   resolve(box, data) {

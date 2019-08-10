@@ -27,6 +27,10 @@ export class Action extends Snippet {
     return this;
   }
 
+  act(...args) {
+    return this.setAct(args);
+  }
+
   getErr() {
     return this._err;
   }
@@ -34,10 +38,6 @@ export class Action extends Snippet {
   setErr(value = []) {
     this._err = value;
     return this;
-  }
-
-  act(...args) {
-    return this.setAct(args);
   }
 
   err(...args) {
