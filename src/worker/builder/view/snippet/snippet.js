@@ -77,7 +77,9 @@ export class Snippet {
   }
 
   append(...args) {
-    return this.setArgs(this._args.concat(args));
+    return this.setArgs(
+      this._args.concat(args)
+    );
   }
 
   args(value) {

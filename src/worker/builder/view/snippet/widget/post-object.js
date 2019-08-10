@@ -9,11 +9,11 @@ export class PostObject extends Widget {
       link
     ] = this._name;
 
-    let resource = `/api/${object}/%(${object}_id)s`;
+    let resource = `/api/${object}`;
     let view = `view-${object}:{${object}_id}@main:clr`;
 
     if (link) {
-      resource += `/${link}`;
+      resource += `/%(${object}_id)s/${link}`;
       view = '@main:his';
     }
 
