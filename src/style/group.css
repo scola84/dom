@@ -56,6 +56,12 @@
   text-transform: uppercase;
 }
 
+@media not all and (max-width: 48em) {
+  .panel:not(.outset-x) .group > .title {
+    pointer-events: none;
+  }
+}
+
 .group > .title:not(:empty) * {
   font-size: inherit;
 }
@@ -81,10 +87,22 @@
   transform: rotate(-90deg);
 }
 
+@media not all and (max-width: 48em) {
+  .panel:not(.outset-x) .group > .title.fold.all:after {
+    content: '';
+  }
+}
+
 .group > .title.fold.some:after {
   content: '\f1fc';
 }
 
 .group.folded > .title.fold.some:after {
   content: '\f102';
+}
+
+@media not all and (max-width: 48em) {
+  .panel:not(.outset-x) .group > .title.fold.some:after {
+    content: '';
+  }
 }
