@@ -4,31 +4,14 @@ export class List extends Parent {
   constructor(options = {}) {
     super(options);
 
-    this._clear = null;
     this._empty = null;
-
-    this.setClear(options.clear);
     this.setEmpty(options.empty);
   }
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      clear: this._clear,
       empty: this._empty
     });
-  }
-
-  getClear() {
-    return this._clear;
-  }
-
-  setClear(value = false) {
-    this._clear = value;
-    return this;
-  }
-
-  clear() {
-    return this.setClear(true);
   }
 
   getEmpty() {
@@ -49,16 +32,20 @@ export class List extends Parent {
     return this.setEmpty(value);
   }
 
+  clearList(box) {
+    const options = box.list || {};
+
+    options.offset = 0;
+    options.total = 0;
+
+    this.removeChildren();
+  }
+
   prepareList(box, data) {
     const options = box.list || {};
 
-    if (this._clear || options.clear) {
-      delete options.clear;
-
-      options.offset = 0;
-      options.total = 0;
-
-      this.removeChildren();
+    if (options.append !== true) {
+      this.clearList(box);
     }
 
     if (options.offset === 0 && options.count > 0) {
@@ -85,7 +72,7 @@ export class List extends Parent {
 
   resolveInner(box, data) {
     data = this._filter ? this._filter(box, data) : data;
-    data = data || [];
+    data = Array.isArray(data) ? data : [];
 
     const [
       item,

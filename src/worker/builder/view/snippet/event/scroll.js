@@ -33,7 +33,10 @@ export class Scroll extends Event {
   }
 
   resolveBefore(box, data) {
-    const height = parseInt(this._parent.node().style('height'), 10);
+    const height = parseFloat(
+      this._parent.node().style('height')
+    );
+
     const count = Math.round(height / this._height) * 2;
 
     defaults(box, {
@@ -61,6 +64,7 @@ export class Scroll extends Event {
       return;
     }
 
+    box.list.append = true;
     box.list.offset += box.list.count;
 
     this.pass(box, data);

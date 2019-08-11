@@ -97,10 +97,11 @@ export class Search extends Node {
   resolveInput(box) {
     this._storage.setItem('search-' + this._id, box.input);
 
-    box.list.clear = true;
     box.list.search = this.formatSearch(box.input);
 
     delete box.input;
+    delete box.list.append;
+
     return this._node;
   }
 
