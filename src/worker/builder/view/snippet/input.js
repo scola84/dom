@@ -119,7 +119,7 @@ export class Input extends Node {
       return true;
     }
 
-    return value >= min;
+    return value >= parseFloat(min);
   }
 
   isBelowMax(value, max) {
@@ -127,7 +127,7 @@ export class Input extends Node {
       return true;
     }
 
-    return value <= max;
+    return value <= parseFloat(max);
   }
 
   isDefined(value, required) {
@@ -150,14 +150,6 @@ export class Input extends Node {
     }
 
     return Array.isArray(value) === true;
-  }
-
-  isPattern(value, pattern) {
-    if (pattern === null) {
-      return true;
-    }
-
-    return new RegExp(pattern).test(String(value));
   }
 
   setValue(object, key, value) {
@@ -210,12 +202,6 @@ export class Input extends Node {
 
     if (this.isEmpty(value) === true) {
       return null;
-    }
-
-    const pattern = this.resolveAttribute(box, data, 'pattern');
-
-    if (this.isPattern(value, pattern) === false) {
-      return this.setError(error, name, value, 'pattern', { pattern });
     }
 
     const maxlength = this.resolveAttribute(box, data, 'maxlength');
