@@ -3,6 +3,7 @@ export * from './bar';
 export * from './button';
 export * from './clip';
 export * from './form';
+export * from './fragment';
 export * from './hint';
 export * from './list';
 export * from './loading';
