@@ -15,7 +15,6 @@ export class Fragment extends Node {
       return;
     }
 
-    this._node.node().snippet = null;
     this._node = null;
   }
 }
