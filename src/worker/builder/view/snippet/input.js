@@ -5,12 +5,14 @@ export class Input extends Node {
   constructor(options = {}) {
     super(options);
 
-    this._custom = null;
+    this._clean = null;
     this._default = null;
+    this._validate = null;
     this._wrap = null;
 
-    this.setCustom(options.custom);
+    this.setClean(options.clean);
     this.setDefault(options.default);
+    this.setValidate(options.validate);
     this.setWrap(options.wrap);
 
     this.name('input');
@@ -18,23 +20,24 @@ export class Input extends Node {
 
   getOptions() {
     return Object.assign(super.getOptions(), {
-      custom: this._custom,
+      clean: this._clean,
       default: this._default,
+      validate: this._validate,
       wrap: this._wrap
     });
   }
 
-  getCustom() {
-    return this._custom;
+  getClean() {
+    return this._clean;
   }
 
-  setCustom(value = () => true) {
-    this._custom = value;
+  setClean(value = (box, data, val) => val) {
+    this._clean = value;
     return this;
   }
 
-  custom(value) {
-    return this.setCustom(value);
+  clean(value) {
+    return this.setClean(value);
   }
 
   getDefault() {
@@ -50,6 +53,19 @@ export class Input extends Node {
     return this.setDefault(value);
   }
 
+  getValidate() {
+    return this._validate;
+  }
+
+  setValidate(value = () => true) {
+    this._validate = value;
+    return this;
+  }
+
+  validate(value) {
+    return this.setValidate(value);
+  }
+
   getWrap() {
     return this._wrap;
   }
@@ -61,28 +77,6 @@ export class Input extends Node {
 
   wrap() {
     return this.setWrap(true);
-  }
-
-  createNode() {
-    super.createNode();
-
-    if (this._wrap) {
-      this.wrapInput();
-    }
-  }
-
-  clean(box, data) {
-    const name = this.resolveAttribute(box, data, 'name');
-    const value = data[name];
-
-    if (Array.isArray(value) === false) {
-      this.cleanBefore(box, data, name, value);
-      return;
-    }
-
-    for (let i = 0; i < value.length; i += 1) {
-      this.cleanBefore(box, data, `${name}.${i}`, value[i]);
-    }
   }
 
   cleanAfter() {}
@@ -111,7 +105,18 @@ export class Input extends Node {
       this.setValue(data, name, value);
     }
 
+    value = this._clean(box, data, value);
+    this.setValue(data, name, value);
+
     this.cleanAfter(box, data, name, value);
+  }
+
+  createNode() {
+    super.createNode();
+
+    if (this._wrap) {
+      this.wrapInput();
+    }
   }
 
   isAboveMin(value, min) {
@@ -152,21 +157,21 @@ export class Input extends Node {
     return Array.isArray(value) === true;
   }
 
-  setValue(object, key, value) {
-    set(object, key, value);
+  resolveClean(box, data) {
+    const name = this.resolveAttribute(box, data, 'name');
+    const value = data[name];
+
+    if (Array.isArray(value) === false) {
+      this.cleanBefore(box, data, name, value);
+      return;
+    }
+
+    for (let i = 0; i < value.length; i += 1) {
+      this.cleanBefore(box, data, `${name}.${i}`, value[i]);
+    }
   }
 
-  setError(error, name, value, reason, options = {}) {
-    value = Object.assign({}, options, {
-      reason,
-      type: this.constructor.name.toLowerCase(),
-      value
-    });
-
-    this.setValue(error, name, value);
-  }
-
-  validate(box, data, error) {
+  resolveValidate(box, data, error) {
     const name = this.resolveAttribute(box, data, 'name');
     const value = data[name];
 
@@ -185,6 +190,20 @@ export class Input extends Node {
     }
 
     return null;
+  }
+
+  setError(error, name, value, reason, options = {}) {
+    value = Object.assign({}, options, {
+      reason,
+      type: this.constructor.name.toLowerCase(),
+      value
+    });
+
+    this.setValue(error, name, value);
+  }
+
+  setValue(object, key, value) {
+    set(object, key, value);
   }
 
   validateAfter() {}
@@ -222,7 +241,7 @@ export class Input extends Node {
       return this.setError(error, name, value, 'min', { min });
     }
 
-    if (this._custom(box, data, value) === false) {
+    if (this._validate(box, data, value) === false) {
       return this.setError(error, name, value, 'custom');
     }
 
