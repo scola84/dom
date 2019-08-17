@@ -3,6 +3,10 @@ import merge from 'lodash-es/merge';
 import { Snippet } from '../snippet';
 import { vsprintf } from '../../../../../helper';
 
+const regexpBase = '\\{([^}]+)\\}';
+const regexpGlobal = new RegExp(regexpBase, 'g');
+const regexpSingle = new RegExp(regexpBase);
+
 let flocale = 'nl_NL';
 let strings = {};
 
@@ -99,7 +103,14 @@ export class Print extends Snippet {
   }
 
   resolveAfter(box, data) {
-    const format = this.resolveValue(box, data, this._format);
+    return this.resolveFormat(
+      box,
+      data,
+      this.resolveValue(box, data, this._format)
+    );
+  }
+
+  resolveFormat(box, data, format) {
     const locale = this.resolveValue(box, data, this._locale);
 
     let values = this.resolveValue(box, data, this._values);
@@ -119,6 +130,8 @@ export class Print extends Snippet {
       lformat = lformat(box, data);
     }
 
+    lformat = this.resolveNested(box, data, lformat);
+
     let string = null;
 
     try {
@@ -128,5 +141,22 @@ export class Print extends Snippet {
     }
 
     return string === format ? '' : string;
+  }
+
+  resolveNested(box, data, lformat = '') {
+    const matches = lformat.match(regexpGlobal) || [];
+
+    let format = null;
+
+    for (let i = 0; i < matches.length; i += 1) {
+      [, format] = matches[i].match(regexpSingle);
+
+      lformat = lformat.replace(
+        matches[i],
+        this.resolveFormat(box, data, format)
+      );
+    }
+
+    return lformat;
   }
 }
