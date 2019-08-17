@@ -115,6 +115,10 @@ export class Print extends Snippet {
       lformat = lformat[values[0]] || lformat.d;
     }
 
+    if (typeof lformat === 'function') {
+      lformat = lformat(box, data);
+    }
+
     let string = null;
 
     try {
