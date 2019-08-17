@@ -45,8 +45,11 @@ button {
   }
 }
 
+fieldset,
 form {
+  border: 0;
   margin: 0;
+  padding: 0;
 }
 
 p {
