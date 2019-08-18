@@ -17,6 +17,27 @@ export class Checkbox extends Input {
     this.removeOuter();
   }
 
+  validateAfter(box, data, error, name, value) {
+    const realName = name.split('.').shift();
+
+    const snippets = this._builder
+      .selector((snippet) => {
+        return snippet instanceof Checkbox &&
+          snippet.resolveAttribute(box, data, 'name') === realName;
+      })
+      .resolve();
+
+    const values = snippets.map((snippet) => {
+      return snippet.resolveAttribute(box, data, 'value');
+    });
+
+    if (values.indexOf(value) === -1) {
+      return this.setError(error, name, value, 'type', { values });
+    }
+
+    return null;
+  }
+
   wrapInput() {
     const wrapper = this
       .wrapNode('label')

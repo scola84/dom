@@ -10,7 +10,8 @@ export const nl_NL = {
   },
   input: {
     checkbox: {
-      required
+      required,
+      type: 'Deze waarde is niet goed.'
     },
     color: {
       maxlength,
@@ -62,7 +63,8 @@ export const nl_NL = {
       type: 'Dit is geen wachtwoord.'
     },
     radio: {
-      required
+      required,
+      type: 'Deze waarde is niet goed.'
     },
     range: {
       maxlength,
