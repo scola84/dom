@@ -1,8 +1,4 @@
 import {
-  Worker
-} from '@scola/worker';
-
-import {
   Axis,
   Plot,
   ViewBuilder
@@ -12,7 +8,12 @@ import { snippet } from '../../worker';
 import { locale } from '../../locale';
 
 export function worker() {
-  Worker.setLog(Worker.log);
+  console.out = (type, wrk, box, data) => {
+    if (type === 'fail' && !data.logged) {
+      data.logged = true;
+      console.error(data);
+    }
+  };
 
   ViewBuilder.setup();
   Axis.setup();
