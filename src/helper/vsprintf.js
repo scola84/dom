@@ -28,7 +28,7 @@ export function vsprintf(format, args, locale) {
       value = args[i];
     }
 
-    if (typeof value === 'undefined') {
+    if (typeof value === 'undefined' || value === null) {
       value = '';
     } else if (formatters[type]) {
       value = formatters[type](value, options, locale);

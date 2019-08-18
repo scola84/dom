@@ -12,10 +12,6 @@ const defaultFormat = {
 const definitions = {};
 
 export function n(value, options = '', locale = 'nl_NL') {
-  if (typeof value === 'undefined') {
-    return '';
-  }
-
   options = options ? options.split(';') : [];
 
   const [
