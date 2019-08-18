@@ -290,6 +290,15 @@ export class Scale {
     this._domain.min = min;
   }
 
+  preparePpu() {
+    const name = this.mapRange();
+
+    this._ppu = this._range[name] /
+      (this._domain.max - this._domain.min);
+
+    return this;
+  }
+
   prepareRange() {
     const node = this._axis.node().node();
     const style = window.getComputedStyle(node);
@@ -313,15 +322,6 @@ export class Scale {
       const value = parseFloat(style[name]);
       return result === 0 ? value : result - value;
     }, 0);
-  }
-
-  preparePpu() {
-    const name = this.mapRange();
-
-    this._ppu = this._range[name] /
-      (this._domain.max - this._domain.min);
-
-    return this;
   }
 
   resolveValue(arg, value) {

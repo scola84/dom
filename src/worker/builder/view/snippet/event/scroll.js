@@ -32,25 +32,6 @@ export class Scroll extends Event {
     return this.setHeight(value);
   }
 
-  resolveBefore(box, data) {
-    const height = parseFloat(
-      this._parent.node().style('height')
-    );
-
-    const count = Math.round(height / this._height) * 2;
-
-    defaults(box, {
-      list: {
-        count,
-        height,
-        offset: 0,
-        total: 0
-      }
-    });
-
-    return this.resolveOuter(box, data);
-  }
-
   handle(box, data, snippet) {
     if (box.list.total % box.list.count > 0) {
       return;
@@ -68,5 +49,24 @@ export class Scroll extends Event {
     box.list.offset += box.list.count;
 
     this.pass(box, data);
+  }
+
+  resolveBefore(box, data) {
+    const height = parseFloat(
+      this._parent.node().style('height')
+    );
+
+    const count = Math.round(height / this._height) * 2;
+
+    defaults(box, {
+      list: {
+        count,
+        height,
+        offset: 0,
+        total: 0
+      }
+    });
+
+    return this.resolveOuter(box, data);
   }
 }

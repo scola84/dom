@@ -7,38 +7,6 @@ export class Fold extends Event {
     this.name('click');
   }
 
-  resolveAfter(box, data) {
-    const result = [];
-    let snippet = null;
-
-    for (let i = 0; i < this._args.length; i += 1) {
-      snippet = this._args[i];
-
-      this.load(box, data, snippet);
-      this.fold(box, data, snippet, true);
-
-      result[result.length] = snippet.node();
-    }
-
-    return result;
-  }
-
-  handle(box, data, snippet, event) {
-    const handle = event.target.closest('.title');
-
-    if (handle === null) {
-      return;
-    }
-
-    const mustFold = select(handle)
-      .classed('fold handle');
-
-    if (mustFold === true) {
-      this.fold(box, data, snippet);
-      this.save(box, data, snippet);
-    }
-  }
-
   attach(item, immediate) {
     item.style('width');
 
@@ -107,6 +75,22 @@ export class Fold extends Event {
     }
   }
 
+  handle(box, data, snippet, event) {
+    const handle = event.target.closest('.title');
+
+    if (handle === null) {
+      return;
+    }
+
+    const mustFold = select(handle)
+      .classed('fold handle');
+
+    if (mustFold === true) {
+      this.fold(box, data, snippet);
+      this.save(box, data, snippet);
+    }
+  }
+
   hide(snippets, immediate) {
     let item = null;
 
@@ -130,6 +114,22 @@ export class Fold extends Event {
     snippet
       .node()
       .classed('folded', !isFolded);
+  }
+
+  resolveAfter(box, data) {
+    const result = [];
+    let snippet = null;
+
+    for (let i = 0; i < this._args.length; i += 1) {
+      snippet = this._args[i];
+
+      this.load(box, data, snippet);
+      this.fold(box, data, snippet, true);
+
+      result[result.length] = snippet.node();
+    }
+
+    return result;
   }
 
   save(box, data, snippet) {

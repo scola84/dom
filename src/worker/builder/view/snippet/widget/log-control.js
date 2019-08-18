@@ -167,11 +167,6 @@ export class LogControl extends Widget {
     );
   }
 
-  resolveAfter(box, data) {
-    this.read(box, data);
-    this.load(box, data);
-  }
-
   handleInput(box, data) {
     this.read(box, data);
     this.save(box, data);
@@ -245,6 +240,11 @@ export class LogControl extends Widget {
         end
       }
     });
+  }
+
+  resolveAfter(box, data) {
+    this.read(box, data);
+    this.load(box, data);
   }
 
   save(box) {

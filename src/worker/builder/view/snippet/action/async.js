@@ -33,6 +33,20 @@ export class Async extends Action {
     return this.setHandler(series);
   }
 
+  asyncify(box, data, snippet) {
+    return (callback) => {
+      snippet.act((b, result) => {
+        callback(null, result);
+      });
+
+      snippet.err((b, error) => {
+        callback(error);
+      });
+
+      this.resolveValue(box, data, snippet);
+    };
+  }
+
   resolveAfter(box, data) {
     const fn = [];
 
@@ -48,19 +62,5 @@ export class Async extends Action {
         this.pass(box, results);
       }
     });
-  }
-
-  asyncify(box, data, snippet) {
-    return (callback) => {
-      snippet.act((b, result) => {
-        callback(null, result);
-      });
-
-      snippet.err((b, error) => {
-        callback(error);
-      });
-
-      this.resolveValue(box, data, snippet);
-    };
   }
 }

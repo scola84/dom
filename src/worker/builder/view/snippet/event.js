@@ -46,32 +46,6 @@ export class Event extends Action {
     return this.setDebounce(value);
   }
 
-  removeBefore() {
-    for (let i = 0; i < this._args.length; i += 1) {
-      this.unbind(this._args[i]);
-    }
-
-    this.removeOuter();
-  }
-
-  resolveAfter() {
-    const result = [];
-
-    for (let i = 0; i < this._args.length; i += 1) {
-      result[result.length] = this._args[i].node();
-    }
-
-    return result;
-  }
-
-  resolveInner(box, data) {
-    for (let i = 0; i < this._args.length; i += 1) {
-      this.bind(box, data, this._args[i]);
-    }
-
-    return this.resolveAfter(box, data);
-  }
-
   bind(box, data, snippet) {
     const node = this.resolveValue(box, data, snippet);
 
@@ -96,6 +70,32 @@ export class Event extends Action {
 
   handleBefore(box, data, snippet, newEvent) {
     this.handle(box, data, snippet, newEvent);
+  }
+
+  removeBefore() {
+    for (let i = 0; i < this._args.length; i += 1) {
+      this.unbind(this._args[i]);
+    }
+
+    this.removeOuter();
+  }
+
+  resolveAfter() {
+    const result = [];
+
+    for (let i = 0; i < this._args.length; i += 1) {
+      result[result.length] = this._args[i].node();
+    }
+
+    return result;
+  }
+
+  resolveInner(box, data) {
+    for (let i = 0; i < this._args.length; i += 1) {
+      this.bind(box, data, this._args[i]);
+    }
+
+    return this.resolveAfter(box, data);
   }
 
   unbind(snippet) {

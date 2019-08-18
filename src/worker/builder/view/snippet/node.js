@@ -147,16 +147,6 @@ export class Node extends Snippet {
     this._node = null;
   }
 
-  wrapNode(name) {
-    const node = this._node.node();
-    const wrapper = document.createElement(name);
-
-    node.parentNode.insertBefore(wrapper, node);
-    wrapper.appendChild(node);
-
-    return select(wrapper);
-  }
-
   removeAfter() {
     this.removeNode();
   }
@@ -211,5 +201,15 @@ export class Node extends Snippet {
     for (let i = 0; i < this._transform.length; i += 1) {
       this._transform[i](box, data, node);
     }
+  }
+
+  wrapNode(name) {
+    const node = this._node.node();
+    const wrapper = document.createElement(name);
+
+    node.parentNode.insertBefore(wrapper, node);
+    wrapper.appendChild(node);
+
+    return select(wrapper);
   }
 }
