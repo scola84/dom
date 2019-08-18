@@ -8,9 +8,9 @@
   "main": "./dist/dom.cjs.js",
   "module": "./index.js",
   "devDependencies": {
-    "rollup": "^1.17.0",
+    "rollup": "^1.19.4",
     "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-css-only": "^1.0.0",
     "rollup-plugin-ignore": "^1.0.5",
     "rollup-plugin-json": "^4.0.0",
@@ -28,13 +28,13 @@
     "es7-shim": "^6.0.0",
     "fastclick": "^1.0.6",
     "iban": "0.0.12",
-    "ionicons": "^4.6.1",
-    "libphonenumber-js": "^1.7.20",
-    "lodash-es": "^4.17.14",
-    "luxon": "^1.17.1",
+    "ionicons": "^4.6.2",
+    "libphonenumber-js": "^1.7.22",
+    "lodash-es": "^4.17.15",
+    "luxon": "^1.17.2",
     "marked": "^0.7.0",
-    "postal-codes-js": "^2.0.2",
-    "qs": "^6.7.0",
+    "postal-codes-js": "^2.1.0",
+    "qs": "^6.8.0",
     "sprintf-js": "^1.1.2"
   }
 }
