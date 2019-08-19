@@ -1,4 +1,4 @@
-import { select } from 'd3';
+import { select } from 'd3-selection';
 import { Input } from '../input';
 
 export class Checkbox extends Input {

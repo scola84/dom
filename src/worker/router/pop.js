@@ -1,4 +1,4 @@
-import { event, select } from 'd3';
+import { event, select } from 'd3-selection';
 import { ViewRouter } from './view';
 
 export class PopRouter extends ViewRouter {

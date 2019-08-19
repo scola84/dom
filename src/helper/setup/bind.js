@@ -1,4 +1,4 @@
-import { select, event } from 'd3';
+import { select, event } from 'd3-selection';
 import fastclick from 'fastclick';
 
 export function bind() {

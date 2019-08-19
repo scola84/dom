@@ -1,7 +1,7 @@
+import { vsprintf } from '@scola/worker';
 import get from 'lodash-es/get';
 import merge from 'lodash-es/merge';
 import { Snippet } from '../snippet';
-import { vsprintf } from '../../../../../helper';
 
 const regexpBase = '\\{([^}]+)\\}';
 const regexpGlobal = new RegExp(regexpBase, 'g');

@@ -1,4 +1,4 @@
-import { select } from 'd3';
+import { select } from 'd3-selection';
 import { DateTime as Luxon } from 'luxon';
 import { DateTime } from './datetime';
 

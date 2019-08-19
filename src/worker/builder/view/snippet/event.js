@@ -1,4 +1,4 @@
-import { event } from 'd3';
+import { event } from 'd3-selection';
 import debounce from 'lodash-es/debounce';
 import { Action } from './action';
 

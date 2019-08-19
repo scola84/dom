@@ -1,4 +1,4 @@
-import { select, selectAll } from 'd3';
+import { select, selectAll } from 'd3-selection';
 import { Node } from './node';
 
 export class Parent extends Node {

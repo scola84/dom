@@ -1,4 +1,4 @@
-import { select, selectAll } from 'd3';
+import { select, selectAll } from 'd3-selection';
 import { Click } from './click';
 
 export class Tab extends Click {

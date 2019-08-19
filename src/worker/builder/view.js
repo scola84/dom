@@ -1,5 +1,5 @@
 import { Builder } from '@scola/worker';
-import { select } from 'd3';
+import { select } from 'd3-selection';
 import * as map from './view/map';
 
 export class ViewBuilder extends Builder {

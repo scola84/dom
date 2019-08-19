@@ -1,4 +1,4 @@
-import { Dummy } from '../../../../../object';
+import { Dummy } from '../../../../../helper';
 import { Node } from '../node';
 
 export class Fragment extends Node {

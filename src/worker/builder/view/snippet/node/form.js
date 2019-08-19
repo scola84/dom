@@ -1,4 +1,4 @@
-import { select } from 'd3';
+import { select } from 'd3-selection';
 import { Node } from '../node';
 
 export class Form extends Node {

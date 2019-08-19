@@ -1,4 +1,4 @@
-import { event, select } from 'd3';
+import { event, select } from 'd3-selection';
 import { Axis } from './axis';
 import { Parent } from '../parent';
 import { map } from './plot/';

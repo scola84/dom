@@ -1,4 +1,4 @@
-import { event, select } from 'd3';
+import { event, select } from 'd3-selection';
 import { Node } from '../node';
 
 export class Button extends Node {

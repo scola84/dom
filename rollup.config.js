@@ -21,11 +21,7 @@ const plugins = [
     }
   }),
   json(),
-  buble({
-    transforms: {
-      dangerousForOf: true
-    }
-  })
+  buble()
 ];
 
 const external = [
