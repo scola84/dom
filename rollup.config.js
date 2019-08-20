@@ -31,13 +31,13 @@ const plugins = [
 const external = [
   '@scola/http',
   '@scola/worker',
-  'process'
+  'postal-codes-js'
 ];
 
 const globals = {
   '@scola/http': 'scola.http',
   '@scola/worker': 'scola.worker',
-  'process': 'process'
+  'postal-codes-js': 'postalCodesJs'
 };
 
 export default [{
