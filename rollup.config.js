@@ -31,14 +31,12 @@ const plugins = [
 const external = [
   '@scola/http',
   '@scola/worker',
-  'postal-codes-js',
   'process'
 ];
 
 const globals = {
   '@scola/http': 'scola.http',
   '@scola/worker': 'scola.worker',
-  'postal-codes-js': 'postalCodesJs',
   'process': 'process'
 };
 
@@ -63,11 +61,11 @@ export default [{
   },
   plugins: [
     ignore([
-      'fastclick',
       'dom-shims',
       'es5-shim',
       'es6-shim',
-      'es6-symbol/implement'
+      'es6-symbol/implement',
+      'fastclick'
     ]),
     ...plugins
   ]
