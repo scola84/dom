@@ -18,8 +18,8 @@
     "rollup-plugin-node-resolve": "^5.2.0"
   },
   "dependencies": {
-    "async": "^2.6.3",
-    "d3": "^5.9.7",
+    "async": "2.6.3",
+    "d3-selection": "^1.4.0",
     "dom-shims": "^0.1.4",
     "element-resize-detector": "^1.1.15",
     "es5-shim": "^4.5.13",
@@ -32,7 +32,6 @@
     "libphonenumber-js": "^1.7.22",
     "lodash-es": "^4.17.15",
     "luxon": "^1.17.2",
-    "marked": "^0.7.0",
     "postal-codes-js": "^2.1.0",
     "qs": "^6.8.0",
     "sprintf-js": "^1.1.2"

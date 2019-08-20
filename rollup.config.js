@@ -16,12 +16,16 @@ const plugins = [
   css({
     output: (styles) => {
       writeFileSync('dist/dom.css', styles.replace(
-        /\.\.\//g, 'https://unpkg.com/ionicons@4.5.6/dist/'
+        /\.\.\//g, 'https://unpkg.com/ionicons@4.6.2/dist/'
       ));
     }
   }),
   json(),
-  buble()
+  buble({
+    transforms: {
+      dangerousForOf: true
+    }
+  })
 ];
 
 const external = [
