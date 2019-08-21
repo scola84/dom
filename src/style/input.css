@@ -81,11 +81,13 @@
 .input.select {
   align-items: center;
   display: flex;
+  flex: 1;
 }
 
 .input.select select {
   background: none;
   border: none;
+  flex: 1;
   margin: 0;
   padding-right: 1em;
   text-overflow: ellipsis;
