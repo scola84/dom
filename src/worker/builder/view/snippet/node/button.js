@@ -32,13 +32,13 @@ export class Button extends Node {
     return this._form;
   }
 
-  setForm(value = false) {
+  setForm(value = null) {
     this._form = value;
     return this;
   }
 
-  form() {
-    return this.setForm(true);
+  form(value) {
+    return this.setForm(value);
   }
 
   getMenu() {
@@ -63,30 +63,26 @@ export class Button extends Node {
   }
 
   resolveAfter(box, data) {
-    if (this._form === true) {
+    if (this._form) {
       return this.resolveForm(box, data);
     }
 
-    if (this._menu === true) {
-      return this.resolveMenu(box);
+    if (this._menu) {
+      return this.resolveMenu(box, data);
     }
 
     return this._node;
   }
 
   resolveForm() {
-    const id = this._node.attr('form');
-
-    this._node.attr('type', 'submit');
+    this._node
+      .attr('type', 'submit')
+      .attr('form', this._form);
 
     this._node.on('click.scola-button', () => {
       event.preventDefault();
 
-      const form = id ?
-        select('#' + id) :
-        select(this._node.node().closest('.panel')).select('form');
-
-      form.dispatch('submit', {
+      select('#' + this._form).dispatch('submit', {
         cancelable: true
       });
     });
