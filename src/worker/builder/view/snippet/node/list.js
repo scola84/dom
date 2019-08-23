@@ -1,102 +1,102 @@
-import { Parent } from '../parent';
+import { Parent } from '../parent'
 
 export class List extends Parent {
-  constructor(options = {}) {
-    super(options);
+  constructor (options = {}) {
+    super(options)
 
-    this._empty = null;
-    this.setEmpty(options.empty);
+    this._empty = null
+    this.setEmpty(options.empty)
   }
 
-  getOptions() {
+  getOptions () {
     return Object.assign(super.getOptions(), {
       empty: this._empty
-    });
+    })
   }
 
-  getEmpty() {
-    return this._empty;
+  getEmpty () {
+    return this._empty
   }
 
-  setEmpty(value = null) {
+  setEmpty (value = null) {
     if (value) {
       this._empty = value
         .setParent(this)
-        .class('empty');
+        .class('empty')
     }
 
-    return this;
+    return this
   }
 
-  empty(value) {
-    return this.setEmpty(value);
+  empty (value) {
+    return this.setEmpty(value)
   }
 
-  clearList(box) {
-    const options = box.list || {};
+  clearList (box) {
+    const options = box.list || {}
 
-    options.offset = 0;
-    options.total = 0;
+    options.offset = 0
+    options.total = 0
 
-    this.removeChildren();
+    this.removeChildren()
   }
 
-  prepareList(box, data) {
-    const options = box.list || {};
+  prepareList (box, data) {
+    const options = box.list || {}
 
     if (options.append !== true) {
-      this.clearList(box);
+      this.clearList(box)
     }
 
     if (options.offset === 0 && options.count > 0) {
-      this._node.node().parentNode.scrollTop = 0;
+      this._node.node().parentNode.scrollTop = 0
     }
 
-    options.total += data.length;
+    options.total += data.length
 
-    this.removeEmpty();
+    this.removeEmpty()
   }
 
-  removeEmpty() {
-    const empty = this._node.select('.empty').node();
+  removeEmpty () {
+    const empty = this._node.select('.empty').node()
 
     if (empty) {
-      empty.snippet.remove();
+      empty.snippet.remove()
     }
   }
 
-  removeInner() {
-    this.removeChildren();
-    this.removeAfter();
+  removeInner () {
+    this.removeChildren()
+    this.removeAfter()
   }
 
-  resolveInner(box, data) {
-    data = this._filter ? this._filter(box, data) : data;
-    data = Array.isArray(data) ? data : [];
+  resolveInner (box, data) {
+    data = this._filter ? this._filter(box, data) : data
+    data = Array.isArray(data) ? data : []
 
     const [
       item,
       ...extra
-    ] = this._args;
+    ] = this._args
 
-    this.prepareList(box, data);
+    this.prepareList(box, data)
 
     for (let i = 0; i < data.length; i += 1) {
-      this.appendChild(box, data[i], item);
+      this.appendChild(box, data[i], item)
     }
 
     const size = this._node
       .select('.item:not(.out)')
-      .size();
+      .size()
 
     if (data.length === 0 && size === 0) {
-      this.appendChild(box, data, this._empty);
+      this.appendChild(box, data, this._empty)
     }
 
     for (let i = 0; i < extra.length; i += 1) {
-      this.appendChild(box, data, extra[i]);
+      this.appendChild(box, data, extra[i])
     }
 
-    return this.resolveAfter(box, data);
+    return this.resolveAfter(box, data)
   }
 }

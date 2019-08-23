@@ -11,27 +11,27 @@
 
 /* Body */
 
-.group > .body {
+.group>.body {
   overflow: hidden;
 }
 
-.group > .body {
+.group>.body {
   border-top: 1px solid lightgrey;
 }
 
-.group > .body:not(:empty) {
+.group>.body:not(:empty) {
   border-bottom: 1px solid lightgrey;
 }
 
 @media not all and (max-width: 48em) {
-  .panel:not(.outset-x) .group > .body {
+  .panel:not(.outset-x) .group>.body {
     border: none;
   }
 }
 
 /* Comment */
 
-.group > .comment {
+.group>.comment {
   color: darkgrey;
   display: flex;
   font-size: 0.9em;
@@ -41,13 +41,13 @@
 
 /* Hint */
 
-.group > .hint:not(:empty) {
+.group>.hint:not(:empty) {
   padding: 0 1.111em 0.555em;
 }
 
 /* Title */
 
-.group > .title:not(:empty) {
+.group>.title:not(:empty) {
   color: darkgrey;
   display: flex;
   font-size: 0.9em;
@@ -57,16 +57,16 @@
 }
 
 @media not all and (max-width: 48em) {
-  .panel:not(.outset-x) .group > .title {
+  .panel:not(.outset-x) .group>.title {
     pointer-events: none;
   }
 }
 
-.group > .title:not(:empty) * {
+.group>.title:not(:empty) * {
   font-size: inherit;
 }
 
-.group > .title.fold:after {
+.group>.title.fold:after {
   font-family: Ionicons;
   font-size: 1.25em;
   margin-left: auto;
@@ -74,35 +74,35 @@
   width: 0.5em;
 }
 
-*[dir=rtl] .group > .title.fold:after {
+*[dir="rtl"] .group>.title.fold:after {
   margin-left: 0;
   margin-right: auto;
 }
 
-.group > .title.fold.all:after {
-  content: '\f3d0';
+.group>.title.fold.all:after {
+  content: "\f3d0";
 }
 
-.group.folded > .title.fold.all:after {
+.group.folded>.title.fold.all:after {
   transform: rotate(-90deg);
 }
 
 @media not all and (max-width: 48em) {
-  .panel:not(.outset-x) .group > .title.fold.all:after {
-    content: '';
+  .panel:not(.outset-x) .group>.title.fold.all:after {
+    content: "";
   }
 }
 
-.group > .title.fold.some:after {
-  content: '\f1fc';
+.group>.title.fold.some:after {
+  content: "\f1fc";
 }
 
-.group.folded > .title.fold.some:after {
-  content: '\f102';
+.group.folded>.title.fold.some:after {
+  content: "\f102";
 }
 
 @media not all and (max-width: 48em) {
-  .panel:not(.outset-x) .group > .title.fold.some:after {
-    content: '';
+  .panel:not(.outset-x) .group>.title.fold.some:after {
+    content: "";
   }
 }

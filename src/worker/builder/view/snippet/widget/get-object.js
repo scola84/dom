@@ -1,12 +1,12 @@
-import { Widget } from '../widget';
+import { Widget } from '../widget'
 
 export class GetObject extends Widget {
-  buildWidget(args) {
-    const b = this._builder;
+  buildWidget (args) {
+    const b = this._builder
 
     const resource = '/api' + this._name.map((name) => {
-      return `/${name}/%(${name}_id)s`;
-    }).join('');
+      return `/${name}/%(${name}_id)s`
+    }).join('')
 
     return b.request().resource(
       `GET ${resource}`
@@ -16,6 +16,6 @@ export class GetObject extends Widget {
       ...args
     ).err(
       b.selector('.message')
-    );
+    )
   }
 }

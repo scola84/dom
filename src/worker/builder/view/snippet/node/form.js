@@ -1,22 +1,22 @@
-import { select } from 'd3-selection';
-import { Node } from '../node';
+import { select } from 'd3-selection'
+import { Node } from '../node'
 
 export class Form extends Node {
-  constructor(options) {
-    super(options);
+  constructor (options) {
+    super(options)
 
     this
       .attributes({
         novalidate: 'novalidate'
       })
-      .name('form');
+      .name('form')
   }
 
-  resolveAfter() {
+  resolveAfter () {
     const label = this._node
-      .selectAll('.label:not(:last-child)');
+      .selectAll('.label:not(:last-child)')
 
-    let max = 0;
+    let max = 0
 
     label.each((datum, index, nodes) => {
       max = Math.max(
@@ -26,13 +26,13 @@ export class Form extends Node {
             select(nodes[index]).style('width')
           )
         )
-      );
-    });
+      )
+    })
 
     this._node
       .selectAll('.label:not(:last-child)')
-      .style('width', max + 'px');
+      .style('width', max + 'px')
 
-    return this._node;
+    return this._node
   }
 }

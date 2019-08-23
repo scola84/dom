@@ -1,20 +1,20 @@
-import { Dummy } from '../../../../../helper';
-import { Node } from '../node';
+import { Dummy } from '../../../../../helper'
+import { Node } from '../node'
 
 export class Fragment extends Node {
-  node() {
-    return this._parent.node();
+  node () {
+    return this._parent.node()
   }
 
-  createNode() {
-    this.setNode(new Dummy());
+  createNode () {
+    this.setNode(new Dummy())
   }
 
-  removeNode() {
+  removeNode () {
     if (this._node === null) {
-      return;
+      return
     }
 
-    this._node = null;
+    this._node = null
   }
 }

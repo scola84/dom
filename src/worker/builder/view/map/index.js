@@ -1,9 +1,9 @@
-import camel from 'lodash-es/camelCase';
-import { Node } from '../snippet/node';
+import camel from 'lodash-es/camelCase'
+import { Node } from '../snippet/node'
 
-import clsBase from './cls';
-import domBase from './dom';
-import snippetBase from './snippet';
+import clsBase from './cls'
+import domBase from './dom'
+import snippetBase from './snippet'
 
 const cls = clsBase.reduce((object, name) => {
   return Object.assign(object, {
@@ -14,8 +14,8 @@ const cls = clsBase.reduce((object, name) => {
         name: 'div'
       }
     }
-  });
-}, {});
+  })
+}, {})
 
 const dom = domBase.reduce((object, name) => {
   return Object.assign(object, {
@@ -25,8 +25,8 @@ const dom = domBase.reduce((object, name) => {
         name
       }
     }
-  });
-}, {});
+  })
+}, {})
 
 const snippet = Object.keys(snippetBase).reduce((master, group) => {
   return Object.keys(snippetBase[group]).reduce((object, name) => {
@@ -37,12 +37,12 @@ const snippet = Object.keys(snippetBase).reduce((master, group) => {
           class: camel(name)
         }
       }
-    });
-  }, master);
-}, {});
+    })
+  }, master)
+}, {})
 
 export {
   snippet,
   cls,
   dom
-};
+}

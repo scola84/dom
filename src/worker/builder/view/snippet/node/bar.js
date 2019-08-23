@@ -1,26 +1,26 @@
-import { Node } from '../node';
-const classes = ['right', 'center', 'left'];
+import { Node } from '../node'
+const classes = ['right', 'center', 'left']
 
 export class Bar extends Node {
-  checkChild(classed, before) {
+  checkChild (classed, before) {
     const size = this._node
       .select('.' + classed)
-      .size();
+      .size()
 
     if (size > 0) {
-      return;
+      return
     }
 
     this._node
       .insert('div', '.' + before)
-      .classed(classed, true);
+      .classed(classed, true)
   }
 
-  resolveAfter() {
+  resolveAfter () {
     for (let i = 0; i < classes.length; i += 1) {
-      this.checkChild(classes[i], classes[i - 1]);
+      this.checkChild(classes[i], classes[i - 1])
     }
 
-    return this._node;
+    return this._node
   }
 }

@@ -14,19 +14,19 @@
   font-size: 1.75em !important;
 }
 
-*[dir=rtl] .ion-ios-arrow-back,
-*[dir=rtl] .ion-ios-arrow-forward {
+*[dir="rtl"] .ion-ios-arrow-back,
+*[dir="rtl"] .ion-ios-arrow-forward {
   transform: rotate(180deg);
 }
 
-.item > .button.add {
+.item>.buttoyn.add {
   color: green;
 }
 
-.item > .button.edit {
+.item>.button.edit {
   color: black;
 }
 
-.item > .button.delete {
+.item>.button.delete {
   color: red;
 }

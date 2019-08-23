@@ -1,2 +1,2 @@
-export * from './object';
-export * from './setup';
+export * from './object'
+export * from './setup'

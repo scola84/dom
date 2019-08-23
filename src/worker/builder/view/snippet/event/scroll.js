@@ -1,62 +1,62 @@
-import defaults from 'lodash-es/defaultsDeep';
-import { Event } from '../event';
+import defaults from 'lodash-es/defaultsDeep'
+import { Event } from '../event'
 
 export class Scroll extends Event {
-  constructor(options = {}) {
-    super(options);
+  constructor (options = {}) {
+    super(options)
 
-    this._height = null;
-    this.setHeight(options.height);
+    this._height = null
+    this.setHeight(options.height)
 
     this
       .name('scroll')
-      .debounce(250);
+      .debounce(250)
   }
 
-  getOptions() {
+  getOptions () {
     return Object.assign(super.getOptions(), {
       height: this._height
-    });
+    })
   }
 
-  getHeight() {
-    return this._height;
+  getHeight () {
+    return this._height
   }
 
-  setHeight(value = 48) {
-    this._height = value;
-    return this;
+  setHeight (value = 48) {
+    this._height = value
+    return this
   }
 
-  height(value) {
-    return this.setHeight(value);
+  height (value) {
+    return this.setHeight(value)
   }
 
-  handle(box, data, snippet) {
+  handle (box, data, snippet) {
     if (box.list.total % box.list.count > 0) {
-      return;
+      return
     }
 
-    const node = snippet.node().node();
-    const top = box.list.height + node.scrollTop;
-    const threshold = node.scrollHeight - (box.list.height / 4 * 2);
+    const node = snippet.node().node()
+    const top = box.list.height + node.scrollTop
+    const threshold = node.scrollHeight - (box.list.height / 4 * 2)
 
     if (top < threshold) {
-      return;
+      return
     }
 
-    box.list.append = true;
-    box.list.offset += box.list.count;
+    box.list.append = true
+    box.list.offset += box.list.count
 
-    this.pass(box, data);
+    this.pass(box, data)
   }
 
-  resolveBefore(box, data) {
+  resolveBefore (box, data) {
     const height = parseFloat(
       this._parent.node().style('height')
-    );
+    )
 
-    const count = Math.round(height / this._height) * 2;
+    const count = Math.round(height / this._height) * 2
 
     defaults(box, {
       list: {
@@ -65,8 +65,8 @@ export class Scroll extends Event {
         offset: 0,
         total: 0
       }
-    });
+    })
 
-    return this.resolveOuter(box, data);
+    return this.resolveOuter(box, data)
   }
 }

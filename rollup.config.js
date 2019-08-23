@@ -1,44 +1,54 @@
-import { writeFileSync } from 'fs';
-import buble from 'rollup-plugin-buble';
-import builtins from 'rollup-plugin-node-builtins';
-import commonjs from 'rollup-plugin-commonjs';
-import css from 'rollup-plugin-css-only';
-import ignore from 'rollup-plugin-ignore';
-import json from 'rollup-plugin-json';
-import resolve from 'rollup-plugin-node-resolve';
+import { writeFileSync } from 'fs'
+import babel from 'rollup-plugin-babel'
+import builtins from 'rollup-plugin-node-builtins'
+import commonjs from 'rollup-plugin-commonjs'
+import css from 'rollup-plugin-css-only'
+import ignore from 'rollup-plugin-ignore'
+import json from 'rollup-plugin-json'
+import resolve from 'rollup-plugin-node-resolve'
 
-const input = './index.js';
+const external = [
+  '@scola/http',
+  '@scola/worker',
+  'postal-codes-js'
+]
+
+const globals = {
+  '@scola/http': 'scola.http',
+  '@scola/worker': 'scola.worker',
+  'postal-codes-js': 'postalCodesJs'
+}
+
+const input = './index.js'
 
 const plugins = [
   resolve(),
   commonjs(),
   builtins(),
   css({
+    include: [new RegExp('.css')],
     output: (styles) => {
-      writeFileSync('dist/dom.css', styles.replace(
-        /\.\.\//g, 'https://unpkg.com/ionicons@4.6.2/dist/'
-      ));
+      writeFileSync(
+        'dist/dom.css',
+        styles.replace(
+          /\.\.\//g,
+          'https://unpkg.com/ionicons@4.6.3/dist/'
+        )
+      )
     }
   }),
   json(),
-  buble({
-    transforms: {
-      dangerousForOf: true
-    }
+  babel({
+    plugins: [
+      ['@babel/plugin-transform-runtime', {
+        helpers: false
+      }]
+    ],
+    presets: [
+      ['@babel/preset-env']
+    ]
   })
-];
-
-const external = [
-  '@scola/http',
-  '@scola/worker',
-  'postal-codes-js'
-];
-
-const globals = {
-  '@scola/http': 'scola.http',
-  '@scola/worker': 'scola.worker',
-  'postal-codes-js': 'postalCodesJs'
-};
+]
 
 export default [{
   input,
@@ -47,8 +57,8 @@ export default [{
     extend: true,
     file: 'dist/dom.umd.js',
     format: 'umd',
-    name: 'scola.dom',
-    globals
+    globals,
+    name: 'scola.dom'
   },
   plugins
 }, {
@@ -62,11 +72,8 @@ export default [{
   plugins: [
     ignore([
       'dom-shims',
-      'es5-shim',
-      'es6-shim',
-      'es6-symbol/implement',
       'fastclick'
     ]),
     ...plugins
   ]
-}];
+}]

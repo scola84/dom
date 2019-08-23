@@ -1,140 +1,140 @@
-import defaults from 'lodash-es/defaultsDeep';
-import { Node } from '../node';
+import defaults from 'lodash-es/defaultsDeep'
+import { Node } from '../node'
 
 export class Search extends Node {
-  constructor(options = {}) {
-    super(options);
+  constructor (options = {}) {
+    super(options)
 
-    this._placeholder = null;
-    this._wildcard = null;
+    this._placeholder = null
+    this._wildcard = null
 
-    this.setPlaceholder(options.placeholder);
-    this.setWildcard(options.wildcard);
+    this.setPlaceholder(options.placeholder)
+    this.setWildcard(options.wildcard)
 
-    this.class('transition');
+    this.class('transition')
   }
 
-  getOptions() {
+  getOptions () {
     return Object.assign(super.getOptions(), {
       placeholder: this._placeholder,
       wildcard: this._wildcard
-    });
+    })
   }
 
-  getPlaceholder() {
-    return this._placeholder;
+  getPlaceholder () {
+    return this._placeholder
   }
 
-  setPlaceholder(value = null) {
-    this._placeholder = value;
-    return this;
+  setPlaceholder (value = null) {
+    this._placeholder = value
+    return this
   }
 
-  placeholder(value) {
-    return this.setPlaceholder(value);
+  placeholder (value) {
+    return this.setPlaceholder(value)
   }
 
-  getWildcard() {
-    return this._wildcard;
+  getWildcard () {
+    return this._wildcard
   }
 
-  setWildcard(value = '*') {
-    this._wildcard = value;
-    return this;
+  setWildcard (value = '*') {
+    this._wildcard = value
+    return this
   }
 
-  wildcard(value) {
-    return this.setWildcard(value);
+  wildcard (value) {
+    return this.setWildcard(value)
   }
 
-  createNode() {
-    super.createNode();
+  createNode () {
+    super.createNode()
 
-    const placeholder = this.resolveValue(null, null, this._placeholder);
+    const placeholder = this.resolveValue(null, null, this._placeholder)
 
     this._node
       .append('input')
       .attr('autocomplete', 'on')
       .attr('name', 'search')
       .attr('type', 'search')
-      .attr('placeholder', placeholder);
+      .attr('placeholder', placeholder)
   }
 
-  formatSearch(value) {
-    const parts = value.match(/[^"\s]+|"[^"]+"/g) || [];
+  formatSearch (value) {
+    const parts = value.match(/[^"\s]+|"[^"]+"/g) || []
 
-    let match = null;
-    let part = null;
+    let match = null
+    let part = null
 
     for (let i = 0; i < parts.length; i += 1) {
-      part = parts[i];
-      match = part.match(/".+"/);
+      part = parts[i]
+      match = part.match(/".+"/)
 
       if (match === null) {
-        parts[i] = this._wildcard + part + this._wildcard;
+        parts[i] = this._wildcard + part + this._wildcard
       }
     }
 
     if (parts.length > 0) {
-      return parts.join(' ').trim();
+      return parts.join(' ').trim()
     }
 
-    return void 0;
+    return undefined
   }
 
-  resolveBefore(box, data) {
+  resolveBefore (box, data) {
     if (typeof box.input !== 'undefined') {
-      return this.resolveInput(box, data);
+      return this.resolveInput(box, data)
     }
 
     if (typeof box.toggle !== 'undefined') {
-      return this.resolveToggle(box, data);
+      return this.resolveToggle(box, data)
     }
 
-    return this.resolveSearch(box, data);
+    return this.resolveSearch(box, data)
   }
 
-  resolveInput(box) {
-    this._storage.setItem('search-' + this._id, box.input);
+  resolveInput (box) {
+    this._storage.setItem('search-' + this._id, box.input)
 
-    box.list.search = this.formatSearch(box.input);
+    box.list.search = this.formatSearch(box.input)
 
-    delete box.input;
-    delete box.list.append;
+    delete box.input
+    delete box.list.append
 
-    return this._node;
+    return this._node
   }
 
-  resolveSearch(box, data) {
-    const value = this._storage.getItem('search-' + this._id);
+  resolveSearch (box, data) {
+    const value = this._storage.getItem('search-' + this._id)
 
     if (value) {
-      this._node.classed('in', true);
-      this._node.select('input').attr('value', value);
+      this._node.classed('in', true)
+      this._node.select('input').attr('value', value)
 
       defaults(box, {
         list: {
           search: this.formatSearch(value)
         }
-      });
+      })
     }
 
-    return this.resolveOuter(box, data);
+    return this.resolveOuter(box, data)
   }
 
-  resolveToggle(box) {
-    const mustIn = !this._node.classed('in');
+  resolveToggle (box) {
+    const mustIn = !this._node.classed('in')
 
     if (mustIn) {
       this._node
         .select('input')
         .node()
-        .focus();
+        .focus()
     }
 
-    this._node.classed('in', mustIn);
+    this._node.classed('in', mustIn)
 
-    delete box.toggle;
-    return this._node;
+    delete box.toggle
+    return this._node
   }
 }

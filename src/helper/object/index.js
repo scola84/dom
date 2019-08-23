@@ -1,2 +1,2 @@
-export * from './dummy';
-export * from './route';
+export * from './dummy'
+export * from './route'

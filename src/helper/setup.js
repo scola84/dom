@@ -2,10 +2,10 @@ import {
   bind,
   shim,
   worker
-} from './setup/';
+} from './setup/'
 
-export function setup() {
-  bind();
-  shim();
-  worker();
+export function setup () {
+  bind()
+  shim()
+  worker()
 }

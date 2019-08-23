@@ -1,66 +1,66 @@
-import { Input } from '../input';
+import { Input } from '../input'
 
 export class Textarea extends Input {
-  constructor(options = {}) {
-    super(options);
+  constructor (options = {}) {
+    super(options)
 
-    this._grow = null;
-    this.setGrow(options.grow);
+    this._grow = null
+    this.setGrow(options.grow)
 
-    this.name('textarea');
+    this.name('textarea')
   }
 
-  getOptions() {
+  getOptions () {
     return Object.assign(super.getOptions(), {
       grow: this._grow
-    });
+    })
   }
 
-  getGrow() {
-    return this._grow;
+  getGrow () {
+    return this._grow
   }
 
-  setGrow(value = true) {
-    this._grow = value;
-    return this;
+  setGrow (value = true) {
+    this._grow = value
+    return this
   }
 
-  grow(value) {
-    return this.setGrow(value);
+  grow (value) {
+    return this.setGrow(value)
   }
 
-  cleanAfter(box, data, name, value) {
-    this.setValue(data, name, String(value).trim());
+  cleanAfter (box, data, name, value) {
+    this.setValue(data, name, String(value).trim())
   }
 
-  removeBefore() {
-    this._node.on('.scola-textarea', null);
-    this.removeOuter();
+  removeBefore () {
+    this._node.on('.scola-textarea', null)
+    this.removeOuter()
   }
 
-  resolveAfter() {
+  resolveAfter () {
     if (this._grow) {
-      this.resolveGrow();
+      this.resolveGrow()
     }
 
-    return this._node;
+    return this._node
   }
 
-  resolveGrow() {
+  resolveGrow () {
     const wrapper = this
       .wrapNode('div')
-      .classed('input textarea', true);
+      .classed('input textarea', true)
 
-    const pre = wrapper.append('pre');
-    const span = pre.append('span');
+    const pre = wrapper.append('pre')
+    const span = pre.append('span')
 
-    pre.append('br');
+    pre.append('br')
 
     const style = window
-      .getComputedStyle(this._node.node());
+      .getComputedStyle(this._node.node())
 
     wrapper
-      .style('display', 'flex');
+      .style('display', 'flex')
 
     pre
       .style('border', '1px solid black')
@@ -69,7 +69,7 @@ export class Textarea extends Input {
       .style('top', '-100%')
       .style('visibility', 'hidden')
       .style('white-space', 'pre-wrap')
-      .style('word-wrap', 'break-word');
+      .style('word-wrap', 'break-word')
 
     this._node
       .style('box-sizing', 'content-box')
@@ -92,12 +92,12 @@ export class Textarea extends Input {
       'padding-top',
       'width'
     ].forEach((name) => {
-      pre.style(name, style[name]);
-    });
+      pre.style(name, style[name])
+    })
 
     this._node.on('input.scola-textarea', () => {
-      span.text(this._node.property('value'));
-      this._node.style('height', pre.style('height'));
-    });
+      span.text(this._node.property('value'))
+      this._node.style('height', pre.style('height'))
+    })
   }
 }

@@ -1,6 +1,6 @@
 .pop {
   align-items: center;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
   display: none;
   justify-content: center;
@@ -20,7 +20,7 @@
   z-index: 3;
 }
 
-.pop > .dialog {
+.pop>.dialog {
   border-radius: 1em;
   height: 34em;
   overflow: hidden;
@@ -28,16 +28,16 @@
   width: 34em;
 }
 
-.pop > .dialog.move {
+.pop>.dialog.move {
   top: 100%;
 }
 
-.pop > .dialog.move.in {
+.pop>.dialog.move.in {
   top: 0;
 }
 
 @media not all and (min-width: 48em) {
-  .pop > .dialog {
+  .pop>.dialog {
     border-radius: 0;
     height: 100%;
     width: 100%;
@@ -45,7 +45,7 @@
 }
 
 @media not all and (min-height: 34em) {
-  .pop > .dialog {
+  .pop>.dialog {
     border-radius: 0;
     height: 100%;
     width: 100%;

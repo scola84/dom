@@ -1,30 +1,30 @@
-import { Input } from '../input';
-const regexp = /^[a-z0-9\-()]+$/i;
+import { Input } from '../input'
+const regexp = /^[a-z0-9\-()]+$/i
 
 export class Email extends Input {
-  constructor(options) {
-    super(options);
+  constructor (options) {
+    super(options)
 
     this.attributes({
       type: 'email'
-    });
+    })
   }
 
-  checkDomain(domain) {
+  checkDomain (domain) {
     return domain.split('.').every((part) => {
       return regexp.test(part) === true &&
         part[0] !== '-' &&
-        part[part.length - 1] !== '-';
-    });
+        part[part.length - 1] !== '-'
+    })
   }
 
-  cleanAfter(box, data, name, value) {
-    this.setValue(data, name, String(value).trim().toLowerCase());
+  cleanAfter (box, data, name, value) {
+    this.setValue(data, name, String(value).trim().toLowerCase())
   }
 
-  validateAfter(box, data, error, name, value) {
+  validateAfter (box, data, error, name, value) {
     if (value.match(/\s/) !== null) {
-      return this.setError(error, name, value, 'space');
+      return this.setError(error, name, value, 'space')
     }
 
     const [
@@ -32,16 +32,16 @@ export class Email extends Input {
       domain = ''
     ] = value
       .trim()
-      .split('@');
+      .split('@')
 
     if (local.length === 0) {
-      return this.setError(error, name, value, 'local');
+      return this.setError(error, name, value, 'local')
     }
 
     if (domain.length === 0 || this.checkDomain(domain) === false) {
-      return this.setError(error, name, value, 'domain');
+      return this.setError(error, name, value, 'domain')
     }
 
-    return null;
+    return null
   }
 }

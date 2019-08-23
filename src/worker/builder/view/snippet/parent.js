@@ -1,110 +1,110 @@
-import { select, selectAll } from 'd3-selection';
-import { Node } from './node';
+import { select, selectAll } from 'd3-selection'
+import { Node } from './node'
 
 export class Parent extends Node {
-  constructor(options = {}) {
-    super(options);
+  constructor (options = {}) {
+    super(options)
 
-    this._children = null;
-    this._key = null;
+    this._children = null
+    this._key = null
 
-    this.setChildren(options.children);
-    this.setKey(options.key);
+    this.setChildren(options.children)
+    this.setKey(options.key)
   }
 
-  getOptions() {
+  getOptions () {
     return Object.assign(super.getOptions(), {
       children: this._children,
       key: this._key
-    });
+    })
   }
 
-  getChildren() {
-    return this._children;
+  getChildren () {
+    return this._children
   }
 
-  setChildren(value = new Map()) {
-    this._children = value;
-    return this;
+  setChildren (value = new Map()) {
+    this._children = value
+    return this
   }
 
-  children(value) {
-    return this.setChildren(value);
+  children (value) {
+    return this.setChildren(value)
   }
 
-  getKey() {
-    return this._key;
+  getKey () {
+    return this._key
   }
 
-  setKey(value = null) {
-    this._key = value;
-    return this;
+  setKey (value = null) {
+    this._key = value
+    return this
   }
 
-  key(value) {
-    return this.setKey(value);
+  key (value) {
+    return this.setKey(value)
   }
 
-  appendChild(box, data, snippet = null) {
+  appendChild (box, data, snippet = null) {
     if (snippet === null) {
-      return null;
+      return null
     }
 
-    let key = this._key ?
-      this._key(box, data) :
-      JSON.stringify(data);
+    let key = this._key
+      ? this._key(box, data)
+      : JSON.stringify(data)
 
-    key = key ? key : snippet.getId();
+    key = key || snippet.getId()
 
     if (this._children.has(key)) {
       return this._children
         .get(key)
-        .resolve(box, data);
+        .resolve(box, data)
     }
 
-    snippet = snippet.clone();
+    snippet = snippet.clone()
 
-    let node = snippet.resolve(box, data);
-    node = Array.isArray(node) ? node[0] : node;
+    let node = snippet.resolve(box, data)
+    node = Array.isArray(node) ? node[0] : node
 
     if (node === null) {
-      return null;
+      return null
     }
 
-    this._children.set(key, snippet);
+    this._children.set(key, snippet)
 
     const transition = select(node.node().parentNode)
-      .classed('transition');
+      .classed('transition')
 
-    node.classed('transition', transition);
-    node.style('width');
-    node.classed('in', true);
+    node.classed('transition', transition)
+    node.style('width')
+    node.classed('in', true)
 
-    return node;
+    return node
   }
 
-  removeChildren() {
-    let children = Array.from(this._node.node().childNodes);
+  removeChildren () {
+    let children = Array.from(this._node.node().childNodes)
 
     if (children.length === 0) {
-      return;
+      return
     }
 
     children = selectAll(children)
       .classed('out', true)
       .on('transitionend.scola-parent', (datum, index, nodes) => {
-        select(nodes[index]).on('.scola-parent', null);
-        nodes[index].snippet.remove();
-      });
+        select(nodes[index]).on('.scola-parent', null)
+        nodes[index].snippet.remove()
+      })
 
     const duration = parseFloat(
       children.style('transition-duration')
-    );
+    )
 
     if (duration === 0) {
-      children.dispatch('transitionend');
+      children.dispatch('transitionend')
     }
 
-    this._children.clear();
+    this._children.clear()
   }
 }

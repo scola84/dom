@@ -18,4 +18,4 @@ export default [
   'right',
   'title',
   'top'
-];
+]

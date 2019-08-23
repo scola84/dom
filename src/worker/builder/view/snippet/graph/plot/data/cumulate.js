@@ -1,28 +1,28 @@
-import { Data } from './data';
+import { Data } from './data'
 
 export class Cumulate extends Data {
-  prepareValue(result, datum) {
-    const exogenous = this._exogenous(datum);
-    const endogenous = this._endogenous(datum);
+  prepareValue (result, datum) {
+    const exogenous = this._exogenous(datum)
+    const endogenous = this._endogenous(datum)
 
     if (typeof result.data[exogenous] === 'undefined') {
-      result.data[exogenous] = [];
-      result.keys[result.keys.length] = exogenous;
-      result.type = 'cumulate';
+      result.data[exogenous] = []
+      result.keys[result.keys.length] = exogenous
+      result.type = 'cumulate'
     }
 
-    const set = result.data[exogenous];
-    const index = set.length;
-    const previousKey = result.keys[result.keys.length - 2];
-    const previous = typeof previousKey !== 'undefined' ?
-      result.data[previousKey][index] : [0, 0];
+    const set = result.data[exogenous]
+    const index = set.length
+    const previousKey = result.keys[result.keys.length - 2]
+    const previous = typeof previousKey !== 'undefined'
+      ? result.data[previousKey][index] : [0, 0]
 
     set[index] = [
       0,
       previous[1] + endogenous,
       datum
-    ];
+    ]
 
-    result.size = set.length;
+    result.size = set.length
   }
 }

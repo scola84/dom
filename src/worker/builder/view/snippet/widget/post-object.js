@@ -1,20 +1,20 @@
-import { Widget } from '../widget';
+import { Widget } from '../widget'
 
 export class PostObject extends Widget {
-  buildWidget() {
-    const b = this._builder;
+  buildWidget () {
+    const b = this._builder
 
     const [
       object,
       link
-    ] = this._name;
+    ] = this._name
 
-    let resource = `/api/${object}`;
-    let view = `view-${object}:{${object}_id}@main:clr`;
+    let resource = `/api/${object}`
+    let view = `view-${object}:{${object}_id}@main:clr`
 
     if (link) {
-      resource += `/%(${object}_id)s/${link}`;
-      view = '@main:his';
+      resource += `/%(${object}_id)s/${link}`
+      view = '@main:his'
     }
 
     return b.request().resource(
@@ -27,6 +27,6 @@ export class PostObject extends Widget {
     ).err(
       b.selector('.message'),
       b.selector('.body .hint')
-    );
+    )
   }
 }

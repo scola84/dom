@@ -1,24 +1,24 @@
-import { Input } from '../input';
+import { Input } from '../input'
 
 export class Number extends Input {
-  constructor(options) {
-    super(options);
+  constructor (options) {
+    super(options)
 
     this.attributes({
       type: 'number'
-    });
+    })
   }
 
-  validateAfter(box, data, error, name, value) {
+  validateAfter (box, data, error, name, value) {
     // https://stackoverflow.com/a/1830844
-    const isNumber = !isNaN(value - parseFloat(value));
+    const isNumber = !isNaN(value - parseFloat(value))
 
     if (isNumber === false) {
-      return this.setError(error, name, value, 'type');
+      return this.setError(error, name, value, 'type')
     }
 
-    this.setValue(data, name, parseFloat(value));
+    this.setValue(data, name, parseFloat(value))
 
-    return null;
+    return null
   }
 }

@@ -1,14 +1,14 @@
-import { Event } from '../event';
+import { Event } from '../event'
 
 export class Click extends Event {
-  constructor(options) {
-    super(options);
-    this.name('click');
+  constructor (options) {
+    super(options)
+    this.name('click')
   }
 
-  handle(box, data, snippet, event) {
+  handle (box, data, snippet, event) {
     if (event.target.closest('.click') !== null) {
-      this.pass(box, data);
+      this.pass(box, data)
     }
   }
 }

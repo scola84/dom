@@ -35,18 +35,18 @@
   }
 }
 
-.app > * {
+.app>* {
   overflow: hidden;
 }
 
-.app > .main {
+.app>.main {
   background: whitesmoke;
   flex: 1 1 auto;
   height: 100%;
   position: relative;
 }
 
-.app > .menu {
+.app>.menu {
   background: whitesmoke;
   border-right: 1px solid lightgrey;
   height: 100%;
@@ -54,41 +54,41 @@
   width: 21.333em;
 }
 
-.app > * + .menu {
+.app>*+.menu {
   border-left: 1px solid lightgrey;
 }
 
-.app > .menu + .menu {
+.app>.menu+.menu {
   display: none;
 }
 
-.outset-x .app > .menu + .menu {
+.outset-x .app>.menu+.menu {
   display: initial;
 }
 
-*[dir=rtl] .app > .menu {
+*[dir="rtl"] .app>.menu {
   border-left: 1px solid lightgrey;
   border-right: 0;
 }
 
 @media (max-width: 48em) {
-  .app > .menu {
+  .app>.menu {
     left: -100%;
     max-width: 85%;
     position: absolute;
     z-index: 3;
   }
 
-  .app > .menu.in {
+  .app>.menu.in {
     left: 0;
   }
 
-  *[dir=rtl] .app > .menu {
+  *[dir="rtl"] .app>.menu {
     left: 0;
     right: -100%;
   }
 
-  *[dir=rtl] .app > .menu.in {
+  *[dir="rtl"] .app>.menu.in {
     right: 0;
   }
 }

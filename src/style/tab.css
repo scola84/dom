@@ -5,23 +5,23 @@
   display: flex;
 }
 
-.tab > * {
+.tab>* {
   flex: 1;
   font-size: 0.9em;
   padding: 0.25em 0.5em;
   text-align: center;
 }
 
-.tab > .selected {
+.tab>.selected {
   background: rgb(14, 122, 254);
   color: white;
 }
 
-.tab * + * {
+.tab *+* {
   border-left: 1px solid rgb(14, 122, 254);
 }
 
-*[dir=rtl] .tab * + * {
+*[dir="rtl"] .tab *+* {
   border-left: none;
   border-right: 1px solid rgb(14, 122, 254);
 }

@@ -1,3 +1,3 @@
-export * from './bind';
-export * from './shim';
-export * from './worker';
+export * from './bind'
+export * from './shim'
+export * from './worker'

@@ -1,43 +1,43 @@
-import assignWith from 'lodash-es/assignWith';
-import defaults from 'lodash-es/defaultsDeep';
-import qs from 'qs';
+import assignWith from 'lodash-es/assignWith'
+import defaults from 'lodash-es/defaultsDeep'
+import qs from 'qs'
 
 export class Route {
-  static parse(route, router) {
+  static parse (route, router) {
     if (route instanceof Route) {
-      return route;
+      return route
     }
 
     if (typeof route === 'object') {
-      return new Route(route);
+      return new Route(route)
     }
 
     if (typeof route === 'undefined') {
-      return route;
+      return route
     }
 
-    const [splitPath, splitName = ''] = route.split('@');
-    const [path, rawParams = ''] = splitPath.split(':');
-    const [name, rawOptions = ''] = splitName.split(':');
+    const [splitPath, splitName = ''] = route.split('@')
+    const [path, rawParams = ''] = splitPath.split(':')
+    const [name, rawOptions = ''] = splitName.split(':')
 
     const options = {
       name,
       options: {},
       params: {},
       path
-    };
-
-    if (options.name === 'self') {
-      options.name = router;
     }
 
-    assignWith(options.options, qs.parse(rawOptions), () => true);
-    assignWith(options.params, qs.parse(rawParams));
+    if (options.name === 'self') {
+      options.name = router
+    }
 
-    return new Route(options);
+    assignWith(options.options, qs.parse(rawOptions), () => true)
+    assignWith(options.params, qs.parse(rawParams))
+
+    return new Route(options)
   }
 
-  constructor(options = {}) {
+  constructor (options = {}) {
     defaults(this, options, {
       base: null,
       default: null,
@@ -53,59 +53,59 @@ export class Route {
       },
       params: {},
       path: null
-    });
+    })
   }
 
-  format(filter) {
-    let string = '';
+  format (filter) {
+    let string = ''
 
-    string += this.path;
-    string += this.formatParams();
-    string += '@';
-    string += this.name;
-    string += this.formatOptions(filter);
+    string += this.path
+    string += this.formatParams()
+    string += '@'
+    string += this.name
+    string += this.formatOptions(filter)
 
-    return string;
+    return string
   }
 
-  formatOptions(filter = []) {
-    const names = Object.keys(this.options);
+  formatOptions (filter = []) {
+    const names = Object.keys(this.options)
 
-    let string = '';
-    let name = null;
+    let string = ''
+    let name = null
 
     for (let i = 0; i < names.length; i += 1) {
-      name = names[i];
+      name = names[i]
 
       if (
         this.options[name] === true &&
         filter.indexOf(name) > -1
       ) {
-        string += string.length === 0 ? ':' : '&';
-        string += name;
+        string += string.length === 0 ? ':' : '&'
+        string += name
       }
     }
 
-    return string;
+    return string
   }
 
-  formatParams() {
-    const names = Object.keys(this.params);
+  formatParams () {
+    const names = Object.keys(this.params)
 
-    let string = '';
-    let name = null;
+    let string = ''
+    let name = null
 
     for (let i = 0; i < names.length; i += 1) {
-      name = names[i];
+      name = names[i]
 
-      string += string.length === 0 ? ':' : '&';
-      string += name + '=' + this.params[name];
+      string += string.length === 0 ? ':' : '&'
+      string += name + '=' + this.params[name]
     }
 
-    return string;
+    return string
   }
 
-  toJSON() {
-    return this.format(['mem']);
+  toJSON () {
+    return this.format(['mem'])
   }
 }

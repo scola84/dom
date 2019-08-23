@@ -1,15 +1,15 @@
-import { Input } from '../input';
+import { Input } from '../input'
 
 export class Password extends Input {
-  constructor(options) {
-    super(options);
+  constructor (options) {
+    super(options)
 
     this.attributes({
       type: 'password'
-    });
+    })
   }
 
-  cleanAfter(box, data, name, value) {
-    this.setValue(data, name, String(value));
+  cleanAfter (box, data, name, value) {
+    this.setValue(data, name, String(value))
   }
 }

@@ -1,12 +1,12 @@
-import { Widget } from '../widget';
+import { Widget } from '../widget'
 
 export class PutObject extends Widget {
-  buildWidget() {
-    const b = this._builder;
+  buildWidget () {
+    const b = this._builder
 
     const resource = '/api' + this._name.map((name) => {
-      return `/${name}/%(${name}_id)s`;
-    }).join('');
+      return `/${name}/%(${name}_id)s`
+    }).join('')
 
     return b.request().resource(
       `PUT ${resource}`
@@ -18,6 +18,6 @@ export class PutObject extends Widget {
     ).err(
       b.selector('.message'),
       b.selector('.body .hint')
-    );
+    )
   }
 }

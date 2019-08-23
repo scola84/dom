@@ -1,34 +1,34 @@
-import { Node } from '../node';
+import { Node } from '../node'
 
 export class Message extends Node {
-  constructor(options = {}) {
-    super(options);
-    this.class('transition');
+  constructor (options = {}) {
+    super(options)
+    this.class('transition')
   }
 
-  resolveAfter(box, data) {
+  resolveAfter (box, data) {
     if (typeof data.status === 'undefined') {
       return this._node
-        .classed('in', false);
+        .classed('in', false)
     }
 
-    let format = `status.${data.status}`;
+    let format = `status.${data.status}`
 
     if (data.code) {
-      format += '.' + data.code;
+      format += '.' + data.code
     }
 
     const text = this._builder
       .print()
       .format(format)
-      .values(data);
+      .values(data)
 
     this._node.text(
       this.resolveValue(box, data, text)
-    );
+    )
 
-    this._node.classed('in', true);
+    this._node.classed('in', true)
 
-    return this._node;
+    return this._node
   }
 }

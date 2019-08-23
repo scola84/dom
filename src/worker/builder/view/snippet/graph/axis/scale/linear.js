@@ -1,90 +1,90 @@
-import { Scale } from './scale';
+import { Scale } from './scale'
 
 export class Linear extends Scale {
-  constructor(options = {}) {
-    super(options);
+  constructor (options = {}) {
+    super(options)
 
-    this._count = null;
-    this._step = null;
+    this._count = null
+    this._step = null
 
-    this.setCount(options.count);
-    this.setStep(options.step);
+    this.setCount(options.count)
+    this.setStep(options.step)
   }
 
-  getOptions() {
+  getOptions () {
     return Object.assign(super.getOptions(), {
       count: this._count,
       step: this._step
-    });
+    })
   }
 
-  getCount() {
-    return this._count;
+  getCount () {
+    return this._count
   }
 
-  setCount(value = null) {
-    this._count = value;
-    return this;
+  setCount (value = null) {
+    this._count = value
+    return this
   }
 
-  count(value) {
-    return this.setCount(value);
+  count (value) {
+    return this.setCount(value)
   }
 
-  setName(value = 'linear') {
-    return super.setName(value);
+  setName (value = 'linear') {
+    return super.setName(value)
   }
 
-  getStep() {
-    return this._step;
+  getStep () {
+    return this._step
   }
 
-  setStep(value = 1) {
-    this._step = value;
-    return this;
+  setStep (value = 1) {
+    this._step = value
+    return this
   }
 
-  step(value) {
-    return this.setStep(value);
+  step (value) {
+    return this.setStep(value)
   }
 
-  calculateDistance(value) {
-    let distance = (value - this._domain.min) * this._ppu;
+  calculateDistance (value) {
+    let distance = (value - this._domain.min) * this._ppu
 
     if (this.mapOrientation() === 'y') {
-      distance = this._range.height - distance;
+      distance = this._range.height - distance
     }
 
-    return Math.round(distance) + 0.5;
+    return Math.round(distance) + 0.5
   }
 
-  calculateTicks() {
-    const count = this.resolveValue(this._domain, this._count);
-    let step = this.resolveValue(this._domain, this._step);
+  calculateTicks () {
+    const count = this.resolveValue(this._domain, this._count)
+    let step = this.resolveValue(this._domain, this._step)
 
-    step = count !== null ?
-      this._domain.max / (count - 1) :
-      step;
+    step = count !== null
+      ? this._domain.max / (count - 1)
+      : step
 
-    const { max, min } = this._domain;
-    const ticks = [];
+    const { max, min } = this._domain
+    const ticks = []
 
-    let distance = null;
+    let distance = null
 
     for (let value = max; value >= min; value -= step) {
-      distance = this.calculateDistance(value);
+      distance = this.calculateDistance(value)
 
       ticks[ticks.length] = [
         value,
         distance
-      ];
+      ]
     }
 
-    return ticks;
+    return ticks
   }
 
-  prepareDomainExogenous() {
-    this.prepareDomainMax(this._domain.keys);
-    this.prepareDomainMin(this._domain.keys);
+  prepareDomainExogenous () {
+    this.prepareDomainMax(this._domain.keys)
+    this.prepareDomainMin(this._domain.keys)
   }
 }

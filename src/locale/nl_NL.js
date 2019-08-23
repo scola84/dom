@@ -1,5 +1,7 @@
-const maxlength = 'Deze waarde is te lang (max. %(maxlength)s tekens).';
-const required = 'Dit veld is verplicht.';
+/* eslint camelcase: 0 */
+
+const maxlength = 'Deze waarde is te lang (max. %(maxlength)s tekens).'
+const required = 'Dit veld is verplicht.'
 
 export const nl_NL = {
   button: {
@@ -128,4 +130,4 @@ export const nl_NL = {
     link: 'Koppelingen',
     properties: 'Eigenschappen'
   }
-};
+}

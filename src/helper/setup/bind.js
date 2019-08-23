@@ -1,18 +1,18 @@
-import { select, event } from 'd3-selection';
-import fastclick from 'fastclick';
+import { select, event } from 'd3-selection'
+import fastclick from 'fastclick'
 
-export function bind() {
+export function bind () {
   if (typeof window === 'undefined') {
-    return;
+    return
   }
 
-  const body = select('body');
+  const body = select('body')
 
-  fastclick(body.node());
+  fastclick(body.node())
 
   body.on('touchstart', () => {
-    body.dispatch('click', event);
-  });
+    body.dispatch('click', event)
+  })
 
   body.on('click.scola-menu', () => {
     if (select(event.target).classed('show-menu') === true) {
@@ -20,13 +20,13 @@ export function bind() {
         .classed('transition', true)
         .classed('in', true)
         .on('touchstart.scola-menu', () => event.stopPropagation())
-        .on('click.scola-menu', () => event.stopPropagation());
+        .on('click.scola-menu', () => event.stopPropagation())
     } else {
       select('.app > .menu.in')
         .classed('transition', true)
         .classed('in', false)
         .on('touchstart.scola-menu', null)
-        .on('click.scola-menu', null);
+        .on('click.scola-menu', null)
     }
-  });
+  })
 }
