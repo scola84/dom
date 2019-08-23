@@ -177,8 +177,9 @@ export class ViewRouter extends Router {
     const previous = this._history.pop();
 
     if (current.options.mem || previous.options.mem) {
-      previous.options = box.options;
-      return previous;
+      box.options.mem = previous.options.mem;
+      box.params = previous.params;
+      box.path = previous.path;
     }
 
     return box;
