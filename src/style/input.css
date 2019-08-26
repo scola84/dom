@@ -25,20 +25,20 @@
   font-size: 2em;
 }
 
-.input.check input[type="checkbox"]+*:after {
-  content: "\f149";
+.input.check input[type='checkbox']+*:after {
+  content: '\f149';
 }
 
-.input.check input[type="checkbox"]:checked+*:after {
-  content: "\f14a";
+.input.check input[type='checkbox']:checked+*:after {
+  content: '\f14a';
 }
 
-.input.check input[type="radio"]+*:after {
-  content: "\f1f6";
+.input.check input[type='radio']+*:after {
+  content: '\f1f6';
 }
 
-.input.check input[type="radio"]:checked+*:after {
-  content: "\f1f7";
+.input.check input[type='radio']:checked+*:after {
+  content: '\f1f7';
 }
 
 /* Date */
@@ -104,7 +104,7 @@
 }
 
 .input.select .arrow:after {
-  content: "\f3d0";
+  content: '\f3d0';
   display: flex;
   font-family: Ionicons;
   margin-top: 0.15em;

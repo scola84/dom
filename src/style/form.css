@@ -12,16 +12,16 @@
   flex: 1;
 }
 
-.form .item input[type="checkbox"],
-.form .item input[type="date"],
-.form .item input[type="month"],
-.form .item input[type="radio"],
-.form .item input[type="time"] {
+.form .item input[type='checkbox'],
+.form .item input[type='date'],
+.form .item input[type='month'],
+.form .item input[type='radio'],
+.form .item input[type='time'] {
   flex: none;
 }
 
-.form .item input[type="checkbox"]:not(:first-child),
-.form .item input[type="radio"]:not(:first-child) {
+.form .item input[type='checkbox']:not(:first-child),
+.form .item input[type='radio']:not(:first-child) {
   margin-left: 0;
 }
 

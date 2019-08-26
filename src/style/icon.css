@@ -14,8 +14,8 @@
   font-size: 1.75em !important;
 }
 
-*[dir="rtl"] .ion-ios-arrow-back,
-*[dir="rtl"] .ion-ios-arrow-forward {
+*[dir='rtl'] .ion-ios-arrow-back,
+*[dir='rtl'] .ion-ios-arrow-forward {
   transform: rotate(180deg);
 }
 

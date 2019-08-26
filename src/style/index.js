@@ -1,4 +1,4 @@
-import 'ionicons/dist/css/ionicons.css'
+import './import.css'
 import './app.css'
 import './dom.css'
 import './form.css'

@@ -74,13 +74,13 @@
   width: 0.5em;
 }
 
-*[dir="rtl"] .group>.title.fold:after {
+*[dir='rtl'] .group>.title.fold:after {
   margin-left: 0;
   margin-right: auto;
 }
 
 .group>.title.fold.all:after {
-  content: "\f3d0";
+  content: '\f3d0';
 }
 
 .group.folded>.title.fold.all:after {
@@ -89,20 +89,20 @@
 
 @media not all and (max-width: 48em) {
   .panel:not(.outset-x) .group>.title.fold.all:after {
-    content: "";
+    content: '';
   }
 }
 
 .group>.title.fold.some:after {
-  content: "\f1fc";
+  content: '\f1fc';
 }
 
 .group.folded>.title.fold.some:after {
-  content: "\f102";
+  content: '\f102';
 }
 
 @media not all and (max-width: 48em) {
   .panel:not(.outset-x) .group>.title.fold.some:after {
-    content: "";
+    content: '';
   }
 }

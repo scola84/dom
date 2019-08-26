@@ -1,11 +1,13 @@
-import { writeFileSync } from 'fs'
 import babel from 'rollup-plugin-babel'
 import builtins from 'rollup-plugin-node-builtins'
 import commonjs from 'rollup-plugin-commonjs'
-import css from 'rollup-plugin-css-only'
+import css from 'rollup-plugin-postcss'
 import ignore from 'rollup-plugin-ignore'
 import json from 'rollup-plugin-json'
+import minimist from 'minimist'
 import resolve from 'rollup-plugin-node-resolve'
+
+const args = minimist(process.argv)
 
 const external = [
   '@scola/http',
@@ -26,19 +28,10 @@ const plugins = [
   commonjs(),
   builtins(),
   css({
-    include: [new RegExp('.css')],
-    output: (styles) => {
-      writeFileSync(
-        'dist/dom.css',
-        styles.replace(
-          /\.\.\//g,
-          'https://unpkg.com/ionicons@4.6.3/dist/'
-        )
-      )
-    }
+    extract: 'dist/dom.css'
   }),
   json(),
-  babel({
+  (args.w && {}) || babel({
     plugins: [
       ['@babel/plugin-transform-runtime', {
         helpers: false

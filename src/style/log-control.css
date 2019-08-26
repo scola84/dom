@@ -57,7 +57,7 @@
 }
 
 .log-control>.row>.range>.arrow:after {
-  content: "\f119";
+  content: '\f119';
   font-size: 1.25em;
   font-family: Ionicons;
   margin: 0 0.5em;
