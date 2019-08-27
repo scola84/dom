@@ -7,7 +7,7 @@
   "name": "@scola/dom",
   "repository": "github:scola84/dom",
   "unpkg": "./dist/dom.umd.js",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "files": [
     "dist/"
   ],
