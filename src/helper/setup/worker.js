@@ -1,11 +1,8 @@
 import {
   Axis,
   Plot,
-  ViewBuilder,
-  snippet
+  ViewBuilder
 } from '../../worker'
-
-import { locale } from '../../locale'
 
 export function worker () {
   console.out = (type, wrk, box, data) => {
@@ -18,6 +15,4 @@ export function worker () {
   ViewBuilder.setup()
   Axis.setup()
   Plot.setup()
-
-  snippet.Print.addStrings(locale)
 }

@@ -1,13 +1,11 @@
-import babel from 'rollup-plugin-babel'
-import builtins from 'rollup-plugin-node-builtins'
-import commonjs from 'rollup-plugin-commonjs'
-import css from 'rollup-plugin-postcss'
+import { rollup } from '@scola/worker'
 import ignore from 'rollup-plugin-ignore'
-import json from 'rollup-plugin-json'
-import minimist from 'minimist'
-import resolve from 'rollup-plugin-node-resolve'
+import { name, version } from './package.json'
 
-const args = minimist(process.argv)
+const {
+  banner,
+  plugins
+} = rollup
 
 const external = [
   '@scola/http',
@@ -23,30 +21,11 @@ const globals = {
 
 const input = './index.js'
 
-const plugins = [
-  resolve(),
-  commonjs(),
-  builtins(),
-  css({
-    extract: 'dist/dom.css'
-  }),
-  json(),
-  (args.w && {}) || babel({
-    plugins: [
-      ['@babel/plugin-transform-runtime', {
-        helpers: false
-      }]
-    ],
-    presets: [
-      ['@babel/preset-env']
-    ]
-  })
-]
-
 export default [{
   input,
   external,
   output: {
+    banner: banner(name, version),
     extend: true,
     file: 'dist/dom.umd.js',
     format: 'umd',
@@ -58,6 +37,7 @@ export default [{
   input,
   external,
   output: {
+    banner: banner(name, version),
     file: 'dist/dom.cjs.js',
     format: 'cjs',
     globals
