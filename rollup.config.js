@@ -1,11 +1,14 @@
-import { rollup } from '@scola/worker'
 import ignore from 'rollup-plugin-ignore'
-import { name, version } from './package.json'
+
+import {
+  name,
+  version
+} from './package.json'
 
 const {
   banner,
   plugins
-} = rollup
+} = require('@scola/worker/rollup')
 
 const external = [
   '@scola/http',

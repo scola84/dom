@@ -12,26 +12,26 @@
     "dist/"
   ],
   "scripts": {
-    "prepublishOnly": "npm run format && rm -rf dist/ && rollup -c",
-    "format": "glob-run js-beautify -r 'src/**/*.{css,js}' && npx standard --fix"
+    "format": "glob-run js-beautify -r 'src/**/*.{css,js}' && npx standard --fix",
+    "preversion": "npm run format && rm -rf dist/ && rollup -c"
   },
   "devDependencies": {
     "glob-run": "^0.1.7",
     "js-beautify": "^1.10.2",
-    "rollup": "^1.20.2",
+    "rollup": "^1.20.3",
     "rollup-plugin-ignore": "^1.0.5",
-    "standard": "^14.0.2"
+    "standard": "^14.1.0"
   },
   "dependencies": {
-    "@scola/http": "^6.0.0",
-    "@scola/worker": "^3.0.3",
+    "@scola/http": "^6.0.2",
+    "@scola/worker": "^3.2.0",
     "async": "^3.1.0",
     "d3-selection": "^1.4.0",
     "dom-shims": "^0.1.4",
     "element-resize-detector": "^1.1.15",
     "fastclick": "^1.0.6",
     "iban": "0.0.12",
-    "libphonenumber-js": "^1.7.22",
+    "libphonenumber-js": "^1.7.23",
     "lodash-es": "^4.17.15",
     "luxon": "^1.17.2",
     "postal-codes-js": "^2.1.0",
