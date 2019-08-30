@@ -23,8 +23,8 @@
     "standard": "^14.1.0"
   },
   "dependencies": {
-    "@scola/http": "^6.0.2",
-    "@scola/worker": "^3.2.0",
+    "@scola/http": "^6.0.3",
+    "@scola/worker": "^3.2.1",
     "async": "^3.1.0",
     "d3-selection": "^1.4.0",
     "dom-shims": "^0.1.4",
