@@ -9,9 +9,7 @@
   "unpkg": "./dist/dom.umd.js",
   "version": "1.0.9",
   "files": [
-    "dist/",
-    "LICENSE",
-    "LICENSE-THIRDPARTY"
+    "dist/"
   ],
   "scripts": {
     "build:dev": "npm run clean && rimraf node_modules/@scola && rollup -cmw",
