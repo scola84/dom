@@ -9,22 +9,28 @@
   "unpkg": "./dist/dom.umd.js",
   "version": "1.0.5",
   "files": [
-    "dist/"
+    "dist/",
+    "LICENSE",
+    "LICENSE-THIRDPARTY"
   ],
   "scripts": {
+    "build:dev": "npm run clean && rimraf node_modules/@scola && rollup -cmw",
+    "build:prod": "npm run clean && rollup -c",
+    "clean": "rimraf dist/ node_modules/ package-lock.json && npm install",
     "format": "glob-run js-beautify -r 'src/**/*.{css,js}' && npx standard --fix",
-    "preversion": "npm run format && rm -rf dist/ && rollup -c"
+    "preversion": "npm run format && npm run build:prod"
   },
   "devDependencies": {
     "glob-run": "^0.1.7",
     "js-beautify": "^1.10.2",
+    "rimraf": "^3.0.0",
     "rollup": "^1.20.3",
     "rollup-plugin-ignore": "^1.0.5",
     "standard": "^14.1.0"
   },
   "dependencies": {
-    "@scola/http": "^6.0.4",
-    "@scola/worker": "^3.2.3",
+    "@scola/http": "^6.0.5",
+    "@scola/worker": "^3.3.1",
     "async": "^3.1.0",
     "d3-selection": "^1.4.0",
     "dom-shims": "^0.1.4",
@@ -34,7 +40,7 @@
     "libphonenumber-js": "^1.7.23",
     "lodash-es": "^4.17.15",
     "luxon": "^1.17.2",
-    "postal-codes-js": "^2.1.0",
+    "postal-codes-js": "^2.2.1",
     "qs": "^6.8.0",
     "sprintf-js": "^1.1.2"
   }

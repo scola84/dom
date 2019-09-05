@@ -1,14 +1,5 @@
-import ignore from 'rollup-plugin-ignore'
-
-import {
-  name,
-  version
-} from './package.json'
-
-const {
-  banner,
-  plugins
-} = require('@scola/worker/rollup')
+const ignore = require('rollup-plugin-ignore')
+const { plugins } = require('@scola/worker/rollup')
 
 const external = [
   '@scola/http',
@@ -28,7 +19,6 @@ export default [{
   input,
   external,
   output: {
-    banner: banner(name, version),
     extend: true,
     file: 'dist/dom.umd.js',
     format: 'umd',
@@ -40,7 +30,6 @@ export default [{
   input,
   external,
   output: {
-    banner: banner(name, version),
     file: 'dist/dom.cjs.js',
     format: 'cjs',
     globals
