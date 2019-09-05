@@ -18,7 +18,7 @@
     "build:prod": "npm run clean && rollup -c",
     "clean": "rimraf dist/ node_modules/ package-lock.json && npm install",
     "format": "glob-run js-beautify -r 'src/**/*.{css,js}' && npx standard --fix",
-    "version": "npm run format && npm run build:prod"
+    "version": "npm run format && npm run build:prod && git add LICENSE"
   },
   "devDependencies": {
     "glob-run": "^0.1.7",
@@ -29,8 +29,8 @@
     "standard": "^14.1.0"
   },
   "dependencies": {
-    "@scola/http": "^6.0.5",
-    "@scola/worker": "^3.3.1",
+    "@scola/http": "^6.0.7",
+    "@scola/worker": "^3.4.2",
     "async": "^3.1.0",
     "d3-selection": "^1.4.0",
     "dom-shims": "^0.1.4",

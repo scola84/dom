@@ -1,5 +1,5 @@
+const plugins = require('@scola/worker/rollup.plugins')
 const ignore = require('rollup-plugin-ignore')
-const { plugins } = require('@scola/worker/rollup')
 
 const external = [
   '@scola/http',
